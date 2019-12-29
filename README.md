@@ -55,7 +55,7 @@
 新建一个倾斜字体对象fl:<br>
 ```Font fl=new ImportFont().getItalicFont(字体文件路径,字体大小);```<br>
 新建一个倾斜加粗体字体对象flb:<br>
-```Font flb=new ImportFont().getItalicBoldFont(字体文件路径,字体大小);```
+```Font flb=new ImportFont().getItalicBoldFont(字体文件路径,字体大小);```<br>
 #### (7)比较两个文件里的内容是否完全相同(返回值boolean)
 也就是比较两个文件是否完全相同，例如比较文件1与文件2里所包含的内容是否完全相同:
 ```new FileComparer().comFile(文件1路径,文件2路径)```
