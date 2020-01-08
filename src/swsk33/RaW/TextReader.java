@@ -32,6 +32,27 @@ public class TextReader {
 			for(int i1=i;i1<fileline;i1++) {
 				result=result+"\r\n"+br.readLine();
 			}
+			br.close();
+		}
+		return result;
+	}
+	public String ReadFileUntil(String filepath,int lineuntil) throws Exception {		//读取文件指定行以前的所有内容并将其储存在字符串中
+		String result=null;
+		int fileline=new LineScanner().GetLinage(filepath);
+		if(lineuntil<=0) {
+			System.out.println("终止行数不能小于等于0！");
+		} else if(lineuntil>fileline) {
+			System.out.println("终止行数不能大于文档行数！");
+		} else {
+			File f=new File(filepath);
+			FileInputStream fis=new FileInputStream(f);
+			InputStreamReader isr=new InputStreamReader(fis);
+			BufferedReader br=new BufferedReader(isr);
+			result=br.readLine();
+			for(int i=1;i<lineuntil;i++) {
+				result=result+"\r\n"+br.readLine();
+			}
+			br.close();
 		}
 		return result;
 	}
@@ -49,6 +70,7 @@ public class TextReader {
 			for(int i=0;i<linef;i++) {
 				cdr=cdr+br.readLine()+"\r\n";
 			}
+			br.close();
 			result=cdr;
 		}
 		return result;
