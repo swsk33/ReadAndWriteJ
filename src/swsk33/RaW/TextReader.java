@@ -75,4 +75,15 @@ public class TextReader {
 		}
 		return result;
 	}
+	public String getFileFormat(String filepath) {		//获取文件格式
+		String ffr="";
+		File f=new File(filepath);
+		String fn=f.getName();
+		if(fn.contains(".")) {
+			ffr=fn.substring(fn.lastIndexOf(".")+1);
+		} else {
+			System.out.println("文件没有扩展名！");
+		}
+		return ffr;
+	}
 }

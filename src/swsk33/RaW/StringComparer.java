@@ -14,6 +14,7 @@ public class StringComparer {
 				break;
 			}
 		}
+		br.close();
 		return result;
 	}
 	public boolean CompareText(String filepatht,String TextCompared) throws Exception {		//判断文本文档内是否包含被比较的字符串
@@ -29,6 +30,7 @@ public class StringComparer {
 				break;
 			}
 		}
+		br.close();
 		return result;
 	}
 }
