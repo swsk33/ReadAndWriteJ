@@ -37,6 +37,16 @@
 读取指定行之后的所有内容：```new TextReader().ReadFileStart(文件目录,起始行);```<br>
 读取指定行之前的所有内容：```new TextReader().ReadFileUntil(文件目录,终止行);```<br>
 读取整个文件所有内容：```new TextReader().ReadFile(文件目录);```<br>
+
+读取指定行(以UTF-8编码形式)：```new TextReader().ReadTextUTF8(文件目录，读取第几行);```<br>
+读取指定行之后的所有内容(以UTF-8编码形式)：```new TextReader().ReadFileStartUTF8(文件目录,起始行);```<br>
+读取指定行之前的所有内容(以UTF-8编码形式)：```new TextReader().ReadFileUntilUTF8(文件目录,终止行);```<br>
+读取整个文件所有内容(以UTF-8编码形式)：```new TextReader().ReadFileUTF8(文件目录);```<br>
+
+读取指定行(以GBK编码形式)：```new TextReader().ReadTextGBK(文件目录，读取第几行);```<br>
+读取指定行之后的所有内容(以GBK编码形式)：```new TextReader().ReadFileStartGBK(文件目录,起始行);```<br>
+读取指定行之前的所有内容(以GBK编码形式)：```new TextReader().ReadFileUntilGBK(文件目录,终止行);```<br>
+读取整个文件所有内容(以GBK编码形式)：```new TextReader().ReadFileGBK(文件目录);```<br>
 例如读取D盘的1.txt的第3行并输出：<br>
 ```TextReader tr=new TextReader();```<br>
 ```System.out.println(tr.ReadText("D:\\1.txt",3));```
