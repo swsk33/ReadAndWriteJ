@@ -9,6 +9,7 @@
 6，文件对比：对比两个文件内容是否一致。<br>
 7，引入字体：在GUI编程中可以快速指定字体文件以设置字体。<br>
 8，图像读取：获取图片文件宽，获取图片文件高，获取图片对象（防止重复操作时内存错误）。<br>
+9,文件分析器：读取文件大小，检测文件存在和正在被写入的状态。<br>
 ### 下载地址:[点击进入下载jar包](https://gitee.com/swsk33/ReadAndWriteJ/releases)
 ## 使用方法：
 ### 1，先把这个包导入到IDE里面，例如eclipse。不知道如何导入请查看教程：[eclipse导入外部jar包](https://blog.csdn.net/czbqoo01/article/details/72803450)
@@ -81,3 +82,33 @@
 ##### (8.2)获取图片对象(返回值ImageIcon):
 用于GUI开发中，这里另行获取防止重复获取图片是内存出错。<br>
 ```ImageIcon ic=new ImageReader().getImg(文件图片路径)```<br>
+#### (9)读取文件信息：
+##### (9.1)读取文件MD5(返回值String):
+```new FileAnalyzer().getFileMD5(文件路径)```<br>
+##### (9.2)读取文件大小(返回值long和double):
+获取文件大小，单位字节(Byte)(返回值long):<br>
+```new FileAnalyzer().getFileSizeb(文件路径)```<br>
+获取文件大小，单位千字节(KB)(返回值double):<br>
+```new FileAnalyzer().getFileSizekb(文件路径)```<br>
+获取文件大小并设定保留小数点位数，单位千字节(KB)(返回值double):<br>
+```new FileAnalyzer().getFileSizekb(文件路径,要保留的小数点位数)```<br>
+获取文件大小，单位兆字节(MB)(返回值double):<br>
+```new FileAnalyzer().getFileSizemb(文件路径)```<br>
+获取文件大小并设定保留小数点位数，单位兆字节(MB)(返回值double):<br>
+```new FileAnalyzer().getFileSizemb(文件路径,要保留的小数点位数)```<br>
+获取文件大小，单位吉字节(GB)(返回值double):<br>
+```new FileAnalyzer().getFileSizegb(文件路径)```<br>
+获取文件大小并设定保留小数点位数，单位吉字节(GB)(返回值double):<br>
+```new FileAnalyzer().getFileSizegb(文件路径,要保留的小数点位数)```<br>
+##### (9.3)检测文件存在和写入状态(返回值void):
+某些情况下我们需要读取文件，但是可能文件没写入完就开始读取而导致一个错误的结果。通过这个包里面的FileAnalyzer类的```waitFileCreated(String filepath)```和```waitFileDone(String filepath)```方法，可以在文件被创建或者写入完成之前先阻滞进程，等待文件创建/写入完成再进行下一步。<br>
+例如:<br>
+```xx1.xxx```<br>
+```new FileAnalyzer().waitFileCreated(文件路径)```<br>
+```xx2.xxx```<br>
+执行完xx1.xxx语句后，等待指定文件被创建后(出现),再继续向下执行xx2.xxx语句。<br>
+
+```xx1.xxx```<br>
+```new FileAnalyzer().waitFileDone(文件路径)```<br>
+```xx2.xxx```<br>
+执行完xx1.xxx语句后，等待指定文件被写入完成(即文件不再发生变化),再继续向下执行xx2.xxx语句。<br>
