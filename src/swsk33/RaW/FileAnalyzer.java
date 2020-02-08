@@ -3,6 +3,7 @@ import java.io.*;
 import java.math.*;
 import java.security.*;
 public class FileAnalyzer {
+	static boolean manbreak=false;		//手动中断参数
 	public String getFileMD5(String filepath) {		//获取文件MD5
 		String result="";
 		BigInteger bgi=null;
@@ -80,22 +81,25 @@ public class FileAnalyzer {
 		size=bd.setScale(numofdecimres,BigDecimal.ROUND_FLOOR).doubleValue();
 		return size;
 	}
+	public void manualBreak() {		//手动中断方法
+		manbreak=true;
+	}
 	public void waitFileCreated(String filepath) {		//等待文件出现
 		File f=new File(filepath);
-		while(!f.exists()) {
+		while(!f.exists()&&manbreak==false) {
 			System.out.println("等待文件创建。。。");
 		}
 	}
 	public void waitFileDone(String filepath) {		//等待文件不再变化后停止
 		File f=new File(filepath);
 		FileAnalyzer fa=new FileAnalyzer();
-		while(!f.exists()) {
+		while(!f.exists()&&manbreak==false) {
 			System.out.println("等待文件创建。。。");
 		}
-		while(f.length()==0) {
+		while(f.length()==0&&manbreak==false) {
 			System.out.println("等待文件被写入。。。");
 		}
-		while(true) {		//第一轮检测
+		while(manbreak==false) {		//第一轮检测
 			long fsz1=fa.getFileSizeb(filepath);
 			long fsz2=fa.getFileSizeb(filepath);
 			String fm1=fa.getFileMD5(filepath);
@@ -108,7 +112,7 @@ public class FileAnalyzer {
 				break;
 			}
 		}
-		while(true) {		//第二轮检测
+		while(manbreak==false) {		//第二轮检测
 			long fsz1=fa.getFileSizeb(filepath);
 			long fsz2=fa.getFileSizeb(filepath);
 			String fm1=fa.getFileMD5(filepath);
@@ -121,7 +125,7 @@ public class FileAnalyzer {
 				break;
 			}
 		}
-		while(true) {		//第三轮检测
+		while(manbreak==false) {		//第三轮检测
 			long fsz1=fa.getFileSizeb(filepath);
 			long fsz2=fa.getFileSizeb(filepath);
 			String fm1=fa.getFileMD5(filepath);
@@ -134,7 +138,7 @@ public class FileAnalyzer {
 				break;
 			}
 		}
-		while(true) {		//第四轮检测
+		while(manbreak==false) {		//第四轮检测
 			long fsz1=fa.getFileSizeb(filepath);
 			long fsz2=fa.getFileSizeb(filepath);
 			String fm1=fa.getFileMD5(filepath);
@@ -147,7 +151,7 @@ public class FileAnalyzer {
 				break;
 			}
 		}
-		while(true) {		//第五轮检测
+		while(manbreak==false) {		//第五轮检测
 			long fsz1=fa.getFileSizeb(filepath);
 			long fsz2=fa.getFileSizeb(filepath);
 			String fm1=fa.getFileMD5(filepath);
