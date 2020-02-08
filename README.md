@@ -102,3 +102,5 @@
 ```new FileAnalyzer().waitFileDone(文件路径)```<br>
 ```xx2.xxx```<br>
 执行完xx1.xxx语句后，等待指定文件被写入完成(即文件不再发生变化),再继续向下执行xx2.xxx语句。<br>
+如果在执行过程中想要手动释放，即不等待文件创建/写入完成就向下执行，可以执行:<br>
+```new FileAnalyzer().manualBreak()```<br>
