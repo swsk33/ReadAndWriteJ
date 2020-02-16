@@ -3,7 +3,6 @@ import java.io.*;
 import java.math.*;
 import java.security.*;
 public class FileAnalyzer {
-	static boolean manbreak=false;		//手动中断参数
 	public String getFileMD5(String filepath) {		//获取文件MD5
 		String result="";
 		BigInteger bgi=null;
@@ -81,88 +80,15 @@ public class FileAnalyzer {
 		size=bd.setScale(numofdecimres,BigDecimal.ROUND_FLOOR).doubleValue();
 		return size;
 	}
-	public void manualBreak() {		//手动中断方法
-		manbreak=true;
-	}
-	public void waitFileCreated(String filepath) {		//等待文件出现
+	public String getFileFormat(String filepath) {		//获取文件格式
+		String ffr="";
 		File f=new File(filepath);
-		while(!f.exists()&&manbreak==false) {
-			System.out.println("等待文件创建。。。");
+		String fn=f.getName();
+		if(fn.contains(".")) {
+			ffr=fn.substring(fn.lastIndexOf(".")+1);
+		} else {
+			System.out.println("文件没有扩展名！");
 		}
-	}
-	public void waitFileDone(String filepath) {		//等待文件不再变化后停止
-		File f=new File(filepath);
-		FileAnalyzer fa=new FileAnalyzer();
-		while(!f.exists()&&manbreak==false) {
-			System.out.println("等待文件创建。。。");
-		}
-		while(f.length()==0&&manbreak==false) {
-			System.out.println("等待文件被写入。。。");
-		}
-		while(manbreak==false) {		//第一轮检测
-			long fsz1=fa.getFileSizeb(filepath);
-			long fsz2=fa.getFileSizeb(filepath);
-			String fm1=fa.getFileMD5(filepath);
-			String fm2=fa.getFileMD5(filepath);
-			System.out.println(fsz1);
-			System.out.println(fsz2);
-			System.out.println(fm1);
-			System.out.println(fm2);
-			if(fsz1==fsz2&&fm1.equals(fm2)) {
-				break;
-			}
-		}
-		while(manbreak==false) {		//第二轮检测
-			long fsz1=fa.getFileSizeb(filepath);
-			long fsz2=fa.getFileSizeb(filepath);
-			String fm1=fa.getFileMD5(filepath);
-			String fm2=fa.getFileMD5(filepath);
-			System.out.println(fsz1);
-			System.out.println(fsz2);
-			System.out.println(fm1);
-			System.out.println(fm2);
-			if(fsz1==fsz2&&fm1.equals(fm2)) {
-				break;
-			}
-		}
-		while(manbreak==false) {		//第三轮检测
-			long fsz1=fa.getFileSizeb(filepath);
-			long fsz2=fa.getFileSizeb(filepath);
-			String fm1=fa.getFileMD5(filepath);
-			String fm2=fa.getFileMD5(filepath);
-			System.out.println(fsz1);
-			System.out.println(fsz2);
-			System.out.println(fm1);
-			System.out.println(fm2);
-			if(fsz1==fsz2&&fm1.equals(fm2)) {
-				break;
-			}
-		}
-		while(manbreak==false) {		//第四轮检测
-			long fsz1=fa.getFileSizeb(filepath);
-			long fsz2=fa.getFileSizeb(filepath);
-			String fm1=fa.getFileMD5(filepath);
-			String fm2=fa.getFileMD5(filepath);
-			System.out.println(fsz1);
-			System.out.println(fsz2);
-			System.out.println(fm1);
-			System.out.println(fm2);
-			if(fsz1==fsz2&&fm1.equals(fm2)) {
-				break;
-			}
-		}
-		while(manbreak==false) {		//第五轮检测
-			long fsz1=fa.getFileSizeb(filepath);
-			long fsz2=fa.getFileSizeb(filepath);
-			String fm1=fa.getFileMD5(filepath);
-			String fm2=fa.getFileMD5(filepath);
-			System.out.println(fsz1);
-			System.out.println(fsz2);
-			System.out.println(fm1);
-			System.out.println(fm2);
-			if(fsz1==fsz2&&fm1.equals(fm2)) {
-				break;
-			}
-		}
+		return ffr;
 	}
 }
