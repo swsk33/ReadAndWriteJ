@@ -1,11 +1,11 @@
 # ReadAndWriteJ使用说明
 ### 这是一个简单的包，用于快速方便地写入、读取文件。<br>
 ### 其功能有：
-1，写入文件：把指定内容写入指定文件(按行写入),替换文件某行内容。<br>
+1，写入文件：把指定内容写入指定文件（按行写入），替换文件某行内容，清空文件。<br>
 2，行数读取：读取文本文档行数。<br>
-3，指定读取：读取指定行内容，读取整个文件的内容，读取文件指定行之后的所有内容，读取文件指定行之前的所有内容。<br>
+3，指定读取：读取指定行内容，读取整个文件的内容，读取指定文件行数范围的内容。<br>
 4，随机读取：随机读取指定文件某一行，从指定行开始随机读取文件后面的某行，从第一行开始随机读取文本文档前指定行数，从某行起随机读取后指定行。<br>
-5，文本对比：(1)比较某一行内容是否与被比较字符串一致(2)判断文本文档内是否包含被比较的字符串<br>
+5，文本对比：比较某一行内容是否与被比较字符串一致，判断文本文档内是否包含被比较的字符串。<br>
 6，文件对比：对比两个文件内容是否一致。<br>
 7，引入字体：在GUI编程中可以快速指定字体文件以设置字体。<br>
 8，文件分析器：读取文件大小和格式（扩展名）。<br>
@@ -32,24 +32,18 @@
 例如输出D盘的1.txt的文件行数：<br>
 ```LineScanner la=new LineScanner();```<br>
 ```System.out.println(la.GetLinage("D:\\1.txt"));```
-#### (3)读取指定行内容(返回值String)：
-读取指定行：```new TextReader().ReadText(文件目录，读取第几行);```<br>
-读取指定行之后的所有内容：```new TextReader().ReadFileStart(文件目录,起始行);```<br>
-读取指定行之前的所有内容：```new TextReader().ReadFileUntil(文件目录,终止行);```<br>
-读取整个文件所有内容：```new TextReader().ReadFile(文件目录);```<br>
-
-读取指定行(以UTF-8编码形式)：```new TextReader().ReadTextUTF8(文件目录，读取第几行);```<br>
-读取指定行之后的所有内容(以UTF-8编码形式)：```new TextReader().ReadFileStartUTF8(文件目录,起始行);```<br>
-读取指定行之前的所有内容(以UTF-8编码形式)：```new TextReader().ReadFileUntilUTF8(文件目录,终止行);```<br>
-读取整个文件所有内容(以UTF-8编码形式)：```new TextReader().ReadFileUTF8(文件目录);```<br>
-
-读取指定行(以GBK编码形式)：```new TextReader().ReadTextGBK(文件目录，读取第几行);```<br>
-读取指定行之后的所有内容(以GBK编码形式)：```new TextReader().ReadFileStartGBK(文件目录,起始行);```<br>
-读取指定行之前的所有内容(以GBK编码形式)：```new TextReader().ReadFileUntilGBK(文件目录,终止行);```<br>
-读取整个文件所有内容(以GBK编码形式)：```new TextReader().ReadFileGBK(文件目录);```<br>
+#### (3)读取指定行内容(返回值String或者String[])：
+读取指定行：```new TextReader().ReadText(文件目录,读取第几行);```<br>
+读取指定行数范围的内容（从第m行读取至第n行）并返回字符串：```new TextReader().ReadFileRange(文件路径,起始行,终止行);```<br>
+读取指定行数范围的内容（从第m行读取至第n行）并返回字符串数组：```new TextReader().ReadFileRangeToArray(文件路径,起始行,终止行);```<br>
+读取整个文件所有内容并返回字符串：```new TextReader().ReadFile(文件目录);```<br>
+读取整个文件所有内容并返回字符串数组：```new TextReader().ReadFileToArray(文件目录);```<br>
 例如读取D盘的1.txt的第3行并输出：<br>
 ```TextReader tr=new TextReader();```<br>
-```System.out.println(tr.ReadText("D:\\1.txt",3));```
+```System.out.println(tr.ReadText("D:\\1.txt", 3));```
+例如从D盘的2.txt的第3行开始读取至第7行的内容并输出:<br>
+```TextReader tr=new TextReader();```<br>
+```System.out.println(tr.ReadFileRange("D:\\1.txt", 3, 7));```
 #### (4)随机读取(返回值String)：
 随机读取指定文件某一行:<br>```new RandomReader().ReadRandomly(文件目录);```<br>
 从指定行开始随机读取文件后面的某行：<br>```new RandomReader().ReadRandomlyStart(文件目录,开始行数);```<br>
