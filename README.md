@@ -43,7 +43,7 @@
 ```System.out.println(tr.ReadText("D:\\1.txt", 3));```<br>
 例如从D盘的2.txt的第3行开始读取至第7行的内容并输出:<br>
 ```TextReader tr=new TextReader();```<br>
-```System.out.println(tr.ReadFileRange("D:\\1.txt", 3, 7));```<br>
+```System.out.println(tr.ReadFileRange("D:\\2.txt", 3, 7));```<br>
 #### (4)随机读取(返回值String)：
 随机读取指定文件某一行:<br>```new RandomReader().ReadRandomly(文件目录);```<br>
 从指定行开始随机读取文件后面的某行：<br>```new RandomReader().ReadRandomlyStart(文件目录,开始行数);```<br>
