@@ -5,39 +5,32 @@ import java.io.*;
 public class TextFileWriter {
 	public void replaceLine(String filepath, int whichline, String Text) throws Exception { // 用指定内容替换文件指定行
 		int fl = new LineScanner().GetLinage(filepath);
-		if (0 < whichline && whichline <= fl) {
+		if (whichline > fl) {
+			System.out.println("错误！超过文件最大行数！");
+		} else if (whichline <= 0) {
+			System.out.println("错误！指定行数不可小于等于0！");
+		} else {
 			File f = new File(filepath);
-			String sumstr;
+			String sumstr = "";
 			String front = "";
-			FileInputStream fisf = new FileInputStream(f);
-			InputStreamReader isrf = new InputStreamReader(fisf);
-			BufferedReader brf = new BufferedReader(isrf);
-			for (int ifr = 0; ifr < whichline - 1; ifr++) {
-				front = front + brf.readLine() + "\r\n";
+			FileInputStream fis = new FileInputStream(f);
+			InputStreamReader isr = new InputStreamReader(fis);
+			BufferedReader br = new BufferedReader(isr);
+			int ifr;
+			for (ifr = 0; ifr < whichline - 1; ifr++) {
+				front = front + br.readLine() + "\r\n";
 			}
 			sumstr = front + Text + "\r\n";
-			brf.close();
-			String after = "";
-			FileInputStream fisa = new FileInputStream(f);
-			InputStreamReader isra = new InputStreamReader(fisa);
-			BufferedReader bra = new BufferedReader(isra);
-			for (int ia1 = 0; ia1 < whichline; ia1++) {
-				bra.readLine();
+			br.readLine();
+			for (int iaf = ifr + 1; iaf < fl; iaf++) {
+				sumstr = sumstr + br.readLine() + "\r\n";
 			}
-			for (int ia2 = 0; ia2 < fl - whichline; ia2++) {
-				after = after + bra.readLine() + "\r\n";
-			}
-			sumstr = sumstr + after;
-			bra.close();
+			br.close();
 			FileOutputStream fos = new FileOutputStream(f);
 			OutputStreamWriter osw = new OutputStreamWriter(fos);
 			BufferedWriter bw = new BufferedWriter(osw);
 			bw.write(sumstr);
 			bw.close();
-		} else if (whichline > fl) {
-			System.out.println("错误！超过文件最大行数！");
-		} else if (whichline <= 0) {
-			System.out.println("错误！指定行数不可小于等于0！");
 		}
 	}
 
@@ -62,7 +55,6 @@ public class TextFileWriter {
 			bw.write(Text);
 			bw.close();
 		}
-
 	}
 
 	public void clearAll(String filepath) throws Exception { // 把一个文件内容清空
