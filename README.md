@@ -11,7 +11,16 @@
 8，文件分析器：读取文件大小和格式（扩展名）。<br>
 ### 下载地址:[点击进入下载jar包](https://gitee.com/swsk33/ReadAndWriteJ/releases)
 ## 使用方法：
-### 1，先把这个包导入到IDE里面，例如eclipse。不知道如何导入请查看教程：[eclipse导入外部jar包](https://blog.csdn.net/czbqoo01/article/details/72803450)
+### 1，添加依赖：
+ ①Eclipse直接添加jar：先把这个包导入到IDE里面，例如eclipse。不知道如何导入请查看教程：[eclipse导入外部jar包](https://blog.csdn.net/czbqoo01/article/details/72803450)<br>
+ ②Maven工程：在项目的配置文件pom.xml中的```<dependencies>```标签里加入下列依赖：
+ ```
+ <dependency>
+ 	<groupId>com.gitee.swsk33</groupId>
+ 	<artifactId>ReadAndWriteJ</artifactId>
+ 	<version>3.0.0</version>
+ </dependency>
+ ```
 ### 2，导入swsk33.RaW下所有类或者需要的类。（import swsk33.RaW.*;）
 ### 3，语法：
 **说在最前：下面语法示例中用了最快捷的方法去执行了某个类中的某个方法。**<br>
