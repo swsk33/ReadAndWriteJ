@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 public class TextReader {
-	public String ReadText(String filepath, int line) throws Exception { // ¶ÁÈ¡ÎÄ±¾ÎÄµµÖ¸¶¨ĞĞ
+	public String ReadText(String filepath, int line) throws Exception { // è¯»å–æ–‡æœ¬æ–‡æ¡£æŒ‡å®šè¡Œ
 		String result = "";
 		File f = new File(filepath);
 		FileInputStream fis = new FileInputStream(f);
@@ -17,19 +17,19 @@ public class TextReader {
 		return result;
 	}
 
-	public String ReadFileRange(String filepath, int start, int end) throws Exception { // Ö¸¶¨¶ÁÈ¡·¶Î§µØ¶ÁÈ¡ÎÄ¼ş²¢½«Æä´¢´æÔÚ×Ö·û´®ÖĞ
+	public String ReadFileRange(String filepath, int start, int end) throws Exception { // æŒ‡å®šè¯»å–èŒƒå›´åœ°è¯»å–æ–‡ä»¶å¹¶å°†å…¶å‚¨å­˜åœ¨å­—ç¬¦ä¸²ä¸­
 		String result = "";
 		int fileline = new LineScanner().GetLinage(filepath);
 		if (start <= 0) {
-			System.out.println("ÆğÊ¼ĞĞÊı²»ÄÜĞ¡ÓÚµÈÓÚ0£¡");
+			System.out.println("èµ·å§‹è¡Œæ•°ä¸èƒ½å°äºç­‰äº0ï¼");
 		} else if (start > fileline) {
-			System.out.println("ÆğÊ¼ĞĞÊı²»ÄÜ´óÓÚÎÄµµµÄ×ÜĞĞÊı£¡");
+			System.out.println("èµ·å§‹è¡Œæ•°ä¸èƒ½å¤§äºæ–‡æ¡£çš„æ€»è¡Œæ•°ï¼");
 		} else if (end <= 0) {
-			System.out.println("ÖÕÖ¹ĞĞÊı²»ÄÜĞ¡ÓÚµÈÓÚ0£¡");
+			System.out.println("ç»ˆæ­¢è¡Œæ•°ä¸èƒ½å°äºç­‰äº0ï¼");
 		} else if (end > fileline) {
-			System.out.println("ÖÕÖ¹ĞĞÊı²»ÄÜ´óÓÚÎÄµµµÄ×ÜĞĞÊı£¡");
+			System.out.println("ç»ˆæ­¢è¡Œæ•°ä¸èƒ½å¤§äºæ–‡æ¡£çš„æ€»è¡Œæ•°ï¼");
 		} else if (start > end) {
-			System.out.println("ÖÕÖ¹ĞĞÊı²»ÄÜĞ¡ÓÚÆğÊ¼ĞĞÊı£¡");
+			System.out.println("ç»ˆæ­¢è¡Œæ•°ä¸èƒ½å°äºèµ·å§‹è¡Œæ•°ï¼");
 		} else {
 			File f = new File(filepath);
 			FileInputStream fis = new FileInputStream(f);
@@ -47,19 +47,19 @@ public class TextReader {
 		return result;
 	}
 
-	public String[] ReadFileRangeToArray(String filepath, int start, int end) throws Exception { // Ö¸¶¨¶ÁÈ¡·¶Î§µØ¶ÁÈ¡ÎÄ¼ş²¢½«Æä´¢´æÔÚ×Ö·û´®Êı×éÖĞ
+	public String[] ReadFileRangeToArray(String filepath, int start, int end) throws Exception { // æŒ‡å®šè¯»å–èŒƒå›´åœ°è¯»å–æ–‡ä»¶å¹¶å°†å…¶å‚¨å­˜åœ¨å­—ç¬¦ä¸²æ•°ç»„ä¸­
 		ArrayList<String> rdi = new ArrayList<String>();
 		int fileline = new LineScanner().GetLinage(filepath);
 		if (start <= 0) {
-			System.out.println("ÆğÊ¼ĞĞÊı²»ÄÜĞ¡ÓÚµÈÓÚ0£¡");
+			System.out.println("èµ·å§‹è¡Œæ•°ä¸èƒ½å°äºç­‰äº0ï¼");
 		} else if (start > fileline) {
-			System.out.println("ÆğÊ¼ĞĞÊı²»ÄÜ´óÓÚÎÄµµµÄ×ÜĞĞÊı£¡");
+			System.out.println("èµ·å§‹è¡Œæ•°ä¸èƒ½å¤§äºæ–‡æ¡£çš„æ€»è¡Œæ•°ï¼");
 		} else if (end <= 0) {
-			System.out.println("ÖÕÖ¹ĞĞÊı²»ÄÜĞ¡ÓÚµÈÓÚ0£¡");
+			System.out.println("ç»ˆæ­¢è¡Œæ•°ä¸èƒ½å°äºç­‰äº0ï¼");
 		} else if (end > fileline) {
-			System.out.println("ÖÕÖ¹ĞĞÊı²»ÄÜ´óÓÚÎÄµµµÄ×ÜĞĞÊı£¡");
+			System.out.println("ç»ˆæ­¢è¡Œæ•°ä¸èƒ½å¤§äºæ–‡æ¡£çš„æ€»è¡Œæ•°ï¼");
 		} else if (start > end) {
-			System.out.println("ÖÕÖ¹ĞĞÊı²»ÄÜĞ¡ÓÚÆğÊ¼ĞĞÊı£¡");
+			System.out.println("ç»ˆæ­¢è¡Œæ•°ä¸èƒ½å°äºèµ·å§‹è¡Œæ•°ï¼");
 		} else {
 			File f = new File(filepath);
 			String rd = "";
@@ -81,7 +81,7 @@ public class TextReader {
 		return result;
 	}
 
-	public String ReadFile(String filepath) throws Exception { // ¶ÁÈ¡Õû¸öÎÄ±¾ÎÄµµ²¢½«ÄÚÈİ´¢´æÔÚ×Ö·û´®ÖĞ
+	public String ReadFile(String filepath) throws Exception { // è¯»å–æ•´ä¸ªæ–‡æœ¬æ–‡æ¡£å¹¶å°†å†…å®¹å‚¨å­˜åœ¨å­—ç¬¦ä¸²ä¸­
 		String result = "";
 		File f = new File(filepath);
 		int linef = new LineScanner().GetLinage(filepath);
@@ -95,7 +95,7 @@ public class TextReader {
 		return result;
 	}
 
-	public String[] ReadFileToArray(String filepath) throws Exception { // ¶ÁÈ¡Õû¸öÎÄ±¾ÎÄµµ²¢½«ÄÚÈİ´¢´æÔÚ×Ö·û´®Êı×éÖĞ
+	public String[] ReadFileToArray(String filepath) throws Exception { // è¯»å–æ•´ä¸ªæ–‡æœ¬æ–‡æ¡£å¹¶å°†å†…å®¹å‚¨å­˜åœ¨å­—ç¬¦ä¸²æ•°ç»„ä¸­
 		ArrayList<String> rdi = new ArrayList<String>();
 		File f = new File(filepath);
 		int linef = new LineScanner().GetLinage(filepath);

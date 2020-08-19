@@ -3,12 +3,12 @@ package swsk33.RaW;
 import java.io.*;
 
 public class TextFileWriter {
-	public void replaceLine(String filepath, int whichline, String Text) throws Exception { // ÓÃÖ¸¶¨ÄÚÈİÌæ»»ÎÄ¼şÖ¸¶¨ĞĞ
+	public void replaceLine(String filepath, int whichline, String Text) throws Exception { // ç”¨æŒ‡å®šå†…å®¹æ›¿æ¢æ–‡ä»¶æŒ‡å®šè¡Œ
 		int fl = new LineScanner().GetLinage(filepath);
 		if (whichline > fl) {
-			System.out.println("´íÎó£¡³¬¹ıÎÄ¼ş×î´óĞĞÊı£¡");
+			System.out.println("é”™è¯¯ï¼è¶…è¿‡æ–‡ä»¶æœ€å¤§è¡Œæ•°ï¼");
 		} else if (whichline <= 0) {
-			System.out.println("´íÎó£¡Ö¸¶¨ĞĞÊı²»¿ÉĞ¡ÓÚµÈÓÚ0£¡");
+			System.out.println("é”™è¯¯ï¼æŒ‡å®šè¡Œæ•°ä¸å¯å°äºç­‰äº0ï¼");
 		} else {
 			File f = new File(filepath);
 			String sumstr = "";
@@ -34,7 +34,7 @@ public class TextFileWriter {
 		}
 	}
 
-	public void writeText(String filepath, String Text) throws Exception { // Ğ´ÈëÖ¸¶¨ÄÚÈİÖÁÎÄ¼ş
+	public void writeText(String filepath, String Text) throws Exception { // å†™å…¥æŒ‡å®šå†…å®¹è‡³æ–‡ä»¶
 		File f = new File(filepath);
 		int line = new LineScanner().GetLinage(filepath);
 		String old = "";
@@ -57,7 +57,7 @@ public class TextFileWriter {
 		}
 	}
 
-	public void clearAll(String filepath) throws Exception { // °ÑÒ»¸öÎÄ¼şÄÚÈİÇå¿Õ
+	public void clearAll(String filepath) throws Exception { // æŠŠä¸€ä¸ªæ–‡ä»¶å†…å®¹æ¸…ç©º
 		File f = new File(filepath);
 		FileOutputStream fos = new FileOutputStream(f);
 		OutputStreamWriter osw = new OutputStreamWriter(fos);

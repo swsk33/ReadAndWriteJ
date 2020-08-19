@@ -5,7 +5,7 @@ import java.util.*;
 
 
 public class RandomReader {
-	public String ReadRandomly(String filepathr) throws Exception { // Ëæ»ú¶ÁÈ¡Õû¸öÎÄ¼şµÄÄ³Ò»ĞĞ
+	public String ReadRandomly(String filepathr) throws Exception { // éšæœºè¯»å–æ•´ä¸ªæ–‡ä»¶çš„æŸä¸€è¡Œ
 		String result = null;
 		Random r = new Random();
 		int liner = r.nextInt(new LineScanner().GetLinage(filepathr)) + 1;
@@ -20,7 +20,7 @@ public class RandomReader {
 		return result;
 	}
 
-	public String ReadRandomlyStart(String filepathr, int start) throws Exception { // ´ÓÖ¸¶¨ĞĞ¿ªÊ¼Ëæ»ú¶ÁÈ¡ÎÄ¼şºóÃæµÄÄ³ĞĞ
+	public String ReadRandomlyStart(String filepathr, int start) throws Exception { // ä»æŒ‡å®šè¡Œå¼€å§‹éšæœºè¯»å–æ–‡ä»¶åé¢çš„æŸè¡Œ
 		String result = null;
 		Random r = new Random();
 		int liner = r.nextInt(new LineScanner().GetLinage(filepathr) - start + 1);
@@ -41,7 +41,7 @@ public class RandomReader {
 		return result;
 	}
 
-	public String ReadRandomlyUntil(String filepathr, int linesa) throws Exception { // ´ÓµÚÒ»ĞĞ¿ªÊ¼Ëæ»ú¶ÁÈ¡ÎÄ±¾ÎÄµµµ½Ö¸¶¨ĞĞÊı
+	public String ReadRandomlyUntil(String filepathr, int linesa) throws Exception { // ä»ç¬¬ä¸€è¡Œå¼€å§‹éšæœºè¯»å–æ–‡æœ¬æ–‡æ¡£åˆ°æŒ‡å®šè¡Œæ•°
 		String result = null;
 		Random r = new Random();
 		int liner = r.nextInt(linesa) + 1;
@@ -56,7 +56,7 @@ public class RandomReader {
 		return result;
 	}
 
-	public String RandomAtSpecifiedRanges(String filepathr, int start, int linesb) throws Exception { // ´ÓÄ³ĞĞÆğËæ»ú¶ÁÈ¡ºóÖ¸¶¨ĞĞ
+	public String RandomAtSpecifiedRanges(String filepathr, int start, int linesb) throws Exception { // ä»æŸè¡Œèµ·éšæœºè¯»å–åæŒ‡å®šè¡Œ
 		String result = null;
 		Random r = new Random();
 		int liner = r.nextInt(linesb);

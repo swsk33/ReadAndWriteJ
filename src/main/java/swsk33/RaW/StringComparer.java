@@ -3,7 +3,7 @@ package swsk33.RaW;
 import java.io.*;
 
 public class StringComparer {
-	public boolean CompareLine(String filepathc, String LineCompared) throws Exception { // ±È½ÏÕûĞĞÄÚÈİÊÇ·ñÓë±»±È½Ï×Ö·û´®Ò»ÖÂ
+	public boolean CompareLine(String filepathc, String LineCompared) throws Exception { // æ¯”è¾ƒæ•´è¡Œå†…å®¹æ˜¯å¦ä¸è¢«æ¯”è¾ƒå­—ç¬¦ä¸²ä¸€è‡´
 		boolean result = false;
 		int line = new LineScanner().GetLinage(filepathc);
 		File f = new File(filepathc);
@@ -20,7 +20,7 @@ public class StringComparer {
 		return result;
 	}
 
-	public boolean CompareText(String filepatht, String TextCompared) throws Exception { // ÅĞ¶ÏÎÄ±¾ÎÄµµÄÚÊÇ·ñ°üº¬±»±È½ÏµÄ×Ö·û´®
+	public boolean CompareText(String filepatht, String TextCompared) throws Exception { // åˆ¤æ–­æ–‡æœ¬æ–‡æ¡£å†…æ˜¯å¦åŒ…å«è¢«æ¯”è¾ƒçš„å­—ç¬¦ä¸²
 		boolean result = false;
 		int line = new LineScanner().GetLinage(filepatht);
 		File f = new File(filepatht);

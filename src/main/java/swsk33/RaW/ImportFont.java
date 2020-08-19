@@ -4,7 +4,7 @@ import java.awt.*;
 import java.io.*;
 
 public class ImportFont {
-	public Font getFont(String filepath, int wordsize) { // ÒıÈë×Ô´ø×ÖÌåÎÄ¼şµÄ·½·¨
+	public Font getFont(String filepath, int wordsize) { // å¼•å…¥è‡ªå¸¦å­—ä½“æ–‡ä»¶çš„æ–¹æ³•
 		Font font = null;
 		File file = new File(filepath);
 		try {
@@ -16,7 +16,7 @@ public class ImportFont {
 		return font;
 	}
 
-	public Font getBoldFont(String filepath, int wordsize) { // ÒıÈë×Ô´ø×ÖÌåÎÄ¼şµÄ·½·¨(¼Ó´ÖÌå)
+	public Font getBoldFont(String filepath, int wordsize) { // å¼•å…¥è‡ªå¸¦å­—ä½“æ–‡ä»¶çš„æ–¹æ³•(åŠ ç²—ä½“)
 		Font font = null;
 		File file = new File(filepath);
 		try {
@@ -28,7 +28,7 @@ public class ImportFont {
 		return font;
 	}
 
-	public Font getItalicFont(String filepath, int wordsize) { // ÒıÈë×Ô´ø×ÖÌåÎÄ¼şµÄ·½·¨(Ğ±Ìå)
+	public Font getItalicFont(String filepath, int wordsize) { // å¼•å…¥è‡ªå¸¦å­—ä½“æ–‡ä»¶çš„æ–¹æ³•(æ–œä½“)
 		Font font = null;
 		File file = new File(filepath);
 		try {
@@ -40,7 +40,7 @@ public class ImportFont {
 		return font;
 	}
 
-	public Font getItalicBoldFont(String filepath, int wordsize) { // ÒıÈë×Ô´ø×ÖÌåÎÄ¼şµÄ·½·¨(Ğ±¼Ó´ÖÌå)
+	public Font getItalicBoldFont(String filepath, int wordsize) { // å¼•å…¥è‡ªå¸¦å­—ä½“æ–‡ä»¶çš„æ–¹æ³•(æ–œåŠ ç²—ä½“)
 		Font font = null;
 		File file = new File(filepath);
 		try {

@@ -6,7 +6,7 @@ import java.security.*;
 
 
 public class FileAnalyzer {
-	public String getFileMD5(String filepath) { // »ñÈ¡ÎÄ¼şMD5
+	public String getFileMD5(String filepath) { // è·å–æ–‡ä»¶MD5
 		String result = "";
 		BigInteger bgi = null;
 		try {
@@ -28,21 +28,21 @@ public class FileAnalyzer {
 		return result;
 	}
 
-	public long getFileSizeb(String filepath) { // »ñÈ¡ÎÄ¼ş´óĞ¡£¨µ¥Î»B£©
+	public long getFileSizeb(String filepath) { // è·å–æ–‡ä»¶å¤§å°ï¼ˆå•ä½Bï¼‰
 		long size = 0;
 		File f = new File(filepath);
 		size = f.length();
 		return size;
 	}
 
-	public double getFileSizekb(String filepath) { // »ñÈ¡ÎÄ¼ş´óĞ¡£¨µ¥Î»KB£©-È«ÏÔÊ¾
+	public double getFileSizekb(String filepath) { // è·å–æ–‡ä»¶å¤§å°ï¼ˆå•ä½KBï¼‰-å…¨æ˜¾ç¤º
 		double size = 0;
 		File f = new File(filepath);
 		size = (double) f.length() / 1024;
 		return size;
 	}
 
-	public double getFileSizekb(String filepath, int numofdecimres) { // »ñÈ¡ÎÄ¼ş´óĞ¡£¨µ¥Î»KB£©-±£ÁôĞ¡Êı
+	public double getFileSizekb(String filepath, int numofdecimres) { // è·å–æ–‡ä»¶å¤§å°ï¼ˆå•ä½KBï¼‰-ä¿ç•™å°æ•°
 		double size = 0;
 		File f = new File(filepath);
 		size = (double) f.length() / 1024;
@@ -51,7 +51,7 @@ public class FileAnalyzer {
 		return size;
 	}
 
-	public double getFileSizemb(String filepath) { // »ñÈ¡ÎÄ¼ş´óĞ¡£¨µ¥Î»MB£©-È«²¿ÏÔÊ¾
+	public double getFileSizemb(String filepath) { // è·å–æ–‡ä»¶å¤§å°ï¼ˆå•ä½MBï¼‰-å…¨éƒ¨æ˜¾ç¤º
 		double size = 0;
 		File f = new File(filepath);
 		size = (double) f.length() / 1024;
@@ -59,7 +59,7 @@ public class FileAnalyzer {
 		return size;
 	}
 
-	public double getFileSizemb(String filepath, int numofdecimres) { // »ñÈ¡ÎÄ¼ş´óĞ¡£¨µ¥Î»MB£©-±£ÁôĞ¡Êı
+	public double getFileSizemb(String filepath, int numofdecimres) { // è·å–æ–‡ä»¶å¤§å°ï¼ˆå•ä½MBï¼‰-ä¿ç•™å°æ•°
 		double size = 0;
 		File f = new File(filepath);
 		size = (double) f.length() / 1024;
@@ -69,7 +69,7 @@ public class FileAnalyzer {
 		return size;
 	}
 
-	public double getFileSizegb(String filepath) { // »ñÈ¡ÎÄ¼ş´óĞ¡£¨µ¥Î»GB£©-È«²¿ÏÔÊ¾
+	public double getFileSizegb(String filepath) { // è·å–æ–‡ä»¶å¤§å°ï¼ˆå•ä½GBï¼‰-å…¨éƒ¨æ˜¾ç¤º
 		double size = 0;
 		File f = new File(filepath);
 		size = (double) f.length() / 1024;
@@ -78,7 +78,7 @@ public class FileAnalyzer {
 		return size;
 	}
 
-	public double getFileSizegb(String filepath, int numofdecimres) { // »ñÈ¡ÎÄ¼ş´óĞ¡£¨µ¥Î»GB£©-±£ÁôĞ¡Êı
+	public double getFileSizegb(String filepath, int numofdecimres) { // è·å–æ–‡ä»¶å¤§å°ï¼ˆå•ä½GBï¼‰-ä¿ç•™å°æ•°
 		double size = 0;
 		File f = new File(filepath);
 		size = (double) f.length() / 1024;
@@ -89,14 +89,14 @@ public class FileAnalyzer {
 		return size;
 	}
 
-	public String getFileFormat(String filepath) { // »ñÈ¡ÎÄ¼ş¸ñÊ½
+	public String getFileFormat(String filepath) { // è·å–æ–‡ä»¶æ ¼å¼
 		String ffr = "";
 		File f = new File(filepath);
 		String fn = f.getName();
 		if (fn.contains(".")) {
 			ffr = fn.substring(fn.lastIndexOf(".") + 1);
 		} else {
-			System.out.println("ÎÄ¼şÃ»ÓĞÀ©Õ¹Ãû£¡");
+			System.out.println("æ–‡ä»¶æ²¡æœ‰æ‰©å±•åï¼");
 		}
 		return ffr;
 	}

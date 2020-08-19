@@ -3,9 +3,9 @@ package swsk33.RaW;
 import java.io.*;
 
 public class FileComparer {
-	public boolean comFile(String Filepath1, String Filepath2) throws Exception { // ±È½ÏÁ½¸öÎÄ¼şÊÇ·ñÍêÈ«Ò»ÖÂ
+	public boolean comFile(String Filepath1, String Filepath2) throws Exception { // æ¯”è¾ƒä¸¤ä¸ªæ–‡ä»¶æ˜¯å¦å®Œå…¨ä¸€è‡´
 		boolean result = false;
-		File f1 = new File(Filepath1); // ¶ÁÈ¡µÚÒ»¸öÎÄ¼ş
+		File f1 = new File(Filepath1); // è¯»å–ç¬¬ä¸€ä¸ªæ–‡ä»¶
 		int fl1 = new LineScanner().GetLinage(Filepath1);
 		String s1 = "";
 		FileInputStream fis1 = new FileInputStream(f1);
@@ -15,7 +15,7 @@ public class FileComparer {
 			s1 = s1 + br1.readLine() + "\r\n";
 		}
 		br1.close();
-		File f2 = new File(Filepath2); // ¶ÁÈ¡µÚ¶ş¸öÎÄ¼ş
+		File f2 = new File(Filepath2); // è¯»å–ç¬¬äºŒä¸ªæ–‡ä»¶
 		int fl2 = new LineScanner().GetLinage(Filepath2);
 		String s2 = "";
 		FileInputStream fis2 = new FileInputStream(f2);
