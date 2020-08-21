@@ -2,6 +2,7 @@ package swsk33.RaW;
 
 import java.io.*;
 import java.util.*;
+import swsk33.RaW.Exception.*;
 
 /**
  * 文件读取器
@@ -38,21 +39,21 @@ public class TextReader {
 	 * @param start    指定起始行
 	 * @param end      指定终止行
 	 * @return String 字符串 读取的内容
-	 * @throws Exception 文件存在错误或者文件不存在时抛出异常
+	 * @throws Exception 文件存在错误或者文件不存在、或者指定的读取行数有误时抛出异常
 	 */
 	public String readFileRange(String filePath, int start, int end) throws Exception {
 		String result = "";
 		int fileline = new LineScanner().getLineCount(filePath);
 		if (start <= 0) {
-			System.out.println("起始行数不能小于等于0！");
+			throw new RowsOutOfBoundsException("起始行数不能小于等于0！");
 		} else if (start > fileline) {
-			System.out.println("起始行数不能大于文档的总行数！");
+			throw new RowsOutOfBoundsException("起始行数不能大于文档的总行数！");
 		} else if (end <= 0) {
-			System.out.println("终止行数不能小于等于0！");
+			throw new RowsOutOfBoundsException("终止行数不能小于等于0！");
 		} else if (end > fileline) {
-			System.out.println("终止行数不能大于文档的总行数！");
+			throw new RowsOutOfBoundsException("终止行数不能大于文档的总行数！");
 		} else if (start > end) {
-			System.out.println("终止行数不能小于起始行数！");
+			throw new RowsOutOfBoundsException("终止行数不能小于起始行数！");
 		} else {
 			File f = new File(filePath);
 			FileInputStream fis = new FileInputStream(f);
@@ -77,21 +78,21 @@ public class TextReader {
 	 * @param start    指定起始行
 	 * @param end      指定终止行
 	 * @return String[] 字符串数组 读取的内容
-	 * @throws Exception 文件存在错误或者文件不存在时抛出异常
+	 * @throws Exception 文件存在错误或者文件不存在、或者指定的读取行数有误时抛出异常
 	 */
 	public String[] readFileRangeToArray(String filePath, int start, int end) throws Exception {
 		ArrayList<String> rdi = new ArrayList<String>();
 		int fileline = new LineScanner().getLineCount(filePath);
 		if (start <= 0) {
-			System.out.println("起始行数不能小于等于0！");
+			throw new RowsOutOfBoundsException("起始行数不能小于等于0！");
 		} else if (start > fileline) {
-			System.out.println("起始行数不能大于文档的总行数！");
+			throw new RowsOutOfBoundsException("起始行数不能大于文档的总行数！");
 		} else if (end <= 0) {
-			System.out.println("终止行数不能小于等于0！");
+			throw new RowsOutOfBoundsException("终止行数不能小于等于0！");
 		} else if (end > fileline) {
-			System.out.println("终止行数不能大于文档的总行数！");
+			throw new RowsOutOfBoundsException("终止行数不能大于文档的总行数！");
 		} else if (start > end) {
-			System.out.println("终止行数不能小于起始行数！");
+			throw new RowsOutOfBoundsException("终止行数不能小于起始行数！");
 		} else {
 			File f = new File(filePath);
 			String rd = "";
