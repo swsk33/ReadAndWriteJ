@@ -138,7 +138,7 @@ public class TextReader {
 	/**
 	 * 读取整个文本文档并将内容储存在字符串数组中 每一行的内容都是String数组中的一个元素
 	 * 
-	 * @param filePath
+	 * @param filePath 待读取文件相对/绝对路径
 	 * @return String[] 字符串数组 读取的内容
 	 * @throws Exception 文件存在错误或者文件不存在时抛出异常
 	 */
