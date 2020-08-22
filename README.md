@@ -116,7 +116,7 @@ System.out.println(tr.readFileRange("D:\\2.txt", 3, 7));
 ```new JarInternalReader().releaseFileInJar(指定的类, 被释放的文件在jar包内相对于指定的类的路径, 指定被释放出去的位置);```<br>
 直接读取jar内图片资源为ImageIcon对象(返回值ImageIcon):<br>
 ```new JarInternalReader().getImageInJar(指定的类, 图片在jar包内相对于指定的类的路径);```<br>
-例如，在jar包内的目录结构如下：
+例如，在jar包内的目录结构如下：<br>
 ![](https://i.niupic.com/images/2020/08/22/8yS7.png)<br>
 那么在Test类中，读取b.txt文件所有内容：
 ```
