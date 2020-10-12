@@ -21,36 +21,35 @@ public class TextFileWriter {
 	 */
 	public boolean replaceLine(String filePath, int whichLine, String text) throws Exception {
 		boolean success = false;
-		int fl = new LineScanner().getLineCount(filePath);
-		if (whichLine > fl) {
+		String content = "";
+		int line = new LineScanner().getLineCount(filePath);
+		if (whichLine > line) {
 			throw new RowsOutOfBoundsException("指定写入行数超过了文件的固有行数！");
 		} else if (whichLine <= 0) {
-			throw new RowsOutOfBoundsException("错误！指定行数不可小于等于0！");
+			throw new RowsOutOfBoundsException("指定行数不可小于等于0！");
 		} else {
 			File f = new File(filePath);
-			String sumstr = "";
-			String front = "";
+			String before = "";
 			FileInputStream fis = new FileInputStream(f);
 			InputStreamReader isr = new InputStreamReader(fis);
 			BufferedReader br = new BufferedReader(isr);
-			int ifr;
-			for (ifr = 0; ifr < whichLine - 1; ifr++) {
-				front = front + br.readLine() + "\r\n";
+			for (int i = 0; i < whichLine - 1; i++) {
+				before = before + br.readLine() + "\r\n";
 			}
-			sumstr = front + text + "\r\n";
+			content = before + text + "\r\n";
 			br.readLine();
-			for (int iaf = ifr + 1; iaf < fl; iaf++) {
-				sumstr = sumstr + br.readLine() + "\r\n";
+			for (int i = 0; i < line - whichLine; i++) {
+				content = content + br.readLine() + "\r\n";
 			}
-			br.close();
 			FileOutputStream fos = new FileOutputStream(f);
 			OutputStreamWriter osw = new OutputStreamWriter(fos);
 			BufferedWriter bw = new BufferedWriter(osw);
-			bw.write(sumstr);
+			bw.write(content);
+			br.close();
 			bw.close();
 		}
 		// 最后检查是否替换成功
-		if (new TextReader().readText(filePath, whichLine).equals(text)) {
+		if (new TextReader().readFile(filePath).equals(content)) {
 			success = true;
 		}
 		return success;
@@ -87,7 +86,102 @@ public class TextFileWriter {
 			bw.close();
 		}
 		// 检查是否写入成功
-		if (new TextReader().readText(filePath, line + 1).equals(text)) {
+		if (new TextReader().readFile(filePath).equals(old + text + "\r\n")) {
+			success = true;
+		}
+		return success;
+	}
+
+	/**
+	 * 插入文本至指定行之后或者之前
+	 * 
+	 * @param filePath    待操作文件的相对/绝对路径
+	 * @param insertText  待插入的内容
+	 * @param whichLine   指定要插入的某一行
+	 * @param isAfterLine 是否在这一行之后插入，true则把内容插入至指定行之后，否则插入到某一行之前
+	 * @return boolean 是否插入成功
+	 * @throws Exception 文件不存在或者行数指定范围错误时抛出异常
+	 */
+	public boolean insertText(String filePath, String insertText, int whichLine, boolean isAfterLine) throws Exception {
+		boolean success = false;
+		int line = new LineScanner().getLineCount(filePath);
+		String content = "";
+		if (whichLine <= 0) {
+			throw new RowsOutOfBoundsException("指定行数不可小于等于0！");
+		} else if (whichLine > line) {
+			throw new RowsOutOfBoundsException("指定行数不可超过文件固有行数！");
+		} else {
+			File f = new File(filePath);
+			String before = "";
+			int bounds;
+			FileInputStream fis = new FileInputStream(f);
+			InputStreamReader isr = new InputStreamReader(fis);
+			BufferedReader br = new BufferedReader(isr);
+			if (isAfterLine) {
+				bounds = whichLine;
+			} else {
+				bounds = whichLine - 1;
+			}
+			for (int i = 0; i < bounds; i++) {
+				before = before + br.readLine() + "\r\n";
+			}
+			content = before + insertText + "\r\n";
+			for (int i = 0; i < line - bounds; i++) {
+				content = content + br.readLine() + "\r\n";
+			}
+			FileOutputStream fos = new FileOutputStream(f);
+			OutputStreamWriter osw = new OutputStreamWriter(fos);
+			BufferedWriter bw = new BufferedWriter(osw);
+			bw.write(content);
+			br.close();
+			bw.close();
+		}
+		// 检查写入是否成功
+		if (new TextReader().readFile(filePath).equals(content)) {
+			success = true;
+		}
+		return success;
+	}
+
+	/**
+	 * 移除某一行的内容
+	 * 
+	 * @param filePath  待操作文件相对/绝对路径
+	 * @param whichLine 指定被移除的行
+	 * @return boolean 是否移除成功
+	 * @throws Exception 文件不存在或者指定行数范围错误时抛出异常
+	 */
+	public boolean removeLine(String filePath, int whichLine) throws Exception {
+		boolean success = false;
+		String content = "";
+		int line = new LineScanner().getLineCount(filePath);
+		if (whichLine <= 0) {
+			throw new RowsOutOfBoundsException("指定行数不可小于等于0！");
+		} else if (whichLine > line) {
+			throw new RowsOutOfBoundsException("指定行数不可超过文件固有行数！");
+		} else {
+			File f = new File(filePath);
+			String before = "";
+			FileInputStream fis = new FileInputStream(f);
+			InputStreamReader isr = new InputStreamReader(fis);
+			BufferedReader br = new BufferedReader(isr);
+			for (int i = 0; i < whichLine - 1; i++) {
+				before = before + br.readLine() + "\r\n";
+			}
+			br.readLine();
+			content = before;
+			for (int i = 0; i < line - whichLine; i++) {
+				content = content + br.readLine() + "\r\n";
+			}
+			FileOutputStream fos = new FileOutputStream(f);
+			OutputStreamWriter osw = new OutputStreamWriter(fos);
+			BufferedWriter bw = new BufferedWriter(osw);
+			bw.write(content);
+			br.close();
+			bw.close();
+		}
+		// 检测移除是否成功
+		if (new TextReader().readFile(filePath).equals(content)) {
 			success = true;
 		}
 		return success;
