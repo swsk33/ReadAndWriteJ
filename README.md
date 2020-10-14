@@ -18,7 +18,7 @@
 ```
 <dependency>
     <groupId>com.gitee.swsk33</groupId>
-    <artifactId>ReadAndWriteJ</artifactId>
+    <artifactId>read-and-write</artifactId>
     <version>4.3.10</version>
 </dependency>
 ```
