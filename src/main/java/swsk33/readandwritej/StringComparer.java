@@ -1,6 +1,9 @@
-package swsk33.RaW;
+package swsk33.readandwritej;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.io.BufferedReader;
 
 /**
  * 文件文本对比器
@@ -9,6 +12,7 @@ import java.io.*;
  *
  */
 public class StringComparer {
+
 	/**
 	 * 比较某一行内容是否与被比较字符串一致
 	 * 
@@ -58,4 +62,5 @@ public class StringComparer {
 		br.close();
 		return result;
 	}
+
 }

@@ -1,6 +1,9 @@
-package swsk33.RaW;
+package swsk33.readandwritej;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.io.BufferedReader;
 
 /**
  * 文件对比：对比两个文件内容是否一致
@@ -9,6 +12,7 @@ import java.io.*;
  *
  */
 public class FileComparer {
+
 	/**
 	 * 比较两个文件的内容是否完全相同
 	 * 
@@ -44,4 +48,5 @@ public class FileComparer {
 		}
 		return result;
 	}
+
 }

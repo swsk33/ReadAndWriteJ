@@ -1,6 +1,9 @@
-package swsk33.RaW;
+package swsk33.readandwritej;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.io.BufferedReader;
 
 /**
  * 文件行数读取器
@@ -9,6 +12,7 @@ import java.io.*;
  *
  */
 public class LineScanner {
+
 	/**
 	 * 获取文本文件的内容行数
 	 * 
@@ -28,4 +32,5 @@ public class LineScanner {
 		br.close();
 		return linage;
 	}
+
 }

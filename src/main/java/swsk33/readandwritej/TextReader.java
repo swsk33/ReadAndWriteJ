@@ -1,8 +1,11 @@
-package swsk33.RaW;
+package swsk33.readandwritej;
 
-import java.io.*;
-import java.util.*;
-import swsk33.RaW.Exception.*;
+import java.util.ArrayList;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.io.BufferedReader;
+import swsk33.readandwritej.exception.RowsOutOfBoundsException;
 
 /**
  * 文件读取器
@@ -11,6 +14,7 @@ import swsk33.RaW.Exception.*;
  *
  */
 public class TextReader {
+	
 	/**
 	 * 读取文本文件指定行内容
 	 * 
@@ -156,4 +160,5 @@ public class TextReader {
 		String[] result = (String[]) rdi.toArray(new String[rdi.size()]);
 		return result;
 	}
+	
 }

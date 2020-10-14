@@ -1,7 +1,13 @@
-package swsk33.RaW;
+package swsk33.readandwritej;
 
-import java.io.*;
-import swsk33.RaW.Exception.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.BufferedWriter;
+import swsk33.readandwritej.exception.RowsOutOfBoundsException;
 
 /**
  * 文件写入器
@@ -10,6 +16,7 @@ import swsk33.RaW.Exception.*;
  *
  */
 public class TextFileWriter {
+
 	/**
 	 * 用指定内容替换文件指定行
 	 * 
@@ -208,4 +215,5 @@ public class TextFileWriter {
 		}
 		return success;
 	}
+
 }

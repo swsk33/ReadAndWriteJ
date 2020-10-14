@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.gitee.swsk33</groupId>
 	<artifactId>ReadAndWriteJ</artifactId>
-	<version>4.2.3</version>
+	<version>4.3.10</version>
 	<packaging>jar</packaging>
 	<name>ReadAndWriteJ</name>
 	<description>一个简单的实现文件简易读写的jar包。</description>

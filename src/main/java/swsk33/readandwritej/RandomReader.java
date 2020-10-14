@@ -1,8 +1,11 @@
-package swsk33.RaW;
+package swsk33.readandwritej;
 
-import java.io.*;
-import java.util.*;
-import swsk33.RaW.Exception.*;
+import java.util.Random;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.io.BufferedReader;
+import swsk33.readandwritej.exception.RowsOutOfBoundsException;
 
 /**
  * 文件随机读取器
@@ -11,6 +14,7 @@ import swsk33.RaW.Exception.*;
  *
  */
 public class RandomReader {
+
 	/**
 	 * 随机读取整个被指定文件的某一行
 	 * 
@@ -130,4 +134,5 @@ public class RandomReader {
 		}
 		return result;
 	}
+
 }

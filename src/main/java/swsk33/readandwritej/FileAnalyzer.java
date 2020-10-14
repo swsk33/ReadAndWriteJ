@@ -1,8 +1,10 @@
-package swsk33.RaW;
+package swsk33.readandwritej;
 
-import java.io.*;
-import java.math.*;
-import java.security.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.security.MessageDigest;
 
 /**
  * 文件分析器，用于读取文件大小和格式（扩展名）
@@ -10,6 +12,7 @@ import java.security.*;
  * @author swsk33
  */
 public class FileAnalyzer {
+
 	/**
 	 * 用于获取文件的MD5值
 	 * 
@@ -161,4 +164,5 @@ public class FileAnalyzer {
 		}
 		return ffr;
 	}
+
 }
