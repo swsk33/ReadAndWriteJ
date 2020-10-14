@@ -19,10 +19,10 @@
 <dependency>
     <groupId>com.gitee.swsk33</groupId>
     <artifactId>ReadAndWriteJ</artifactId>
-    <version>4.2.3</version>
+    <version>4.3.10</version>
 </dependency>
 ```
-### 2，导入swsk33.RaW下所有类或者需要的类。（import swsk33.RaW.*;）
+### 2，导入swsk33.readandwritej下所有类或者需要的类。（import swsk33.readandwritej.*;）
 ### 3，语法：
 **说在最前：下面语法示例中用了最快捷的方法去执行了某个类中的某个方法。**<br>
 **实际上这两种方式执行效果相同：**<br>
