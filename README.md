@@ -18,7 +18,7 @@
 <dependency>
     <groupId>com.gitee.swsk33</groupId>
     <artifactId>read-and-write</artifactId>
-    <version>4.5.11</version>
+    <version>4.5.12</version>
 </dependency>
 ```
 ### 2，导入swsk33.readandwritej下所有类或者需要的类。（import swsk33.readandwritej.*;）
@@ -28,7 +28,7 @@
 	+ 作用：用于获取文件的MD5值 
 	+ 参数：
 		- filePath 文件的相对路径/绝对路径
-	+ 返回值：String 文件大小
+	+ 返回值：String 文件MD5值
 
 * long getFileSizeb(String filePath)
 	+ 作用：获取文件的大小，单位为B
