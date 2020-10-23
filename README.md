@@ -18,7 +18,7 @@
 <dependency>
     <groupId>com.gitee.swsk33</groupId>
     <artifactId>read-and-write</artifactId>
-    <version>4.5.10</version>
+    <version>4.5.11</version>
 </dependency>
 ```
 ### 2，导入swsk33.readandwritej下所有类或者需要的类。（import swsk33.readandwritej.*;）
