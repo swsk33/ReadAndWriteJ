@@ -8,7 +8,7 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 
 /**
- * 用于读取jar包内的文件和资源，支持读取文件，释放文件，读取为图片格式
+ * 用于获取或者释放jar包内的文件和资源
  * 
  * @author swsk33
  *
