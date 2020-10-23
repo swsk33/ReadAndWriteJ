@@ -17,7 +17,7 @@ public class FileAnalyzer {
 	 * 用于获取文件的MD5值
 	 * 
 	 * @param filePath 文件的相对路径/绝对路径
-	 * @return String 字符串 文件大小
+	 * @return String 字符串 文件MD5值
 	 */
 	public String getFileMD5(String filePath) {
 		String result = "";
