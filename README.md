@@ -5,10 +5,11 @@
 2，行数读取：读取文本文档行数。<br>
 3，指定读取：读取指定行内容，读取整个文件的内容，读取指定文件行数范围的内容。<br>
 4，文本对比：比较某一行内容是否与被比较字符串一致，判断文本文档内是否包含被比较的字符串。<br>
-5，文件对比：对比两个文件内容是否一致。<br>
+5，文件对比：对比两个文件是否一致。<br>
 6，引入字体：在GUI编程中可以快速指定字体文件以设置字体。<br>
 7，文件分析器：读取文件大小和格式（扩展名）。<br>
-8，Jar包内读取器：读取Jar包内的文件资源，有释放包内文件功能。<br>
+8，Jar包内工具：读取Jar包内的文件资源，有释放包内文件功能。<br>
+9，二进制文件工具：读取二进制文件为字节数据，复制文件。<br>
 ### 下载地址:[点击进入下载jar包](https://gitee.com/swsk33/ReadAndWriteJ/releases)
 ## 使用方法：
 ### 1，添加依赖，有下列两种情况：
@@ -18,7 +19,7 @@
 <dependency>
     <groupId>com.gitee.swsk33</groupId>
     <artifactId>read-and-write</artifactId>
-    <version>5.0.0</version>
+    <version>5.0.0-1024</version>
 </dependency>
 ```
 ### 2，导入swsk33.readandwritej下所有类或者需要的类。（import swsk33.readandwritej.*;）
@@ -311,6 +312,20 @@
 		- filePath 要读取的文件
 	+ 返回值：byte[] 读取到的文件字节内容
 
+* byte[][] readBinaryFile(String filePath, int fragments)
+	+ 作用：分段读取二进制文件并储存在byte二维数组中，用于读取大于2GB的文件
+	+ 参数：
+		- filePath  要读取的文件
+		- fragments 分段数
+	+ 返回值：byte[i][j] 读取到的文件字节内容，为二维数组，下标1代表第i+1个片段，下标2代表第i+1个片段的第j+1个字节
+
+* boolean copyFile(String origin, String destination)
+	+ 作用：复制文件，把文件从原文件路径复制到目标文件路径，目标文件路径目录不存在会自动创建
+	+ 参数：
+		- origin      原文件路径
+		- destination 目标文件路径
+	+ 返回值：boolean 是否复制成功
+
 #### 上述charSet（编码格式参数）可选常量值如下：
 ```
 CharSetValue.US_ASCII：US-ASCII
@@ -345,23 +360,22 @@ System.out.println(tr.readText("D:\\3.txt", 3, CharSetValue.GBK));
 ```
 **例如，在jar包内的目录结构如下：**<br>
 ![](https://i.niupic.com/images/2020/08/22/8yS7.png)<br>
-那么在Test类中，读取b.txt文件所有内容：
+那么，在Test类中，释放sda.pdf到E:\中转\out.pdf:
 ```
-String content = new JarInternalReader().readFileInJar(Test.class, "b.txt");
-```
-非静态方法中可以直接写成：
-```
-String content = new JarInternalReader().readFileInJar(this.getClass(), "b.txt");
-```
-在Test类中，释放sda.pdf到E:\中转\out.pdf:
-```
-boolean s = new releaseFileInJar(Test.class, "sda.pdf", "E:\\中转\\out.pdf");
+boolean s = new JarUtil(Test.class, "sda.pdf", "E:\\中转\\out.pdf");
 System.out.println("是否释放成功：" + s);
 ```
-在Test类中，读取这个jar根目录下的a.txt的第二行内容：
+非静态方法中可写作如下：
 ```
-String ct = new JarInternalReader().readLineInJar(Test.class, "/a.txt", 2);
+boolean s = new JarUtil(this.getClass(), "sda.pdf", "E:\\中转\\out.pdf");
+System.out.println("是否释放成功：" + s);
 ```
 注意，表示jar根目录，路径开头加上"/"即可！<br>
 
->最后更新：2020.10.23
+**例如把C盘根目录下的o.exe复制到E盘的中转文件夹里面：**<br>
+```
+boolean f = new BinaryUtil().copyFile("C:\\o.exe", "E:\\中转\\o.exe");
+System.out.println("是否复制成功：" + f);
+```
+
+>最后更新：2020.10.24
