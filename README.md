@@ -304,7 +304,12 @@
 		- charSet  指定编码格式读取文件
 	+ 返回值：String[] 读取的内容
 
-#### 类****：
+#### 类**BinaryUtil**：二进制文件工具
+* byte[] readBinaryFile(String filePath)
+	+ 作用：读取二进制文件并储存在byte数组当中
+	+ 参数：
+		- filePath 要读取的文件
+	+ 返回值：byte[] 读取到的文件字节内容
 
 #### 上述charSet（编码格式参数）可选常量值如下：
 ```

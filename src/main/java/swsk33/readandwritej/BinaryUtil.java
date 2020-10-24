@@ -19,7 +19,7 @@ public class BinaryUtil {
 	 * 读取二进制文件并储存在byte数组当中
 	 * 
 	 * @param filePath 要读取的文件
-	 * @return byte[] 读取到的字节内容
+	 * @return byte[] 读取到的文件字节内容
 	 * @throws Exception 文件不存在抛出异常
 	 */
 	public byte[] readBinaryFile(String filePath) throws Exception {
@@ -42,7 +42,7 @@ public class BinaryUtil {
 	 * 
 	 * @param filePath  要读取的文件
 	 * @param fragments 分段数
-	 * @return byte[i][j] 读取到的字节内容，为二维数组，下标1代表第i+1个片段，下标2代表第i+1个片段的第j+1个字节
+	 * @return byte[i][j] 读取到的文件字节内容，为二维数组，下标1代表第i+1个片段，下标2代表第i+1个片段的第j+1个字节
 	 * @throws Exception 文件不存在时抛出异常
 	 */
 	public byte[][] readBinaryFile(String filePath, int fragments) throws Exception {
