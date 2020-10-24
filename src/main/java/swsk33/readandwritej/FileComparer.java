@@ -3,6 +3,7 @@ package swsk33.readandwritej;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.io.BufferedReader;
 
 /**
@@ -14,14 +15,14 @@ import java.io.BufferedReader;
 public class FileComparer {
 
 	/**
-	 * 比较两个文件的内容是否完全相同
+	 * 比较两个文本文件的内容是否完全相同
 	 * 
 	 * @param filePath1 待比较的文件1
 	 * @param filePath2 待比较的文件2
 	 * @return boolean 布尔值 表示两个文件是否一样
 	 * @throws Exception 其中有一个文件不存在或者文件存在错误时抛出异常
 	 */
-	public boolean compareFile(String filePath1, String filePath2) throws Exception {
+	public boolean compareTextFile(String filePath1, String filePath2) throws Exception {
 		boolean result = false;
 		File f1 = new File(filePath1); // 读取第一个文件
 		int fl1 = new LineScanner().getLineCount(filePath1);
@@ -47,6 +48,21 @@ public class FileComparer {
 			result = true;
 		}
 		return result;
+	}
+
+	/**
+	 * 比较两个二进制文件的内容是否完全相同
+	 * 
+	 * @param filePath1 待比较的文件1
+	 * @param filePath2 待比较的文件2
+	 * @return boolean 布尔值 表示两个文件是否一样
+	 * @throws Exception 其中有一个文件不存在或者文件存在错误时抛出异常
+	 */
+	public boolean compareBinaryFile(String filePath1, String filePath2) throws Exception {
+		BinaryUtil binaryReader = new BinaryUtil();
+		byte[] fc1 = binaryReader.readBinaryFile(filePath1);
+		byte[] fc2 = binaryReader.readBinaryFile(filePath2);
+		return Arrays.equals(fc1, fc2);
 	}
 
 }

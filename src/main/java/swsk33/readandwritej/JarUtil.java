@@ -13,7 +13,7 @@ import javax.swing.ImageIcon;
  * @author swsk33
  *
  */
-public class JarInternalReader {
+public class JarUtil {
 
 	/**
 	 * 释放jar包内文件到jar包外部
