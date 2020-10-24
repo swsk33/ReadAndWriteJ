@@ -18,7 +18,7 @@
 <dependency>
     <groupId>com.gitee.swsk33</groupId>
     <artifactId>read-and-write</artifactId>
-    <version>4.5.12</version>
+    <version>5.0.0</version>
 </dependency>
 ```
 ### 2，导入swsk33.readandwritej下所有类或者需要的类。（import swsk33.readandwritej.*;）
@@ -81,9 +81,16 @@
 		- filePath 文件的相对路径/绝对路径
 	+ 返回值：String 为获取文件扩展名（不带.）
 
-#### 类**FileComparer**：用于对比两个文件内容是否一致
-* boolean compareFile(String filePath1, String filePath2)
+#### 类**FileComparer**：比较两个文本文件的内容是否完全相同
+* boolean compareTextFile(String filePath1, String filePath2)
 	+ 作用：比较两个文件的内容是否完全相同
+	+ 参数：
+		- filePath1 待比较的文件1
+		- filePath2 待比较的文件2
+	+ 返回值：boolean 表示两个文件是否一样
+
+* boolean compareBinaryFile(String filePath1, String filePath2)
+	+ 作用：比较两个二进制文件的内容是否完全相同
 	+ 参数：
 		- filePath1 待比较的文件1
 		- filePath2 待比较的文件2
@@ -118,7 +125,7 @@
 		- wordSize 字体大小
 	+ 返回值：Font 字体对象
 
-#### 类**JarInternalReader**：用于获取或者释放jar包内的文件和资源
+#### 类**JarUtil**：用于获取或者释放jar包内的文件和资源
 * boolean releaseFileInJar(Class c, String classPath, String outputPath)
 	+ 作用：释放jar包内文件到jar包外部
 	+ 参数：
@@ -296,6 +303,8 @@
 		- filePath 待读取文件相对/绝对路径
 		- charSet  指定编码格式读取文件
 	+ 返回值：String[] 读取的内容
+
+#### 类****：
 
 #### 上述charSet（编码格式参数）可选常量值如下：
 ```

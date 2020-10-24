@@ -8,7 +8,7 @@ import java.io.OutputStream;
 import swsk33.readandwritej.exception.SizeOutOfBoundsException;
 
 /**
- * 用于读取二进制文件
+ * 二进制文件工具
  * 
  * @author swsk33
  *
