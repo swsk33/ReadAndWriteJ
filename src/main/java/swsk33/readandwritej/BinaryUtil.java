@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Arrays;
+
 import swsk33.readandwritej.exception.SizeOutOfBoundsException;
 
 /**
@@ -74,6 +76,33 @@ public class BinaryUtil {
 			is.close();
 		}
 		return content;
+	}
+
+	/**
+	 * 写入二进制文件（小文件）
+	 * 
+	 * @param filePath 待写入的文件
+	 * @param data     待写入的数据
+	 * @return boolean 是否写入成功
+	 * @throws Exception 文件错误抛出异常
+	 */
+	public boolean writeBinaryFile(String filePath, byte[] data) throws Exception {
+		boolean success = false;
+		File f = new File(filePath);
+		File fp = new File(f.getParent());
+		if (!fp.exists()) {
+			fp.mkdirs();
+		}
+		if (!f.exists()) {
+			f.createNewFile();
+		}
+		OutputStream os = new FileOutputStream(f);
+		os.write(data);
+		os.close();
+		if (Arrays.equals(this.readBinaryFile(filePath), data)) {
+			success = true;
+		}
+		return success;
 	}
 
 	/**
