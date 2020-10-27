@@ -19,7 +19,7 @@
 <dependency>
     <groupId>com.gitee.swsk33</groupId>
     <artifactId>read-and-write</artifactId>
-    <version>5.0.0-1024</version>
+    <version>5.1.0-halloween</version>
 </dependency>
 ```
 ### 2，导入swsk33.readandwritej下所有类或者需要的类。（import swsk33.readandwritej.*;）
@@ -319,6 +319,13 @@
 		- fragments 分段数
 	+ 返回值：byte[i][j] 读取到的文件字节内容，为二维数组，下标1代表第i+1个片段，下标2代表第i+1个片段的第j+1个字节
 
+* boolean writeBinaryFile(String filePath, byte[] data)
+	+ 作用：写入二进制文件（小文件）
+	+ 参数：
+		- filePath 待写入的文件
+		- data     待写入的数据
+	+ 返回值：boolean 是否写入成功
+
 * boolean copyFile(String origin, String destination)
 	+ 作用：复制文件，把文件从原文件路径复制到目标文件路径，目标文件路径目录不存在会自动创建
 	+ 参数：
@@ -378,4 +385,4 @@ boolean f = new BinaryUtil().copyFile("C:\\o.exe", "E:\\中转\\o.exe");
 System.out.println("是否复制成功：" + f);
 ```
 
->最后更新：2020.10.24
+>最后更新：2020.10.27
