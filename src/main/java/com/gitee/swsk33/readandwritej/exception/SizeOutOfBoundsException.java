@@ -1,4 +1,4 @@
-package swsk33.readandwritej.exception;
+package com.gitee.swsk33.readandwritej.exception;
 
 public class SizeOutOfBoundsException extends Exception {
 

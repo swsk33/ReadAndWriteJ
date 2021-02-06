@@ -1,11 +1,13 @@
-package swsk33.readandwritej;
+package com.gitee.swsk33.readandwritej;
 
 import java.util.ArrayList;
+
+import com.gitee.swsk33.readandwritej.exception.RowsOutOfBoundsException;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
-import swsk33.readandwritej.exception.RowsOutOfBoundsException;
 
 /**
  * 文件读取器
@@ -48,7 +50,6 @@ public class TextReader {
 	 * <li>CharSetValue.UTF_16BE：<strong>UTF-16BE</strong></li>
 	 * <li>CharSetValue.UTF_16LE：<strong>UTF-16LE</strong></li>
 	 * </ul>
-	 * 其中CharSetValue类位于swsk33.readandwritej.util包下。
 	 * 
 	 * @param filePath 待读取文件相对/绝对路径
 	 * @param line     待读取的行数
@@ -120,7 +121,6 @@ public class TextReader {
 	 * <li>CharSetValue.UTF_16BE：<strong>UTF-16BE</strong></li>
 	 * <li>CharSetValue.UTF_16LE：<strong>UTF-16LE</strong></li>
 	 * </ul>
-	 * 其中CharSetValue类位于swsk33.readandwritej.util包下。
 	 * 
 	 * @param filePath 待读取文件相对/绝对路径
 	 * @param start    指定起始行
@@ -214,7 +214,6 @@ public class TextReader {
 	 * <li>CharSetValue.UTF_16BE：<strong>UTF-16BE</strong></li>
 	 * <li>CharSetValue.UTF_16LE：<strong>UTF-16LE</strong></li>
 	 * </ul>
-	 * 其中CharSetValue类位于swsk33.readandwritej.util包下。
 	 * 
 	 * @param filePath 待读取文件相对/绝对路径
 	 * @param start    指定起始行
@@ -290,7 +289,6 @@ public class TextReader {
 	 * <li>CharSetValue.UTF_16BE：<strong>UTF-16BE</strong></li>
 	 * <li>CharSetValue.UTF_16LE：<strong>UTF-16LE</strong></li>
 	 * </ul>
-	 * 其中CharSetValue类位于swsk33.readandwritej.util包下。
 	 * 
 	 * @param filePath 待读取文件相对/绝对路径
 	 * @param charSet  指定编码格式读取文件
@@ -345,7 +343,6 @@ public class TextReader {
 	 * <li>CharSetValue.UTF_16BE：<strong>UTF-16BE</strong></li>
 	 * <li>CharSetValue.UTF_16LE：<strong>UTF-16LE</strong></li>
 	 * </ul>
-	 * 其中CharSetValue类位于swsk33.readandwritej.util包下。
 	 * 
 	 * @param filePath 待读取文件相对/绝对路径
 	 * @param charSet  指定编码格式读取文件

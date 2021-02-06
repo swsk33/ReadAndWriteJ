@@ -1,4 +1,4 @@
-package swsk33.readandwritej;
+package com.gitee.swsk33.readandwritej;
 
 import java.io.File;
 import java.io.FileInputStream;

@@ -1,4 +1,4 @@
-package swsk33.readandwritej;
+package com.gitee.swsk33.readandwritej;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -7,7 +7,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Arrays;
 
-import swsk33.readandwritej.exception.SizeOutOfBoundsException;
+import com.gitee.swsk33.readandwritej.exception.SizeOutOfBoundsException;
 
 /**
  * 二进制文件工具

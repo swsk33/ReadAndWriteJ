@@ -1,4 +1,4 @@
-package swsk33.readandwritej;
+package com.gitee.swsk33.readandwritej;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -6,8 +6,10 @@ import java.io.FileOutputStream;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+
+import com.gitee.swsk33.readandwritej.exception.RowsOutOfBoundsException;
+
 import java.io.BufferedWriter;
-import swsk33.readandwritej.exception.RowsOutOfBoundsException;
 
 /**
  * 文件写入器
@@ -74,7 +76,6 @@ public class TextFileWriter {
 	 * <li>CharSetValue.UTF_16BE：<strong>UTF-16BE</strong></li>
 	 * <li>CharSetValue.UTF_16LE：<strong>UTF-16LE</strong></li>
 	 * </ul>
-	 * 其中CharSetValue类位于swsk33.readandwritej.util包下。
 	 * 
 	 * @param filePath  待写入文件相对/绝对路径
 	 * @param whichLine 待替换的行数
@@ -168,7 +169,6 @@ public class TextFileWriter {
 	 * <li>CharSetValue.UTF_16BE：<strong>UTF-16BE</strong></li>
 	 * <li>CharSetValue.UTF_16LE：<strong>UTF-16LE</strong></li>
 	 * </ul>
-	 * 其中CharSetValue类位于swsk33.readandwritej.util包下。
 	 * 
 	 * @param filePath 待写入文件相对/绝对路径
 	 * @param text     待写入内容
@@ -268,7 +268,6 @@ public class TextFileWriter {
 	 * <li>CharSetValue.UTF_16BE：<strong>UTF-16BE</strong></li>
 	 * <li>CharSetValue.UTF_16LE：<strong>UTF-16LE</strong></li>
 	 * </ul>
-	 * 其中CharSetValue类位于swsk33.readandwritej.util包下。
 	 * 
 	 * @param filePath    待操作文件的相对/绝对路径
 	 * @param insertText  待插入的内容

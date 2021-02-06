@@ -1,4 +1,4 @@
-package swsk33.readandwritej;
+package com.gitee.swsk33.readandwritej;
 
 import java.awt.Font;
 import java.io.File;

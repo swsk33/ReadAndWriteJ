@@ -1,4 +1,4 @@
-package swsk33.readandwritej.util;
+package com.gitee.swsk33.readandwritej.util;
 
 /**
  * 读写字符编码值常量
