@@ -56,6 +56,7 @@ public class TerminalUtils {
 	 * </ul>
 	 * 
 	 * @param command 运行的命令
+	 * @param charSet 编码格式
 	 * @return 标准结果
 	 * @throws Exception 输入输出异常
 	 * 

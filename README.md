@@ -19,10 +19,10 @@
 <dependency>
     <groupId>com.gitee.swsk33</groupId>
     <artifactId>read-and-write</artifactId>
-    <version>5.1.0-halloween</version>
+    <version>5.1.2</version>
 </dependency>
 ```
-### 2，导入swsk33.readandwritej下所有类或者需要的类。（import swsk33.readandwritej.*;）
+### 2，导入com.gitee.swsk33.readandwritej下所有类或者需要的类。（import swsk33.readandwritej.*;）
 ### 3，公共类和方法：
 #### 类**FileAnalyzer**：用于分析文件信息
 * String getFileMD5(String filePath)
@@ -333,8 +333,23 @@
 		- destination 目标文件路径
 	+ 返回值：boolean 是否复制成功
 
+#### 类**TerminalUtils**：用于命令行命令的执行和读取
+* TerminalOutput getCommandOutput(String command)
+	+ 作用：向终端输入（运行）一条命令并获取输出结果，注意这是同步方法，会堵塞当前线程
+	+ 参数：
+		- command 要执行的命令
+	+ 返回值：命令执行后的结果模型TerminalOutput类实例（TerminalOutput类位于com.gitee.swsk33.readandwritej.model下）
+
+* TerminalOutput getCommandOutput(String command, String charSet)
+	+ 作用：向终端输入（运行）一条命令并以指定编码格式获取输出结果，注意这是同步方法，会堵塞当前线程
+	+ 参数：
+		- command 要执行的命令
+		- charSet 编码格式
+	+ 返回值：命令执行后的结果模型TerminalOutput类实例
+
 #### 上述charSet（编码格式参数）可选常量值如下：
 ```
+//CharSetValue类位于com.gitee.swsk33.readandwritej.util下
 CharSetValue.US_ASCII：US-ASCII
 CharSetValue.ISO_8859_1：ISO-8859-1
 CharSetValue.GBK：GBK
