@@ -400,4 +400,25 @@ boolean f = new BinaryUtil().copyFile("C:\\o.exe", "E:\\中转\\o.exe");
 System.out.println("是否复制成功：" + f);
 ```
 
->最后更新：2020.10.27
+**例如执行命令```ping www.baidu.com```并以GBK编码格式读取输出结果**<br>
+```
+TerminalOutput out = new TerminalUtils().getCommandOutput("ping www.baidu.com", CharSetValue.GBK);
+//标准输出流
+System.out.println(out.getStandardOutput());
+//标准错误流
+System.out.println(out.getStandardError());
+```
+输出结果：<br>
+```
+正在 Ping www.a.shifen.com [14.215.177.39] 具有 32 字节的数据:
+来自 14.215.177.39 的回复: 字节=32 时间=23ms TTL=55
+来自 14.215.177.39 的回复: 字节=32 时间=23ms TTL=55
+来自 14.215.177.39 的回复: 字节=32 时间=23ms TTL=55
+来自 14.215.177.39 的回复: 字节=32 时间=23ms TTL=55
+
+14.215.177.39 的 Ping 统计信息:
+    数据包: 已发送 = 4，已接收 = 4，丢失 = 0 (0% 丢失)，
+往返行程的估计时间(以毫秒为单位):
+    最短 = 23ms，最长 = 23ms，平均 = 23ms
+```
+>最后更新：2021.2.6
