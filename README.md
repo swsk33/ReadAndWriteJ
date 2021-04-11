@@ -12,6 +12,9 @@
 9，二进制文件工具：读取二进制文件为字节数据，复制文件。<br>
 10，终端工具：执行命令并获取命令输出结果。<br>
 ### 下载地址:[点击进入下载jar包](https://gitee.com/swsk33/ReadAndWriteJ/releases)
+### 其它版本：
+现已完成C#版的读写类库，可根据自己的框架前往查看：<br>
+[.NET Framework](https://gitee.com/swsk33/ReadAndWriteSharp) [.NET 5](https://gitee.com/swsk33/ReadAndWriteDotNet)
 ## 使用方法：
 ### 1，添加依赖，有下列两种情况：
 ①Eclipse直接添加jar：先下载这个jar包并把这个包导入到IDE里面，例如eclipse。不知道如何导入请查看教程：[eclipse导入外部jar包](https://blog.csdn.net/czbqoo01/article/details/72803450)<br>
