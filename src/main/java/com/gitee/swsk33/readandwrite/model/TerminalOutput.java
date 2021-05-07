@@ -23,6 +23,11 @@ public class TerminalOutput {
 	 */
 	private boolean done = false;
 
+	/**
+	 * 得到标准输出流结果
+	 * 
+	 * @return 标准输出
+	 */
 	public String getStandardOutput() {
 		return standardOutput;
 	}
@@ -35,6 +40,11 @@ public class TerminalOutput {
 		this.standardOutput = this.standardOutput + content + "\r\n";
 	}
 
+	/**
+	 * 得到标准错误流结果
+	 * 
+	 * @return 标准错误输出
+	 */
 	public String getStandardError() {
 		return standardError;
 	}
@@ -47,6 +57,11 @@ public class TerminalOutput {
 		this.standardError = this.standardError + content + "\r\n";
 	}
 
+	/**
+	 * 该命令是否已经执行完成
+	 * 
+	 * @return 是否完成
+	 */
 	public boolean isDone() {
 		return done;
 	}

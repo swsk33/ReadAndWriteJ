@@ -16,7 +16,7 @@ public class TerminalUtils {
 	 * 向终端输入（运行）一条命令并获取输出结果，注意这是同步方法，会堵塞当前线程
 	 * 
 	 * @param command 运行的命令
-	 * @return 标准结果
+	 * @return 标准结果类，位于com.gitee.swsk33.readandwrite.model下的TerminalOutput类
 	 * @throws Exception 输入输出异常
 	 */
 	public static TerminalOutput getCommandOutput(String command) throws Exception {
@@ -60,7 +60,7 @@ public class TerminalUtils {
 	 * 
 	 * @param command 运行的命令
 	 * @param charSet 编码格式
-	 * @return 标准结果
+	 * @return 标准结果，位于com.gitee.swsk33.readandwrite.model下的TerminalOutput类
 	 * @throws Exception 输入输出异常
 	 * 
 	 */
@@ -92,7 +92,7 @@ public class TerminalUtils {
 	 * 异步运行命令并实时获取输出结果
 	 * 
 	 * @param command 命令
-	 * @param result  用于储存结果的TerminalOutput实例
+	 * @param result  用于储存结果的TerminalOutput实例，位于com.gitee.swsk33.readandwrite.model下
 	 */
 	public static void runCommandAsyn(String command, TerminalOutput result) {
 		new Thread(() -> {
@@ -144,7 +144,7 @@ public class TerminalUtils {
 	 * 
 	 * @param command 命令
 	 * @param charset 编码
-	 * @param result  用于储存结果的TerminalOutput实例
+	 * @param result  用于储存结果的TerminalOutput实例，位于com.gitee.swsk33.readandwrite.model下
 	 */
 	public static void runCommandAsyn(String command, String charset, TerminalOutput result) {
 		new Thread(() -> {
