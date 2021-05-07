@@ -1,9 +1,13 @@
 package com.gitee.swsk33.readandwrite;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.util.Arrays;
 import com.gitee.swsk33.readandwrite.exception.SizeOutOfBoundsException;
@@ -14,7 +18,7 @@ import com.gitee.swsk33.readandwrite.exception.SizeOutOfBoundsException;
  * @author swsk33
  *
  */
-public class BinaryUtil {
+public class BinaryUtils {
 
 	/**
 	 * 读取二进制文件并储存在byte数组当中
@@ -98,10 +102,45 @@ public class BinaryUtil {
 		OutputStream os = new FileOutputStream(f);
 		os.write(data);
 		os.close();
-		if (Arrays.equals(BinaryUtil.readBinaryFile(filePath), data)) {
+		if (Arrays.equals(BinaryUtils.readBinaryFile(filePath), data)) {
 			success = true;
 		}
 		return success;
+	}
+
+	/**
+	 * 将对象（实例）序列化并写入文件<br>
+	 * 被写入的对象必须是可序列化的（即被写入实例的类需要implements Serializable）
+	 * 
+	 * @param <T>      实例类型
+	 * @param filePath 写入文件路径
+	 * @param object   待写入实例内容
+	 * @return 是否写入成功
+	 * @throws Exception 文件写入异常，序列化异常
+	 */
+	public static <T> boolean writeObjectToFile(String filePath, T object) throws Exception {
+		Object data = (Object) object;
+		ByteArrayOutputStream byteOutput = new ByteArrayOutputStream();
+		ObjectOutputStream objectOutput = new ObjectOutputStream(byteOutput);
+		objectOutput.writeObject(data);
+		return writeBinaryFile(filePath, byteOutput.toByteArray());
+	}
+
+	/**
+	 * 从文件中读取数据并反序列化为对象<br>
+	 * 读取的对象必须是可序列化的（即读取到的实例的类需要implements Serializable）
+	 * 
+	 * @param <T>      待读取文件储存的数据对象类型
+	 * @param filePath 待读取文件
+	 * @return 读取到的结果
+	 * @throws Exception 文件读取异常，反序列化异常
+	 */
+	@SuppressWarnings("unchecked")
+	public static <T> T readObjectFromFile(String filePath) throws Exception {
+		byte[] readData = readBinaryFile(filePath);
+		ByteArrayInputStream byteInput = new ByteArrayInputStream(readData);
+		ObjectInputStream objectInput = new ObjectInputStream(byteInput);
+		return (T) objectInput.readObject();
 	}
 
 	/**

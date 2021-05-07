@@ -59,8 +59,8 @@ public class FileComparer {
 	 * @throws Exception 其中有一个文件不存在或者文件存在错误时抛出异常
 	 */
 	public static boolean compareBinaryFile(String filePath1, String filePath2) throws Exception {
-		byte[] fc1 = BinaryUtil.readBinaryFile(filePath1);
-		byte[] fc2 = BinaryUtil.readBinaryFile(filePath2);
+		byte[] fc1 = BinaryUtils.readBinaryFile(filePath1);
+		byte[] fc2 = BinaryUtils.readBinaryFile(filePath2);
 		return Arrays.equals(fc1, fc2);
 	}
 
