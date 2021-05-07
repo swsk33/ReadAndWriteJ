@@ -48,6 +48,8 @@ public class TextReader {
 	 * <li>CharSetValue.UTF_16BE：<strong>UTF-16BE</strong></li>
 	 * <li>CharSetValue.UTF_16LE：<strong>UTF-16LE</strong></li>
 	 * </ul>
+	 * CharSetValue类在com.gitee.swsk33.readandwrite.util下<br>
+	 * <br>
 	 * 
 	 * @param filePath 待读取文件相对/绝对路径
 	 * @param line     待读取的行数
@@ -120,6 +122,8 @@ public class TextReader {
 	 * <li>CharSetValue.UTF_16BE：<strong>UTF-16BE</strong></li>
 	 * <li>CharSetValue.UTF_16LE：<strong>UTF-16LE</strong></li>
 	 * </ul>
+	 * CharSetValue类在com.gitee.swsk33.readandwrite.util下<br>
+	 * <br>
 	 * 
 	 * @param filePath 待读取文件相对/绝对路径
 	 * @param start    指定起始行
@@ -215,6 +219,8 @@ public class TextReader {
 	 * <li>CharSetValue.UTF_16BE：<strong>UTF-16BE</strong></li>
 	 * <li>CharSetValue.UTF_16LE：<strong>UTF-16LE</strong></li>
 	 * </ul>
+	 * CharSetValue类在com.gitee.swsk33.readandwrite.util下<br>
+	 * <br>
 	 * 
 	 * @param filePath 待读取文件相对/绝对路径
 	 * @param start    指定起始行
@@ -291,6 +297,8 @@ public class TextReader {
 	 * <li>CharSetValue.UTF_16BE：<strong>UTF-16BE</strong></li>
 	 * <li>CharSetValue.UTF_16LE：<strong>UTF-16LE</strong></li>
 	 * </ul>
+	 * CharSetValue类在com.gitee.swsk33.readandwrite.util下<br>
+	 * <br>
 	 * 
 	 * @param filePath 待读取文件相对/绝对路径
 	 * @param charSet  指定编码格式读取文件
@@ -345,6 +353,8 @@ public class TextReader {
 	 * <li>CharSetValue.UTF_16BE：<strong>UTF-16BE</strong></li>
 	 * <li>CharSetValue.UTF_16LE：<strong>UTF-16LE</strong></li>
 	 * </ul>
+	 * CharSetValue类在com.gitee.swsk33.readandwrite.util下<br>
+	 * <br>
 	 * 
 	 * @param filePath 待读取文件相对/绝对路径
 	 * @param charSet  指定编码格式读取文件

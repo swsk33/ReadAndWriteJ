@@ -74,6 +74,8 @@ public class TextFileWriter {
 	 * <li>CharSetValue.UTF_16BE：<strong>UTF-16BE</strong></li>
 	 * <li>CharSetValue.UTF_16LE：<strong>UTF-16LE</strong></li>
 	 * </ul>
+	 * CharSetValue类在com.gitee.swsk33.readandwrite.util下<br>
+	 * <br>
 	 * 
 	 * @param filePath  待写入文件相对/绝对路径
 	 * @param whichLine 待替换的行数
@@ -169,6 +171,8 @@ public class TextFileWriter {
 	 * <li>CharSetValue.UTF_16BE：<strong>UTF-16BE</strong></li>
 	 * <li>CharSetValue.UTF_16LE：<strong>UTF-16LE</strong></li>
 	 * </ul>
+	 * CharSetValue类在com.gitee.swsk33.readandwrite.util下<br>
+	 * <br>
 	 * 
 	 * @param filePath 待写入文件相对/绝对路径
 	 * @param text     待写入内容
@@ -269,6 +273,8 @@ public class TextFileWriter {
 	 * <li>CharSetValue.UTF_16BE：<strong>UTF-16BE</strong></li>
 	 * <li>CharSetValue.UTF_16LE：<strong>UTF-16LE</strong></li>
 	 * </ul>
+	 * CharSetValue类在com.gitee.swsk33.readandwrite.util下<br>
+	 * <br>
 	 * 
 	 * @param filePath    待操作文件的相对/绝对路径
 	 * @param insertText  待插入的内容
