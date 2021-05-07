@@ -18,6 +18,11 @@ public class TerminalOutput {
 	 */
 	private String standardError = "";
 
+	/**
+	 * 命令是否运行完成
+	 */
+	private boolean done = false;
+
 	public String getStandardOutput() {
 		return standardOutput;
 	}
@@ -26,12 +31,28 @@ public class TerminalOutput {
 		this.standardOutput = standardOutput;
 	}
 
+	public void appendStandardOutput(String content) {
+		this.standardOutput = this.standardOutput + content + "\r\n";
+	}
+
 	public String getStandardError() {
 		return standardError;
 	}
 
 	public void setStandardError(String standardError) {
 		this.standardError = standardError;
+	}
+
+	public void appendStandardError(String content) {
+		this.standardError = this.standardError + content + "\r\n";
+	}
+
+	public boolean isDone() {
+		return done;
+	}
+
+	public void setDone(boolean done) {
+		this.done = done;
 	}
 
 }

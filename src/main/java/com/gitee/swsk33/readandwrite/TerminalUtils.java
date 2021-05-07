@@ -39,6 +39,7 @@ public class TerminalUtils {
 		process.waitFor();
 		result.setStandardOutput(outResult);
 		result.setStandardError(errResult);
+		result.setDone(true);
 		return result;
 	}
 
@@ -81,7 +82,97 @@ public class TerminalUtils {
 		process.waitFor();
 		result.setStandardOutput(outResult);
 		result.setStandardError(errResult);
+		result.setDone(true);
 		return result;
+	}
+
+	/**
+	 * 异步运行命令并实时获取输出结果
+	 * 
+	 * @param command 命令
+	 * @param result  用于储存结果的TerminalOutput实例
+	 */
+	public static void runCommandAsyn(String command, TerminalOutput result) {
+		new Thread(() -> {
+			BufferedReader stdOutReader = null;
+			BufferedReader stdErrReader = null;
+			try {
+				Process process = Runtime.getRuntime().exec(command);
+				stdOutReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+				stdErrReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+				String stdOutLine = "";
+				String stdErrLine = "";
+				while ((stdOutLine = stdOutReader.readLine()) != null || (stdErrLine = stdErrReader.readLine()) != null) {
+					if (stdOutLine != null) {
+						result.appendStandardOutput(stdOutLine);
+					}
+					if (stdErrLine != null) {
+						result.appendStandardError(stdErrLine);
+					}
+				}
+				process.waitFor();
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				result.setDone(true);
+				try {
+					stdOutReader.close();
+					stdErrReader.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}).start();
+	}
+
+	/**
+	 * 以指定的编码异步运行命令并实时获取输出结果<br>
+	 * 可用的编码常量值有：
+	 * <ul>
+	 * <li>CharSetValue.US_ASCII：<strong>US-ASCII</strong></li>
+	 * <li>CharSetValue.ISO_8859_1：<strong>ISO-8859-1</strong></li>
+	 * <li>CharSetValue.GBK：<strong>GBK</strong></li>
+	 * <li>CharSetValue.UTF_8：<strong>UTF-8</strong></li>
+	 * <li>CharSetValue.UTF_16：<strong>UTF-16</strong></li>
+	 * <li>CharSetValue.UTF_16BE：<strong>UTF-16BE</strong></li>
+	 * <li>CharSetValue.UTF_16LE：<strong>UTF-16LE</strong></li>
+	 * </ul>
+	 * 
+	 * @param command 命令
+	 * @param charset 编码
+	 * @param result  用于储存结果的TerminalOutput实例
+	 */
+	public static void runCommandAsyn(String command, String charset, TerminalOutput result) {
+		new Thread(() -> {
+			BufferedReader stdOutReader = null;
+			BufferedReader stdErrReader = null;
+			try {
+				Process process = Runtime.getRuntime().exec(command);
+				stdOutReader = new BufferedReader(new InputStreamReader(process.getInputStream(), charset));
+				stdErrReader = new BufferedReader(new InputStreamReader(process.getErrorStream(), charset));
+				String stdOutLine = "";
+				String stdErrLine = "";
+				while ((stdOutLine = stdOutReader.readLine()) != null || (stdErrLine = stdErrReader.readLine()) != null) {
+					if (stdOutLine != null) {
+						result.appendStandardOutput(stdOutLine);
+					}
+					if (stdErrLine != null) {
+						result.appendStandardError(stdErrLine);
+					}
+				}
+				process.waitFor();
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				result.setDone(true);
+				try {
+					stdOutReader.close();
+					stdErrReader.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}).start();
 	}
 
 }
