@@ -55,5 +55,36 @@
 #### 类JarUtils：用于获取或者释放jar包内的文件和资源
 - static boolean releaseFileInJar(@SuppressWarnings("rawtypes") Class c, String classPath, String outputPath)：释放jar包内文件到jar包外部
 - static ImageIcon getImageInJar(@SuppressWarnings("rawtypes") Class c, String classPath)：直接读取jar内图片资源为ImageIcon对象
-
->最后更新：2021.2.6
+#### 类LineScanner：文件行数获取
+- static int getLineCount(String filePath)：获取文本文件行数
+#### 类StringComparer：文本文件对比器
+- static boolean compareLine(String filepath, String lineCompared)：比较某一行内容是否与被比较字符串一致
+- static boolean compareText(String filepath, String textCompared)：判断文本文档内是否包含被比较的字符串
+#### 类TerminalUtils：用于命令行的执行和读取
+- static TerminalOutput getCommandOutput(String command)：向终端输入（运行）一条命令并获取输出结果
+- static TerminalOutput getCommandOutput(String command, String charSet)：向终端输入（运行）一条命令并以指定的编码获取输出结果
+- static void runCommandAsyn(String command, TerminalOutput result)：异步运行命令并实时获取输出结果
+- static void runCommandAsyn(String command, String charset, TerminalOutput result)：以指定的编码异步运行命令并实时获取输出结果
+#### 类TextFileWriter：文件写入器
+- static boolean replaceLine(String filePath, int whichLine, String text)：用指定内容替换文件指定行
+- static boolean replaceLine(String filePath, int whichLine, String text, String charSet)：用指定内容替换文件指定行，以指定的字符编码形式
+- static boolean writeText(String filePath, String text)：写入指定内容至文件末尾，每执行一次该方法就在末尾写入一行内容
+- static boolean writeText(String filePath, String text, String charSet)：以指定的编码格式，写入指定内容至文件末尾，每执行一次该方法就在末尾写入一行内容
+- static boolean insertText(String filePath, String insertText, int whichLine, boolean isAfterLine)：插入文本至指定行之后或者之前
+- static boolean insertText(String filePath, String insertText, int whichLine, boolean isAfterLine, String charSet)：插入文本至指定行之后或者之前，以指定的编码格式
+- static boolean removeLine(String filePath, int whichLine)：移除某一行的内容
+- static boolean clearAll(String filePath)：清空一个文件
+#### 类TextReader：文件读取器
+- static String readText(String filePath, int line)：读取文本文件指定行内容
+- static String readText(String filePath, int line, String charSet)：指定编码读取文本文件指定行内容
+- static String readFileRange(String filePath, int start, int end)：读取指定行数范围内的内容并以字符串形式储存
+- static String readFileRange(String filePath, int start, int end, String charSet)：以指定编码读取指定行数范围内的内容并以字符串形式储存
+- static String[] readFileRangeToArray(String filePath, int start, int end)：读取指定行数范围内的内容并以字符串数组形式储存
+- static String[] readFileRangeToArray(String filePath, int start, int end, String charSet)：以指定编码读取指定行数范围内的内容并以字符串数组形式储存
+- static String readFile(String filePath)：读取整个文本文档并将内容储存在字符串中
+- static String readFile(String filePath, String charSet)：以指定编码读取整个文本文档并将内容储存在字符串中
+- static String[] readFileToArray(String filePath)：读取整个文本文档并将内容储存在字符串数组中
+- static String[] readFileToArray(String filePath, String charSet)：以指定编码读取整个文本文档并将内容储存在字符串数组中
+<br>
+**详细的使用可以在调用类的方法时查看，IDE中会显示其中的详细文档**<br>
+>最后更新：2021.5.7
