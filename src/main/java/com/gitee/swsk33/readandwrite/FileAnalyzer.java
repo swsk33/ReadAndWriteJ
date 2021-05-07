@@ -1,4 +1,4 @@
-package com.gitee.swsk33.readandwritej;
+package com.gitee.swsk33.readandwrite;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -19,7 +19,7 @@ public class FileAnalyzer {
 	 * @param filePath 文件的相对路径/绝对路径
 	 * @return String 字符串 文件MD5值
 	 */
-	public String getFileMD5(String filePath) {
+	public static String getFileMD5(String filePath) {
 		String result = "";
 		BigInteger bgi = null;
 		try {
@@ -47,7 +47,7 @@ public class FileAnalyzer {
 	 * @param filePath 文件的相对路径/绝对路径
 	 * @return long 长整型 文件大小
 	 */
-	public long getFileSizeb(String filePath) {
+	public static long getFileSizeb(String filePath) {
 		long size = 0;
 		File f = new File(filePath);
 		size = f.length();
@@ -60,7 +60,7 @@ public class FileAnalyzer {
 	 * @param filePath 文件的相对路径/绝对路径
 	 * @return double 浮点型 文件大小
 	 */
-	public double getFileSizekb(String filePath) {
+	public static double getFileSizekb(String filePath) {
 		double size = 0;
 		File f = new File(filePath);
 		size = (double) f.length() / 1024;
@@ -74,7 +74,8 @@ public class FileAnalyzer {
 	 * @param numofdecimres 要保留的小数位数
 	 * @return double 浮点型 文件大小
 	 */
-	public double getFileSizekb(String filePath, int numofdecimres) {
+	@SuppressWarnings("deprecation")
+	public static double getFileSizekb(String filePath, int numofdecimres) {
 		double size = 0;
 		File f = new File(filePath);
 		size = (double) f.length() / 1024;
@@ -89,7 +90,7 @@ public class FileAnalyzer {
 	 * @param filePath 文件的相对路径/绝对路径
 	 * @return double 浮点型 文件大小
 	 */
-	public double getFileSizemb(String filePath) {
+	public static double getFileSizemb(String filePath) {
 		double size = 0;
 		File f = new File(filePath);
 		size = (double) f.length() / 1024;
@@ -104,7 +105,8 @@ public class FileAnalyzer {
 	 * @param numofdecimres 要保留的小数位数
 	 * @return double 浮点型 文件大小
 	 */
-	public double getFileSizemb(String filePath, int numofdecimres) {
+	@SuppressWarnings("deprecation")
+	public static double getFileSizemb(String filePath, int numofdecimres) {
 		double size = 0;
 		File f = new File(filePath);
 		size = (double) f.length() / 1024;
@@ -120,7 +122,7 @@ public class FileAnalyzer {
 	 * @param filePath 文件的相对路径/绝对路径
 	 * @return double 浮点型 文件大小
 	 */
-	public double getFileSizegb(String filePath) {
+	public static double getFileSizegb(String filePath) {
 		double size = 0;
 		File f = new File(filePath);
 		size = (double) f.length() / 1024;
@@ -136,7 +138,8 @@ public class FileAnalyzer {
 	 * @param numofdecimres 要保留的小数位数
 	 * @return double 浮点型 文件大小
 	 */
-	public double getFileSizegb(String filePath, int numofdecimres) {
+	@SuppressWarnings("deprecation")
+	public static double getFileSizegb(String filePath, int numofdecimres) {
 		double size = 0;
 		File f = new File(filePath);
 		size = (double) f.length() / 1024;
@@ -153,7 +156,7 @@ public class FileAnalyzer {
 	 * @param filePath 文件的相对路径/绝对路径
 	 * @return String 字符串 为获取文件扩展名（不带.）
 	 */
-	public String getFileFormat(String filePath) {
+	public static String getFileFormat(String filePath) {
 		String ffr = "";
 		File f = new File(filePath);
 		String fn = f.getName();

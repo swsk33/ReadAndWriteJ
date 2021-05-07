@@ -1,8 +1,8 @@
-package com.gitee.swsk33.readandwritej;
+package com.gitee.swsk33.readandwrite;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import com.gitee.swsk33.readandwritej.model.TerminalOutput;
+import com.gitee.swsk33.readandwrite.model.TerminalOutput;
 
 /**
  * 用于命令行的执行和读取。
@@ -19,7 +19,7 @@ public class TerminalUtils {
 	 * @return 标准结果
 	 * @throws Exception 输入输出异常
 	 */
-	public TerminalOutput getCommandOutput(String command) throws Exception {
+	public static TerminalOutput getCommandOutput(String command) throws Exception {
 		TerminalOutput result = new TerminalOutput();
 		Process process = Runtime.getRuntime().exec(command);
 		BufferedReader stdOutReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
@@ -61,7 +61,7 @@ public class TerminalUtils {
 	 * @throws Exception 输入输出异常
 	 * 
 	 */
-	public TerminalOutput getCommandOutput(String command, String charSet) throws Exception {
+	public static TerminalOutput getCommandOutput(String command, String charSet) throws Exception {
 		TerminalOutput result = new TerminalOutput();
 		Process process = Runtime.getRuntime().exec(command);
 		BufferedReader stdOutReader = new BufferedReader(new InputStreamReader(process.getInputStream(), charSet));

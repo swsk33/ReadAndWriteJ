@@ -26,8 +26,9 @@
     <version>5.1.2</version>
 </dependency>
 ```
-### 2，导入com.gitee.swsk33.readandwritej下所有类或者需要的类。（import swsk33.readandwritej.*;）
+### 2，导入com.gitee.swsk33.readandwrite下所有类或者需要的类。（import swsk33.readandwrite.*;）
 ### 3，公共类和方法：
+>**位于com.gitee.swsk33.readandwrite下**
 #### 类**FileAnalyzer**：用于分析文件信息
 * String getFileMD5(String filePath)
 	+ 作用：用于获取文件的MD5值 

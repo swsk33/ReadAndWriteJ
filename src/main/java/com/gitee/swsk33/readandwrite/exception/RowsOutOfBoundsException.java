@@ -1,4 +1,4 @@
-package com.gitee.swsk33.readandwritej.exception;
+package com.gitee.swsk33.readandwrite.exception;
 
 /**
  * 行数越界异常，当读取文件指定的行数超过其本有的行数时抛出此异常

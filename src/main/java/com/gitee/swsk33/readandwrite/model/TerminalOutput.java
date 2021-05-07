@@ -1,4 +1,4 @@
-package com.gitee.swsk33.readandwritej.model;
+package com.gitee.swsk33.readandwrite.model;
 
 /**
  * 终端输出数据模型

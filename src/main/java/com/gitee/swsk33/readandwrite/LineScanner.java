@@ -1,4 +1,4 @@
-package com.gitee.swsk33.readandwritej;
+package com.gitee.swsk33.readandwrite;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,7 +20,7 @@ public class LineScanner {
 	 * @return int 整型 文件行数
 	 * @throws Exception 文件不存在或存在错误时抛出异常
 	 */
-	public int getLineCount(String filePath) throws Exception {
+	public static int getLineCount(String filePath) throws Exception {
 		int linage = 0;
 		File f = new File(filePath);
 		FileInputStream fis = new FileInputStream(f);

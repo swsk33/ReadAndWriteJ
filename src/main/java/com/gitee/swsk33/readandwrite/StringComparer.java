@@ -1,4 +1,4 @@
-package com.gitee.swsk33.readandwritej;
+package com.gitee.swsk33.readandwrite;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -21,9 +21,9 @@ public class StringComparer {
 	 * @return boolean 布尔值 表示是否有一行的内容和被比较字符串一致
 	 * @throws Exception 文件不存在或者存在错误时抛出异常
 	 */
-	public boolean compareLine(String filepath, String lineCompared) throws Exception {
+	public static boolean compareLine(String filepath, String lineCompared) throws Exception {
 		boolean result = false;
-		int line = new LineScanner().getLineCount(filepath);
+		int line = LineScanner.getLineCount(filepath);
 		File f = new File(filepath);
 		FileInputStream fis = new FileInputStream(f);
 		InputStreamReader isr = new InputStreamReader(fis);
@@ -46,9 +46,9 @@ public class StringComparer {
 	 * @return boolean 布尔值 表示是否有一行的内容包含被比较的字符串
 	 * @throws Exception 文件不存在或者存在错误时抛出异常
 	 */
-	public boolean compareText(String filepath, String textCompared) throws Exception {
+	public static boolean compareText(String filepath, String textCompared) throws Exception {
 		boolean result = false;
-		int line = new LineScanner().getLineCount(filepath);
+		int line = LineScanner.getLineCount(filepath);
 		File f = new File(filepath);
 		FileInputStream fis = new FileInputStream(f);
 		InputStreamReader isr = new InputStreamReader(fis);

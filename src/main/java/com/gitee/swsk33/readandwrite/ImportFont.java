@@ -1,4 +1,4 @@
-package com.gitee.swsk33.readandwritej;
+package com.gitee.swsk33.readandwrite;
 
 import java.awt.Font;
 import java.io.File;
@@ -18,7 +18,7 @@ public class ImportFont {
 	 * @param wordSize 字体大小
 	 * @return Font 字体对象
 	 */
-	public Font getFont(String filePath, int wordSize) {
+	public static Font getFont(String filePath, int wordSize) {
 		Font font = null;
 		File file = new File(filePath);
 		try {
@@ -37,7 +37,7 @@ public class ImportFont {
 	 * @param wordSize 字体大小
 	 * @return Font 字体对象
 	 */
-	public Font getBoldFont(String filePath, int wordSize) {
+	public static Font getBoldFont(String filePath, int wordSize) {
 		Font font = null;
 		File file = new File(filePath);
 		try {
@@ -56,7 +56,7 @@ public class ImportFont {
 	 * @param wordSize 字体大小
 	 * @return Font 字体对象
 	 */
-	public Font getItalicFont(String filePath, int wordSize) {
+	public static Font getItalicFont(String filePath, int wordSize) {
 		Font font = null;
 		File file = new File(filePath);
 		try {
@@ -75,7 +75,7 @@ public class ImportFont {
 	 * @param wordSize 字体大小
 	 * @return Font 字体对象
 	 */
-	public Font getItalicBoldFont(String filePath, int wordSize) {
+	public static Font getItalicBoldFont(String filePath, int wordSize) {
 		Font font = null;
 		File file = new File(filePath);
 		try {

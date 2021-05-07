@@ -1,13 +1,11 @@
-package com.gitee.swsk33.readandwritej;
+package com.gitee.swsk33.readandwrite;
 
 import java.util.ArrayList;
-
-import com.gitee.swsk33.readandwritej.exception.RowsOutOfBoundsException;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
+import com.gitee.swsk33.readandwrite.exception.RowsOutOfBoundsException;
 
 /**
  * 文件读取器
@@ -25,7 +23,7 @@ public class TextReader {
 	 * @return String 字符串 读取的内容
 	 * @throws Exception 文件存在错误或者文件不存在时抛出异常
 	 */
-	public String readText(String filePath, int line) throws Exception {
+	public static String readText(String filePath, int line) throws Exception {
 		String result = "";
 		File f = new File(filePath);
 		FileInputStream fis = new FileInputStream(f);
@@ -57,7 +55,7 @@ public class TextReader {
 	 * @return String 字符串 读取的内容
 	 * @throws Exception 文件存在错误或者文件不存在时抛出异常
 	 */
-	public String readText(String filePath, int line, String charSet) throws Exception {
+	public static String readText(String filePath, int line, String charSet) throws Exception {
 		String result = "";
 		File f = new File(filePath);
 		FileInputStream fis = new FileInputStream(f);
@@ -79,9 +77,10 @@ public class TextReader {
 	 * @return String 字符串 读取的内容
 	 * @throws Exception 文件存在错误或者文件不存在、或者指定的读取行数有误时抛出异常
 	 */
-	public String readFileRange(String filePath, int start, int end) throws Exception {
+	@SuppressWarnings("resource")
+	public static String readFileRange(String filePath, int start, int end) throws Exception {
 		String result = "";
-		int fileline = new LineScanner().getLineCount(filePath);
+		int fileline = LineScanner.getLineCount(filePath);
 		if (start <= 0) {
 			throw new RowsOutOfBoundsException("起始行数不能小于等于0！");
 		} else if (start > fileline) {
@@ -129,9 +128,10 @@ public class TextReader {
 	 * @return String 字符串 读取的内容
 	 * @throws Exception 文件存在错误或者文件不存在、或者指定的读取行数有误时抛出异常
 	 */
-	public String readFileRange(String filePath, int start, int end, String charSet) throws Exception {
+	@SuppressWarnings("resource")
+	public static String readFileRange(String filePath, int start, int end, String charSet) throws Exception {
 		String result = "";
-		int fileline = new LineScanner().getLineCount(filePath);
+		int fileline = LineScanner.getLineCount(filePath);
 		if (start <= 0) {
 			throw new RowsOutOfBoundsException("起始行数不能小于等于0！");
 		} else if (start > fileline) {
@@ -168,9 +168,10 @@ public class TextReader {
 	 * @return String[] 字符串数组 读取的内容
 	 * @throws Exception 文件存在错误或者文件不存在、或者指定的读取行数有误时抛出异常
 	 */
-	public String[] readFileRangeToArray(String filePath, int start, int end) throws Exception {
+	@SuppressWarnings("resource")
+	public static String[] readFileRangeToArray(String filePath, int start, int end) throws Exception {
 		ArrayList<String> rdi = new ArrayList<String>();
-		int fileline = new LineScanner().getLineCount(filePath);
+		int fileline = LineScanner.getLineCount(filePath);
 		if (start <= 0) {
 			throw new RowsOutOfBoundsException("起始行数不能小于等于0！");
 		} else if (start > fileline) {
@@ -222,9 +223,10 @@ public class TextReader {
 	 * @return String[] 字符串数组 读取的内容
 	 * @throws Exception 文件存在错误或者文件不存在、或者指定的读取行数有误时抛出异常
 	 */
-	public String[] readFileRangeToArray(String filePath, int start, int end, String charSet) throws Exception {
+	@SuppressWarnings("resource")
+	public static String[] readFileRangeToArray(String filePath, int start, int end, String charSet) throws Exception {
 		ArrayList<String> rdi = new ArrayList<String>();
-		int fileline = new LineScanner().getLineCount(filePath);
+		int fileline = LineScanner.getLineCount(filePath);
 		if (start <= 0) {
 			throw new RowsOutOfBoundsException("起始行数不能小于等于0！");
 		} else if (start > fileline) {
@@ -263,10 +265,10 @@ public class TextReader {
 	 * @return String 字符串 读取的内容
 	 * @throws Exception 文件存在错误或者文件不存在时抛出异常
 	 */
-	public String readFile(String filePath) throws Exception {
+	public static String readFile(String filePath) throws Exception {
 		String result = "";
 		File f = new File(filePath);
-		int linef = new LineScanner().getLineCount(filePath);
+		int linef = LineScanner.getLineCount(filePath);
 		FileInputStream fis = new FileInputStream(f);
 		InputStreamReader isr = new InputStreamReader(fis);
 		BufferedReader br = new BufferedReader(isr);
@@ -295,10 +297,10 @@ public class TextReader {
 	 * @return String 字符串 读取的内容
 	 * @throws Exception 文件存在错误或者文件不存在时抛出异常
 	 */
-	public String readFile(String filePath, String charSet) throws Exception {
+	public static String readFile(String filePath, String charSet) throws Exception {
 		String result = "";
 		File f = new File(filePath);
-		int linef = new LineScanner().getLineCount(filePath);
+		int linef = LineScanner.getLineCount(filePath);
 		FileInputStream fis = new FileInputStream(f);
 		InputStreamReader isr = new InputStreamReader(fis, charSet);
 		BufferedReader br = new BufferedReader(isr);
@@ -316,10 +318,10 @@ public class TextReader {
 	 * @return String[] 字符串数组 读取的内容
 	 * @throws Exception 文件存在错误或者文件不存在时抛出异常
 	 */
-	public String[] readFileToArray(String filePath) throws Exception {
+	public static String[] readFileToArray(String filePath) throws Exception {
 		ArrayList<String> rdi = new ArrayList<String>();
 		File f = new File(filePath);
-		int linef = new LineScanner().getLineCount(filePath);
+		int linef = LineScanner.getLineCount(filePath);
 		FileInputStream fis = new FileInputStream(f);
 		InputStreamReader isr = new InputStreamReader(fis);
 		BufferedReader br = new BufferedReader(isr);
@@ -349,10 +351,10 @@ public class TextReader {
 	 * @return String[] 字符串数组 读取的内容
 	 * @throws Exception 文件存在错误或者文件不存在时抛出异常
 	 */
-	public String[] readFileToArray(String filePath, String charSet) throws Exception {
+	public static String[] readFileToArray(String filePath, String charSet) throws Exception {
 		ArrayList<String> rdi = new ArrayList<String>();
 		File f = new File(filePath);
-		int linef = new LineScanner().getLineCount(filePath);
+		int linef = LineScanner.getLineCount(filePath);
 		FileInputStream fis = new FileInputStream(f);
 		InputStreamReader isr = new InputStreamReader(fis, charSet);
 		BufferedReader br = new BufferedReader(isr);

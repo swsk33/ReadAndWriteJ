@@ -1,4 +1,4 @@
-package com.gitee.swsk33.readandwritej;
+package com.gitee.swsk33.readandwrite;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -6,10 +6,8 @@ import java.io.FileOutputStream;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-
-import com.gitee.swsk33.readandwritej.exception.RowsOutOfBoundsException;
-
 import java.io.BufferedWriter;
+import com.gitee.swsk33.readandwrite.exception.RowsOutOfBoundsException;
 
 /**
  * 文件写入器
@@ -28,10 +26,10 @@ public class TextFileWriter {
 	 * @return boolean 替换写入操作成功即返回true
 	 * @throws Exception 文件不存在或者存在错误、指定替换的行数超出文件固有行数或者小于0时抛出异常
 	 */
-	public boolean replaceLine(String filePath, int whichLine, String text) throws Exception {
+	public static boolean replaceLine(String filePath, int whichLine, String text) throws Exception {
 		boolean success = false;
 		String content = "";
-		int line = new LineScanner().getLineCount(filePath);
+		int line = LineScanner.getLineCount(filePath);
 		if (whichLine > line) {
 			throw new RowsOutOfBoundsException("指定写入行数超过了文件的固有行数！");
 		} else if (whichLine <= 0) {
@@ -58,7 +56,7 @@ public class TextFileWriter {
 			bw.close();
 		}
 		// 最后检查是否替换成功
-		if (new TextReader().readFile(filePath).equals(content)) {
+		if (TextReader.readFile(filePath).equals(content)) {
 			success = true;
 		}
 		return success;
@@ -84,10 +82,10 @@ public class TextFileWriter {
 	 * @return boolean 替换写入操作成功即返回true
 	 * @throws Exception 文件不存在或者存在错误、指定替换的行数超出文件固有行数或者小于0时抛出异常
 	 */
-	public boolean replaceLine(String filePath, int whichLine, String text, String charSet) throws Exception {
+	public static boolean replaceLine(String filePath, int whichLine, String text, String charSet) throws Exception {
 		boolean success = false;
 		String content = "";
-		int line = new LineScanner().getLineCount(filePath);
+		int line = LineScanner.getLineCount(filePath);
 		if (whichLine > line) {
 			throw new RowsOutOfBoundsException("指定写入行数超过了文件的固有行数！");
 		} else if (whichLine <= 0) {
@@ -114,7 +112,7 @@ public class TextFileWriter {
 			bw.close();
 		}
 		// 最后检查是否替换成功
-		if (new TextReader().readFile(filePath, charSet).equals(content)) {
+		if (TextReader.readFile(filePath, charSet).equals(content)) {
 			success = true;
 		}
 		return success;
@@ -128,14 +126,15 @@ public class TextFileWriter {
 	 * @return boolean 写入操作成功即返回true
 	 * @throws Exception 文件不存在或者存在错误时抛出异常
 	 */
-	public boolean writeText(String filePath, String text) throws Exception {
+	public static boolean writeText(String filePath, String text) throws Exception {
 		boolean success = false;
 		File f = new File(filePath);
-		int line = new LineScanner().getLineCount(filePath);
+		int line = LineScanner.getLineCount(filePath);
 		String old = "";
 		if (!(line == 0)) {
 			for (int i = 0; i < line; i++) {
-				old = old + new TextReader().readText(filePath, i + 1) + "\r\n";
+
+				old = old + TextReader.readText(filePath, i + 1) + "\r\n";
 			}
 			FileOutputStream fos = new FileOutputStream(f);
 			OutputStreamWriter osw = new OutputStreamWriter(fos);
@@ -150,8 +149,9 @@ public class TextFileWriter {
 			bw.write(text);
 			bw.close();
 		}
+
 		// 检查是否写入成功
-		if (new TextReader().readFile(filePath).equals(old + text + "\r\n")) {
+		if (TextReader.readFile(filePath).equals(old + text + "\r\n")) {
 			success = true;
 		}
 		return success;
@@ -176,14 +176,15 @@ public class TextFileWriter {
 	 * @return boolean 写入操作成功即返回true
 	 * @throws Exception 文件不存在或者存在错误时抛出异常
 	 */
-	public boolean writeText(String filePath, String text, String charSet) throws Exception {
+	public static boolean writeText(String filePath, String text, String charSet) throws Exception {
 		boolean success = false;
 		File f = new File(filePath);
-		int line = new LineScanner().getLineCount(filePath);
+		int line = LineScanner.getLineCount(filePath);
 		String old = "";
 		if (!(line == 0)) {
 			for (int i = 0; i < line; i++) {
-				old = old + new TextReader().readText(filePath, i + 1) + "\r\n";
+
+				old = old + TextReader.readText(filePath, i + 1) + "\r\n";
 			}
 			FileOutputStream fos = new FileOutputStream(f);
 			OutputStreamWriter osw = new OutputStreamWriter(fos, charSet);
@@ -199,7 +200,7 @@ public class TextFileWriter {
 			bw.close();
 		}
 		// 检查是否写入成功
-		if (new TextReader().readFile(filePath, charSet).equals(old + text + "\r\n")) {
+		if (TextReader.readFile(filePath, charSet).equals(old + text + "\r\n")) {
 			success = true;
 		}
 		return success;
@@ -215,9 +216,9 @@ public class TextFileWriter {
 	 * @return boolean 是否插入成功
 	 * @throws Exception 文件不存在或者行数指定范围错误时抛出异常
 	 */
-	public boolean insertText(String filePath, String insertText, int whichLine, boolean isAfterLine) throws Exception {
+	public static boolean insertText(String filePath, String insertText, int whichLine, boolean isAfterLine) throws Exception {
 		boolean success = false;
-		int line = new LineScanner().getLineCount(filePath);
+		int line = LineScanner.getLineCount(filePath);
 		String content = "";
 		if (whichLine <= 0) {
 			throw new RowsOutOfBoundsException("指定行数不可小于等于0！");
@@ -250,7 +251,7 @@ public class TextFileWriter {
 			bw.close();
 		}
 		// 检查写入是否成功
-		if (new TextReader().readFile(filePath).equals(content)) {
+		if (TextReader.readFile(filePath).equals(content)) {
 			success = true;
 		}
 		return success;
@@ -277,10 +278,9 @@ public class TextFileWriter {
 	 * @return boolean 是否插入成功
 	 * @throws Exception 文件不存在或者行数指定范围错误时抛出异常
 	 */
-	public boolean insertText(String filePath, String insertText, int whichLine, boolean isAfterLine, String charSet)
-			throws Exception {
+	public static boolean insertText(String filePath, String insertText, int whichLine, boolean isAfterLine, String charSet) throws Exception {
 		boolean success = false;
-		int line = new LineScanner().getLineCount(filePath);
+		int line = LineScanner.getLineCount(filePath);
 		String content = "";
 		if (whichLine <= 0) {
 			throw new RowsOutOfBoundsException("指定行数不可小于等于0！");
@@ -313,7 +313,7 @@ public class TextFileWriter {
 			bw.close();
 		}
 		// 检查写入是否成功
-		if (new TextReader().readFile(filePath, charSet).equals(content)) {
+		if (TextReader.readFile(filePath, charSet).equals(content)) {
 			success = true;
 		}
 		return success;
@@ -327,10 +327,10 @@ public class TextFileWriter {
 	 * @return boolean 是否移除成功
 	 * @throws Exception 文件不存在或者指定行数范围错误时抛出异常
 	 */
-	public boolean removeLine(String filePath, int whichLine) throws Exception {
+	public static boolean removeLine(String filePath, int whichLine) throws Exception {
 		boolean success = false;
 		String content = "";
-		int line = new LineScanner().getLineCount(filePath);
+		int line = LineScanner.getLineCount(filePath);
 		if (whichLine <= 0) {
 			throw new RowsOutOfBoundsException("指定行数不可小于等于0！");
 		} else if (whichLine > line) {
@@ -357,7 +357,7 @@ public class TextFileWriter {
 			bw.close();
 		}
 		// 检测移除是否成功
-		if (new TextReader().readFile(filePath).equals(content)) {
+		if (TextReader.readFile(filePath).equals(content)) {
 			success = true;
 		}
 		return success;
@@ -370,7 +370,7 @@ public class TextFileWriter {
 	 * @throws Exception 文件不存在时抛出异常
 	 * @return boolean 清空操作成功时返回true
 	 */
-	public boolean clearAll(String filePath) throws Exception {
+	public static boolean clearAll(String filePath) throws Exception {
 		boolean success = false;
 		File f = new File(filePath);
 		FileOutputStream fos = new FileOutputStream(f);
@@ -379,7 +379,7 @@ public class TextFileWriter {
 		bw.write("");
 		bw.close();
 		// 检查是否操作成功
-		if (new LineScanner().getLineCount(filePath) == 0) {
+		if (LineScanner.getLineCount(filePath) == 0) {
 			success = true;
 		}
 		return success;

@@ -1,4 +1,4 @@
-package com.gitee.swsk33.readandwritej;
+package com.gitee.swsk33.readandwrite;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -24,8 +24,7 @@ public class JarUtils {
 	 * @return boolean 释放成功则为true
 	 * @throws Exception 文件不存在或者存在错误时抛出异常
 	 */
-	public boolean releaseFileInJar(@SuppressWarnings("rawtypes") Class c, String classPath, String outputPath)
-			throws Exception {
+	public static boolean releaseFileInJar(@SuppressWarnings("rawtypes") Class c, String classPath, String outputPath) throws Exception {
 		boolean success = false;
 		InputStream is = c.getResourceAsStream(classPath);
 		File f = new File(outputPath);
@@ -58,7 +57,7 @@ public class JarUtils {
 	 * @param classPath 资源文件路径，可以是指定的类（c）为基准的相对路径，也可以是绝对路径。绝对路径以/开头，表示jar包的根目录
 	 * @return ImageIcon 获取的包内图片对象
 	 */
-	public ImageIcon getImageInJar(@SuppressWarnings("rawtypes") Class c, String classPath) {
+	public static ImageIcon getImageInJar(@SuppressWarnings("rawtypes") Class c, String classPath) {
 		URL imgurl = c.getResource(classPath);
 		return new ImageIcon(imgurl);
 	}

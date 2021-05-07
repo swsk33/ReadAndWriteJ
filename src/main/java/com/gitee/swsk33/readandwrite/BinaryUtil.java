@@ -1,4 +1,4 @@
-package com.gitee.swsk33.readandwritej;
+package com.gitee.swsk33.readandwrite;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -6,8 +6,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Arrays;
-
-import com.gitee.swsk33.readandwritej.exception.SizeOutOfBoundsException;
+import com.gitee.swsk33.readandwrite.exception.SizeOutOfBoundsException;
 
 /**
  * 二进制文件工具
@@ -24,7 +23,7 @@ public class BinaryUtil {
 	 * @return byte[] 读取到的文件字节内容
 	 * @throws Exception 文件不存在抛出异常
 	 */
-	public byte[] readBinaryFile(String filePath) throws Exception {
+	public static byte[] readBinaryFile(String filePath) throws Exception {
 		File f = new File(filePath);
 		long size = f.length();
 		byte[] content;
@@ -47,7 +46,7 @@ public class BinaryUtil {
 	 * @return byte[i][j] 读取到的文件字节内容，为二维数组，下标1代表第i+1个片段，下标2代表第i+1个片段的第j+1个字节
 	 * @throws Exception 文件不存在时抛出异常
 	 */
-	public byte[][] readBinaryFile(String filePath, int fragments) throws Exception {
+	public static byte[][] readBinaryFile(String filePath, int fragments) throws Exception {
 		File f = new File(filePath);
 		byte[][] content = new byte[fragments][];
 		long size = f.length();
@@ -86,7 +85,7 @@ public class BinaryUtil {
 	 * @return boolean 是否写入成功
 	 * @throws Exception 文件错误抛出异常
 	 */
-	public boolean writeBinaryFile(String filePath, byte[] data) throws Exception {
+	public static boolean writeBinaryFile(String filePath, byte[] data) throws Exception {
 		boolean success = false;
 		File f = new File(filePath);
 		File fp = new File(f.getParent());
@@ -99,7 +98,7 @@ public class BinaryUtil {
 		OutputStream os = new FileOutputStream(f);
 		os.write(data);
 		os.close();
-		if (Arrays.equals(this.readBinaryFile(filePath), data)) {
+		if (Arrays.equals(BinaryUtil.readBinaryFile(filePath), data)) {
 			success = true;
 		}
 		return success;
@@ -113,7 +112,7 @@ public class BinaryUtil {
 	 * @return boolean 是否复制成功
 	 * @throws Exception 原文件不存在时抛出异常
 	 */
-	public boolean copyFile(String origin, String destination) throws Exception {
+	public static boolean copyFile(String origin, String destination) throws Exception {
 		File originFile = new File(origin);
 		File destFile = new File(destination);
 		File parentDir = new File(destFile.getParent());
@@ -132,7 +131,7 @@ public class BinaryUtil {
 		}
 		is.close();
 		os.close();
-		return new FileComparer().compareBinaryFile(origin, destination);
+		return FileComparer.compareBinaryFile(origin, destination);
 	}
 
 }
