@@ -85,7 +85,6 @@
 - static String readFile(String filePath, String charSet)：以指定编码读取整个文本文档并将内容储存在字符串中
 - static String[] readFileToArray(String filePath)：读取整个文本文档并将内容储存在字符串数组中
 - static String[] readFileToArray(String filePath, String charSet)：以指定编码读取整个文本文档并将内容储存在字符串数组中
-<br>
+<br><br>
 **详细的使用可以在调用类的方法时查看，IDE中会显示其中的详细文档**
-<br>
 >最后更新：2021.5.7
