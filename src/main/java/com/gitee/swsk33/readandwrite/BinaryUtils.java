@@ -9,6 +9,8 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Arrays;
 import com.gitee.swsk33.readandwrite.exception.SizeOutOfBoundsException;
 
@@ -82,7 +84,7 @@ public class BinaryUtils {
 	}
 
 	/**
-	 * 写入二进制文件（小文件）
+	 * 写入二进制文件（小文件），文件夹不存在自动创建
 	 * 
 	 * @param filePath 待写入的文件
 	 * @param data     待写入的数据
@@ -123,6 +125,8 @@ public class BinaryUtils {
 		ByteArrayOutputStream byteOutput = new ByteArrayOutputStream();
 		ObjectOutputStream objectOutput = new ObjectOutputStream(byteOutput);
 		objectOutput.writeObject(data);
+		byteOutput.close();
+		objectOutput.close();
 		return writeBinaryFile(filePath, byteOutput.toByteArray());
 	}
 
@@ -140,6 +144,8 @@ public class BinaryUtils {
 		byte[] readData = readBinaryFile(filePath);
 		ByteArrayInputStream byteInput = new ByteArrayInputStream(readData);
 		ObjectInputStream objectInput = new ObjectInputStream(byteInput);
+		byteInput.close();
+		objectInput.close();
 		return (T) objectInput.readObject();
 	}
 
@@ -171,6 +177,78 @@ public class BinaryUtils {
 		is.close();
 		os.close();
 		return FileComparer.compareBinaryFile(origin, destination);
+	}
+
+	/**
+	 * 从网络上下载文件
+	 * 
+	 * @param url      网络文件地址
+	 * @param filePath 下载保存到位置
+	 * @return 是否下载成功
+	 * @throws Exception 网络异常，文件写入异常
+	 */
+	public static boolean downloadFile(String url, String filePath) throws Exception {
+		String urlProtocol = url.substring(0, url.indexOf("//") + 2); // 网址协议
+		String urlContent = url.substring(url.indexOf("//") + 2); // 网址内容
+		String urlHost;
+		if (urlContent.contains("/")) {
+			urlHost = urlContent.substring(0, urlContent.indexOf("/"));
+		} else {
+			urlHost = urlContent;
+		}
+		String urlReferer = urlProtocol + urlHost + "/";
+		URL netUrl = new URL(url);
+		HttpURLConnection connection = (HttpURLConnection) netUrl.openConnection();
+		connection.addRequestProperty("Referer", urlReferer);
+		connection.addRequestProperty("Host", urlHost);
+		connection.setConnectTimeout(5000);
+		InputStream inputStream = connection.getInputStream();
+		ByteArrayOutputStream byteOutput = new ByteArrayOutputStream();
+		byte[] buffer = new byte[1024];
+		int index = 0;
+		while ((index = inputStream.read(buffer)) != -1) {
+			byteOutput.write(buffer, 0, index);
+		}
+		byteOutput.close();
+		inputStream.close();
+		return writeBinaryFile(filePath, byteOutput.toByteArray());
+	}
+
+	/**
+	 * 以一个特定的User-Agent从网络上下载文件
+	 * 
+	 * @param url       网络文件地址
+	 * @param filePath  下载保存到位置
+	 * @param userAgent 模拟浏览器UA，可以自定义输入也可以使用com.gitee.swsk33.readandwrite.util.UserAgentValue类中的常用值
+	 * @return 是否下载成功
+	 * @throws Exception 网络异常，文件写入异常
+	 */
+	public static boolean downloadFile(String url, String filePath, String userAgent) throws Exception {
+		String urlProtocol = url.substring(0, url.indexOf("//") + 2); // 网址协议
+		String urlContent = url.substring(url.indexOf("//") + 2); // 网址内容
+		String urlHost;
+		if (urlContent.contains("/")) {
+			urlHost = urlContent.substring(0, urlContent.indexOf("/"));
+		} else {
+			urlHost = urlContent;
+		}
+		String urlReferer = urlProtocol + urlHost + "/";
+		URL netUrl = new URL(url);
+		HttpURLConnection connection = (HttpURLConnection) netUrl.openConnection();
+		connection.addRequestProperty("User-Agent", userAgent);
+		connection.addRequestProperty("Referer", urlReferer);
+		connection.addRequestProperty("Host", urlHost);
+		connection.setConnectTimeout(5000);
+		InputStream inputStream = connection.getInputStream();
+		ByteArrayOutputStream byteOutput = new ByteArrayOutputStream();
+		byte[] buffer = new byte[1024];
+		int index = 0;
+		while ((index = inputStream.read(buffer)) != -1) {
+			byteOutput.write(buffer, 0, index);
+		}
+		byteOutput.close();
+		inputStream.close();
+		return writeBinaryFile(filePath, byteOutput.toByteArray());
 	}
 
 }
