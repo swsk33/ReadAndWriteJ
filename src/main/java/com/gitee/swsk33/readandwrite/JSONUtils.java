@@ -15,7 +15,7 @@ import com.gitee.swsk33.readandwrite.exception.JSONParseException;
 public class JSONUtils {
 
 	/**
-	 * 读取转义字符
+	 * 读取以字符串形式储存的转义字符
 	 */
 	private static char getEscapeChar(char escapeChar) throws JSONParseException {
 		if (escapeChar == '\"') {
@@ -114,7 +114,11 @@ public class JSONUtils {
 					char eachChar;
 					while ((eachChar = jsonString.charAt(pointer + index)) != '\"') {
 						if (eachChar == '\\') {
-							field.append(getEscapeChar(eachChar));
+							if (jsonString.charAt(pointer + index + 1) == 'u') { // Unicode字符直接放入
+								field.append("\\u");
+							} else {
+								field.append(getEscapeChar(jsonString.charAt(pointer + index + 1)));
+							}
 							index = index + 2;
 						} else {
 							field.append(eachChar);
@@ -165,7 +169,11 @@ public class JSONUtils {
 			index = 1;
 			while (jsonString.charAt(currentIndex + index) != '\"') {
 				if (jsonString.charAt(currentIndex + index) == '\\') {
-					stringValue.append(getEscapeChar(jsonString.charAt(currentIndex + index + 1)));
+					if (jsonString.charAt(currentIndex + index + 1) == 'u') { // Unicode直接放入
+						stringValue.append("\\u");
+					} else {
+						stringValue.append(getEscapeChar(jsonString.charAt(currentIndex + index + 1)));
+					}
 					index = index + 2;
 				} else {
 					stringValue.append(jsonString.charAt(currentIndex + index));
@@ -342,8 +350,8 @@ public class JSONUtils {
 					int index = 1;
 					char eachChar;
 					while ((eachChar = originJSON.charAt(pointer + index)) != '\"') {
-						if (eachChar == '\"') {
-							formattedJSON.append("\"");
+						if (eachChar == '\\' && originJSON.charAt(pointer + index + 1) == '\"') {
+							formattedJSON.append("\\\"");
 							index = index + 2;
 						} else {
 							formattedJSON.append(eachChar);
@@ -427,9 +435,8 @@ public class JSONUtils {
 				index = 1;
 				value.append("\"");
 				while (originJSON.charAt(pointer + index) != '\"') {
-					if (originJSON.charAt(pointer + index) == '\\') {
-						value.append("\\");
-						value.append(getEscapeChar(originJSON.charAt(pointer + index + 1)));
+					if (originJSON.charAt(pointer + index) == '\\' && originJSON.charAt(pointer + index + 1) == '\"') {
+						value.append("\\\"");
 						index = index + 2;
 					} else {
 						value.append(originJSON.charAt(pointer + index));
@@ -438,7 +445,7 @@ public class JSONUtils {
 				}
 				value.append("\"");
 				index++;
-			} else { // 其他情况，一般是null，true或者false
+			} else { // 其他情况，一般是null，true或者false或者数字
 				if (!isUselessChar(eachChar)) {
 					value.append(eachChar);
 				}
@@ -459,7 +466,7 @@ public class JSONUtils {
 	public static String stringifyMap(Map<String, Object> data) {
 		String json = "{";
 		for (String key : data.keySet()) {
-			json = json + surByQut(key) + ":";
+			json = json + surByQut(replaceEscapeInString(key)) + ":";
 			json = json + objectToString(data.get(key)) + ",";
 		}
 		if (data.size() != 0) {
