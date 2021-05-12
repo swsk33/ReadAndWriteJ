@@ -9,8 +9,10 @@
 6，引入字体：在GUI编程中可以快速指定字体文件以设置字体。<br>
 7，文件分析器：读取文件大小和格式（扩展名）。<br>
 8，Jar包内工具：读取Jar包内的图片资源，有释放包内文件功能。<br>
-9，二进制文件工具：读写二进制文件为字节数据，复制下载文件。<br>
+9，二进制文件工具：读写二进制文件为字节数据，复制文件。<br>
 10，终端工具：执行命令并获取命令输出结果。<br>
+11，JSON工具：简单的JSON解析和格式化。<br>
+12，网络工具：网络请求和文件下载。<br>
 ### 下载地址:[点击进入下载jar包](https://gitee.com/swsk33/ReadAndWriteJ/releases)
 ### 其它版本：
 现已完成C#版的读写类库，可根据自己的框架前往查看：<br>
@@ -23,7 +25,7 @@
 <dependency>
     <groupId>com.gitee.swsk33</groupId>
     <artifactId>read-and-write</artifactId>
-    <version>6.0.0</version>
+    <version>6.3.0</version>
 </dependency>
 ```
 ### 2，导入com.gitee.swsk33.readandwrite下所有类或者需要的类。（import swsk33.readandwrite.*;）
@@ -35,8 +37,6 @@
 - static <T> boolean writeObjectToFile(String filePath, T object)：将对象（实例）序列化并写入文件
 - static <T> T readObjectFromFile(String filePath)：从文件中读取数据并反序列化为对象
 - static boolean copyFile(String origin, String destination)：复制文件，把文件从原文件路径复制到目标文件路径，目标文件路径目录不存在会自动创建
-- static boolean downloadFile(String url, String filePath)：从网络上下载文件
-- static boolean downloadFile(String url, String filePath, String userAgent)：以一个特定的User-Agent从网络上下载文件
 #### 类FileAnalyzer：文件分析器，用于读取文件大小和格式（扩展名）
 - static String getFileMD5(String filePath)：用于获取文件的MD5值
 - static long getFileSizeb(String filePath)：获取文件的大小，单位为B
@@ -85,6 +85,18 @@
 - static String readFile(String filePath, String charSet)：以指定编码读取整个文本文档并将内容储存在字符串中
 - static String[] readFileToArray(String filePath)：读取整个文本文档并将内容储存在字符串数组中
 - static String[] readFileToArray(String filePath, String charSet)：以指定编码读取整个文本文档并将内容储存在字符串数组中
-<br><br>
+#### 类NetworkUtils：网络实用类
+- static String sendGetRequest(String urlString)：发送GET请求
+- static String sendGetRequest(String urlString, String userAgent)：以一个特定的User-Agent发送GET请求
+- static String sendPostRequest(String urlString, String contentType, String requestBody)：发送POST请求
+- static String sendPostRequest(String urlString, String contentType, String requestBody, String userAgent)：以一个特定的User-Agent发送POST请求
+- static boolean downloadFile(String url, String filePath)：从网络上下载文件
+- static boolean downloadFile(String url, String filePath, String userAgent)：以一个特定的User-Agent从网络上下载文件
+#### 类JSONUtils：一个简单的JSON处理实用类
+- static String stringifyMap(Map<String, Object> data)：将Map实例序列化为json字符串
+- static Map<String, Object> parseJSONToMap(String jsonString)：反序列化json，将json转为Map实例
+- static String formatJSONString(String json)：格式化json字符串
+
 **详细的使用可以在调用类的方法时查看，IDE中会显示其中的详细文档**
+
 >最后更新：2021.5.7
