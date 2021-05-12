@@ -74,7 +74,7 @@ public class TextFileWriter {
 	 * <li>CharSetValue.UTF_16BE：<strong>UTF-16BE</strong></li>
 	 * <li>CharSetValue.UTF_16LE：<strong>UTF-16LE</strong></li>
 	 * </ul>
-	 * CharSetValue类在com.gitee.swsk33.readandwrite.util下<br>
+	 * CharSetValue类在com.gitee.swsk33.readandwrite.param下<br>
 	 * <br>
 	 * 
 	 * @param filePath  待写入文件相对/绝对路径
@@ -171,7 +171,7 @@ public class TextFileWriter {
 	 * <li>CharSetValue.UTF_16BE：<strong>UTF-16BE</strong></li>
 	 * <li>CharSetValue.UTF_16LE：<strong>UTF-16LE</strong></li>
 	 * </ul>
-	 * CharSetValue类在com.gitee.swsk33.readandwrite.util下<br>
+	 * CharSetValue类在com.gitee.swsk33.readandwrite.param下<br>
 	 * <br>
 	 * 
 	 * @param filePath 待写入文件相对/绝对路径
@@ -273,7 +273,7 @@ public class TextFileWriter {
 	 * <li>CharSetValue.UTF_16BE：<strong>UTF-16BE</strong></li>
 	 * <li>CharSetValue.UTF_16LE：<strong>UTF-16LE</strong></li>
 	 * </ul>
-	 * CharSetValue类在com.gitee.swsk33.readandwrite.util下<br>
+	 * CharSetValue类在com.gitee.swsk33.readandwrite.param下<br>
 	 * <br>
 	 * 
 	 * @param filePath    待操作文件的相对/绝对路径

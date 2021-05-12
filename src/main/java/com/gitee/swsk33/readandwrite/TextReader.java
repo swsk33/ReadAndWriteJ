@@ -48,7 +48,7 @@ public class TextReader {
 	 * <li>CharSetValue.UTF_16BE：<strong>UTF-16BE</strong></li>
 	 * <li>CharSetValue.UTF_16LE：<strong>UTF-16LE</strong></li>
 	 * </ul>
-	 * CharSetValue类在com.gitee.swsk33.readandwrite.util下<br>
+	 * CharSetValue类在com.gitee.swsk33.readandwrite.param下<br>
 	 * <br>
 	 * 
 	 * @param filePath 待读取文件相对/绝对路径
@@ -122,7 +122,7 @@ public class TextReader {
 	 * <li>CharSetValue.UTF_16BE：<strong>UTF-16BE</strong></li>
 	 * <li>CharSetValue.UTF_16LE：<strong>UTF-16LE</strong></li>
 	 * </ul>
-	 * CharSetValue类在com.gitee.swsk33.readandwrite.util下<br>
+	 * CharSetValue类在com.gitee.swsk33.readandwrite.param下<br>
 	 * <br>
 	 * 
 	 * @param filePath 待读取文件相对/绝对路径
@@ -219,7 +219,7 @@ public class TextReader {
 	 * <li>CharSetValue.UTF_16BE：<strong>UTF-16BE</strong></li>
 	 * <li>CharSetValue.UTF_16LE：<strong>UTF-16LE</strong></li>
 	 * </ul>
-	 * CharSetValue类在com.gitee.swsk33.readandwrite.util下<br>
+	 * CharSetValue类在com.gitee.swsk33.readandwrite.param下<br>
 	 * <br>
 	 * 
 	 * @param filePath 待读取文件相对/绝对路径
@@ -297,7 +297,7 @@ public class TextReader {
 	 * <li>CharSetValue.UTF_16BE：<strong>UTF-16BE</strong></li>
 	 * <li>CharSetValue.UTF_16LE：<strong>UTF-16LE</strong></li>
 	 * </ul>
-	 * CharSetValue类在com.gitee.swsk33.readandwrite.util下<br>
+	 * CharSetValue类在com.gitee.swsk33.readandwrite.param下<br>
 	 * <br>
 	 * 
 	 * @param filePath 待读取文件相对/绝对路径
@@ -353,7 +353,7 @@ public class TextReader {
 	 * <li>CharSetValue.UTF_16BE：<strong>UTF-16BE</strong></li>
 	 * <li>CharSetValue.UTF_16LE：<strong>UTF-16LE</strong></li>
 	 * </ul>
-	 * CharSetValue类在com.gitee.swsk33.readandwrite.util下<br>
+	 * CharSetValue类在com.gitee.swsk33.readandwrite.param下<br>
 	 * <br>
 	 * 
 	 * @param filePath 待读取文件相对/绝对路径

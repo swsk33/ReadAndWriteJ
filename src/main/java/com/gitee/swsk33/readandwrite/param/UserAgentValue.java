@@ -1,4 +1,4 @@
-package com.gitee.swsk33.readandwrite.util;
+package com.gitee.swsk33.readandwrite.param;
 
 /**
  * 浏览器User-Agent字段常用值

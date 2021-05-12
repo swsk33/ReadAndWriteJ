@@ -4,8 +4,10 @@ import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import com.gitee.swsk33.readandwrite.param.CharSetValue;
 
 /**
  * 网络实用类
@@ -16,13 +18,13 @@ import java.net.URL;
 public class NetworkUtils {
 
 	/**
-	 * 发送get请求
+	 * 发送GET请求
 	 * 
 	 * @param urlString 请求地址
 	 * @return 请求结果
 	 * @throws Exception 请求异常
 	 */
-	public static String sendGetEquest(String urlString) throws Exception {
+	public static String sendGetRequest(String urlString) throws Exception {
 		URL url = new URL(urlString);
 		String urlProtocol = urlString.substring(0, urlString.indexOf("//") + 2); // 网址协议
 		String urlContent = urlString.substring(urlString.indexOf("//") + 2); // 网址内容
@@ -38,14 +40,132 @@ public class NetworkUtils {
 		connection.addRequestProperty("Host", urlHost);
 		connection.setConnectTimeout(5000);
 		connection.connect();
-		BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+		BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), CharSetValue.UTF_8));
 		StringBuilder result = new StringBuilder("");
 		String eachLine = "";
 		while ((eachLine = reader.readLine()) != null) {
 			result.append(eachLine + "\r\n");
 		}
 		reader.close();
-		return result.toString();
+		return result.substring(0, result.length() - 2);
+	}
+
+	/**
+	 * 以一个特定的User-Agent发送GET请求
+	 * 
+	 * @param urlString 请求地址
+	 * @param userAgent 模拟浏览器UA，可以自定义输入也可以使用com.gitee.swsk33.readandwrite.param.UserAgentValue类中的常用值
+	 * @return 请求结果
+	 * @throws Exception 请求异常
+	 */
+	public static String sendGetRequest(String urlString, String userAgent) throws Exception {
+		URL url = new URL(urlString);
+		String urlProtocol = urlString.substring(0, urlString.indexOf("//") + 2); // 网址协议
+		String urlContent = urlString.substring(urlString.indexOf("//") + 2); // 网址内容
+		String urlHost;
+		if (urlContent.contains("/")) {
+			urlHost = urlContent.substring(0, urlContent.indexOf("/"));
+		} else {
+			urlHost = urlContent;
+		}
+		String urlReferer = urlProtocol + urlHost + "/";
+		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+		connection.addRequestProperty("Referer", urlReferer);
+		connection.addRequestProperty("Host", urlHost);
+		connection.addRequestProperty("User-Agent", userAgent);
+		connection.setConnectTimeout(5000);
+		connection.connect();
+		BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), CharSetValue.UTF_8));
+		StringBuilder result = new StringBuilder("");
+		String eachLine = "";
+		while ((eachLine = reader.readLine()) != null) {
+			result.append(eachLine + "\r\n");
+		}
+		reader.close();
+		return result.substring(0, result.length() - 2);
+	}
+
+	/**
+	 * 发送POST请求
+	 * 
+	 * @param urlString   请求地址
+	 * @param contentType 内容类型，可以自定义也可以使用com.gitee.swsk33.readandwrite.param.RequestContentType中的常用值
+	 * @param requestBody 请求体，需要注意的是不同的内容类型有不同的请求体格式，例如application/x-www-form-urlencoded中请求体通常是：键1=值1&amp;键2=值2&amp;...
+	 * @return 请求结果
+	 * @throws Exception 请求错误
+	 */
+	public static String sendPostRequest(String urlString, String contentType, String requestBody) throws Exception {
+		URL url = new URL(urlString);
+		String urlProtocol = urlString.substring(0, urlString.indexOf("//") + 2); // 网址协议
+		String urlContent = urlString.substring(urlString.indexOf("//") + 2); // 网址内容
+		String urlHost;
+		if (urlContent.contains("/")) {
+			urlHost = urlContent.substring(0, urlContent.indexOf("/"));
+		} else {
+			urlHost = urlContent;
+		}
+		String urlReferer = urlProtocol + urlHost + "/";
+		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+		connection.addRequestProperty("Referer", urlReferer);
+		connection.addRequestProperty("Host", urlHost);
+		connection.setRequestMethod("POST");
+		connection.setDoOutput(true);
+		connection.setDoInput(true);
+		connection.connect();
+		OutputStreamWriter output = new OutputStreamWriter(connection.getOutputStream(), CharSetValue.UTF_8);
+		output.write(requestBody);
+		output.flush();
+		output.close();
+		BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), CharSetValue.UTF_8));
+		StringBuilder result = new StringBuilder("");
+		String eachLine = "";
+		while ((eachLine = reader.readLine()) != null) {
+			result.append(eachLine + "\r\n");
+		}
+		reader.close();
+		return result.substring(0, result.length() - 2);
+	}
+
+	/**
+	 * 以一个特定的User-Agent发送POST请求
+	 * 
+	 * @param urlString   请求地址
+	 * @param contentType 内容类型，可以自定义也可以使用com.gitee.swsk33.readandwrite.param.RequestContentType中的常用值
+	 * @param requestBody 请求体，需要注意的是不同的内容类型有不同的请求体格式，例如application/x-www-form-urlencoded中请求体通常是：键1=值1&amp;键2=值2&amp;...
+	 * @return 请求结果
+	 * @throws Exception 请求错误
+	 */
+	public static String sendPostRequest(String urlString, String contentType, String requestBody, String userAgent) throws Exception {
+		URL url = new URL(urlString);
+		String urlProtocol = urlString.substring(0, urlString.indexOf("//") + 2); // 网址协议
+		String urlContent = urlString.substring(urlString.indexOf("//") + 2); // 网址内容
+		String urlHost;
+		if (urlContent.contains("/")) {
+			urlHost = urlContent.substring(0, urlContent.indexOf("/"));
+		} else {
+			urlHost = urlContent;
+		}
+		String urlReferer = urlProtocol + urlHost + "/";
+		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+		connection.addRequestProperty("Referer", urlReferer);
+		connection.addRequestProperty("Host", urlHost);
+		connection.addRequestProperty("User-Agent", userAgent);
+		connection.setRequestMethod("POST");
+		connection.setDoOutput(true);
+		connection.setDoInput(true);
+		connection.connect();
+		OutputStreamWriter output = new OutputStreamWriter(connection.getOutputStream(), CharSetValue.UTF_8);
+		output.write(requestBody);
+		output.flush();
+		output.close();
+		BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), CharSetValue.UTF_8));
+		StringBuilder result = new StringBuilder("");
+		String eachLine = "";
+		while ((eachLine = reader.readLine()) != null) {
+			result.append(eachLine + "\r\n");
+		}
+		reader.close();
+		return result.substring(0, result.length() - 2);
 	}
 
 	/**
@@ -71,6 +191,7 @@ public class NetworkUtils {
 		connection.addRequestProperty("Referer", urlReferer);
 		connection.addRequestProperty("Host", urlHost);
 		connection.setConnectTimeout(5000);
+		connection.connect();
 		InputStream inputStream = connection.getInputStream();
 		ByteArrayOutputStream byteOutput = new ByteArrayOutputStream();
 		byte[] buffer = new byte[1024];
@@ -88,7 +209,7 @@ public class NetworkUtils {
 	 * 
 	 * @param url       网络文件地址
 	 * @param filePath  下载保存到位置
-	 * @param userAgent 模拟浏览器UA，可以自定义输入也可以使用com.gitee.swsk33.readandwrite.util.UserAgentValue类中的常用值
+	 * @param userAgent 模拟浏览器UA，可以自定义输入也可以使用com.gitee.swsk33.readandwrite.param.UserAgentValue类中的常用值
 	 * @return 是否下载成功
 	 * @throws Exception 网络异常，文件写入异常
 	 */
@@ -108,6 +229,7 @@ public class NetworkUtils {
 		connection.addRequestProperty("Referer", urlReferer);
 		connection.addRequestProperty("Host", urlHost);
 		connection.setConnectTimeout(5000);
+		connection.connect();
 		InputStream inputStream = connection.getInputStream();
 		ByteArrayOutputStream byteOutput = new ByteArrayOutputStream();
 		byte[] buffer = new byte[1024];
