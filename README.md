@@ -25,7 +25,7 @@
 <dependency>
     <groupId>com.gitee.swsk33</groupId>
     <artifactId>read-and-write</artifactId>
-    <version>6.3.1</version>
+    <version>6.4.1</version>
 </dependency>
 ```
 ### 2，导入com.gitee.swsk33.readandwrite下所有类或者需要的类。（import swsk33.readandwrite.*;）
@@ -88,10 +88,13 @@
 #### 类NetworkUtils：网络实用类
 - static String sendGetRequest(String urlString)：发送GET请求
 - static String sendGetRequest(String urlString, String userAgent)：以一个特定的User-Agent发送GET请求
+- static String sendGetRequest(String urlString, Map<String, String> headers)：发送自定义请求头的GET请求
 - static String sendPostRequest(String urlString, String contentType, String requestBody)：发送POST请求
 - static String sendPostRequest(String urlString, String contentType, String requestBody, String userAgent)：以一个特定的User-Agent发送POST请求
+- static String sendPostRequest(String urlString, Map<String, String> headers, String requestBody)：发送自定义请求头的POST请求
 - static boolean downloadFile(String url, String filePath)：从网络上下载文件
 - static boolean downloadFile(String url, String filePath, String userAgent)：以一个特定的User-Agent从网络上下载文件
+- static boolean downloadFile(String url, String filePath, Map<String, String> headers)：以一个自定义的请求头，从网络上下载文件
 #### 类JSONUtils：一个简单的JSON处理实用类
 - static String stringifyMap(Map<String, Object> data)：将Map实例序列化为json字符串
 - static Map<String, Object> parseJSONToMap(String jsonString)：反序列化json，将json转为Map实例
