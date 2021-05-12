@@ -13,6 +13,7 @@ import com.gitee.swsk33.readandwrite.exception.JSONParseException;
  *
  */
 public class JSONUtils {
+
 	/**
 	 * 读取转义字符
 	 */
@@ -87,6 +88,13 @@ public class JSONUtils {
 	 * @throws JSONParseException json解析错误
 	 */
 	private static Object[] jsonReader(String jsonString) throws JSONParseException {
+		// 裁剪两端无用字符
+		while (isUselessChar(jsonString.charAt(0))) {
+			jsonString = jsonString.substring(1, jsonString.length());
+		}
+		while (isUselessChar(jsonString.charAt(jsonString.length() - 1))) {
+			jsonString = jsonString.substring(0, jsonString.length() - 1);
+		}
 		if (!jsonString.startsWith("{") || !jsonString.endsWith("}")) {
 			throw new JSONParseException("json必须以花括号开头或结尾！");
 		}
@@ -300,12 +308,19 @@ public class JSONUtils {
 	/**
 	 * json字符串格式化构造器
 	 * 
-	 * @param originJSON 带格式化json字符串
+	 * @param originJSON 待格式化json字符串
 	 * @param level      当前层级
 	 * @return 第一位是格式化的json字符串，第二个是当前解析到了哪一位
 	 * @throws JSONParseException json字符串解析错误
 	 */
 	private static Object[] jsonFormatter(String originJSON, int level) throws JSONParseException {
+		// 裁剪两端无用字符
+		while (isUselessChar(originJSON.charAt(0))) {
+			originJSON = originJSON.substring(1, originJSON.length());
+		}
+		while (isUselessChar(originJSON.charAt(originJSON.length() - 1))) {
+			originJSON = originJSON.substring(0, originJSON.length() - 1);
+		}
 		if (!originJSON.startsWith("{") || !originJSON.endsWith("}")) {
 			throw new JSONParseException("json必须以花括号开头或结尾！");
 		}
@@ -455,14 +470,14 @@ public class JSONUtils {
 	}
 
 	/**
-	 * 反序列化json，将json转为对象
+	 * 反序列化json，将json转为Map实例
 	 * 
 	 * @param jsonString json字符串
 	 * @return 反序列化结果
 	 * @throws JSONParseException json解析异常
 	 */
 	@SuppressWarnings("unchecked")
-	public static Map<String, Object> parseJSONString(String jsonString) throws JSONParseException {
+	public static Map<String, Object> parseJSONToMap(String jsonString) throws JSONParseException {
 		return (Map<String, Object>) jsonReader(jsonString)[0];
 	}
 
