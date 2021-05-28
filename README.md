@@ -25,7 +25,7 @@
 <dependency>
     <groupId>com.gitee.swsk33</groupId>
     <artifactId>read-and-write</artifactId>
-    <version>6.4.1</version>
+    <version>6.5.0</version>
 </dependency>
 ```
 ### 2，导入com.gitee.swsk33.readandwrite下所有类或者需要的类。（import swsk33.readandwrite.*;）
@@ -61,10 +61,14 @@
 - static boolean compareLine(String filepath, String lineCompared)：比较某一行内容是否与被比较字符串一致
 - static boolean compareText(String filepath, String textCompared)：判断文本文档内是否包含被比较的字符串
 #### 类TerminalUtils：用于命令行的执行和读取
-- static TerminalOutput getCommandOutput(String command)：向终端输入（运行）一条命令并获取输出结果
-- static TerminalOutput getCommandOutput(String command, String charSet)：向终端输入（运行）一条命令并以指定的编码获取输出结果
+- static TerminalOutput runCommand(String command)：向终端运行一条命令并获取输出结果
+- static TerminalOutput runCommand(String command, String charSet)：向终端运行一条命令并以指定的编码获取输出结果
+- static TerminalOutput runCommand(String[] commandArray)：向终端运行一个命令数组并获取输出结果
+- static TerminalOutput runCommand(String[] commandArray, String charSet)：向终端运行一个命令数组并以指定的编码获取输出结果
 - static void runCommandAsyn(String command, TerminalOutput result)：异步运行命令并实时获取输出结果
 - static void runCommandAsyn(String command, String charset, TerminalOutput result)：以指定的编码异步运行命令并实时获取输出结果
+- static void runCommandAsyn(String[] commandArray, TerminalOutput result)：异步运行命令数组并实时获取输出结果
+- static void runCommandAsyn(String[] commandArray, String charset, TerminalOutput result)：以指定的编码异步运行命令数组并实时获取输出结果
 #### 类TextFileWriter：文件写入器
 - static boolean replaceLine(String filePath, int whichLine, String text)：用指定内容替换文件指定行
 - static boolean replaceLine(String filePath, int whichLine, String text, String charSet)：用指定内容替换文件指定行，以指定的字符编码形式
@@ -102,4 +106,4 @@
 
 **详细的使用可以在调用类的方法时查看，IDE中会显示其中的详细文档**
 
->最后更新：2021.5.12
+>最后更新：2021.5.28
