@@ -17,6 +17,14 @@ import com.gitee.swsk33.readandwrite.exception.RowsOutOfBoundsException;
  */
 public class TextFileWriter {
 
+	private static String newLineChar = "\r\n";
+
+	static {
+		if (!System.getProperty("os.name").toLowerCase().contains("windows")) {
+			newLineChar = "\n";
+		}
+	}
+
 	/**
 	 * 用指定内容替换文件指定行
 	 * 
@@ -41,12 +49,12 @@ public class TextFileWriter {
 			InputStreamReader isr = new InputStreamReader(fis);
 			BufferedReader br = new BufferedReader(isr);
 			for (int i = 0; i < whichLine - 1; i++) {
-				before = before + br.readLine() + "\r\n";
+				before = before + br.readLine() + newLineChar;
 			}
-			content = before + text + "\r\n";
+			content = before + text + newLineChar;
 			br.readLine();
 			for (int i = 0; i < line - whichLine; i++) {
-				content = content + br.readLine() + "\r\n";
+				content = content + br.readLine() + newLineChar;
 			}
 			FileOutputStream fos = new FileOutputStream(f);
 			OutputStreamWriter osw = new OutputStreamWriter(fos);
@@ -99,12 +107,12 @@ public class TextFileWriter {
 			InputStreamReader isr = new InputStreamReader(fis, charSet);
 			BufferedReader br = new BufferedReader(isr);
 			for (int i = 0; i < whichLine - 1; i++) {
-				before = before + br.readLine() + "\r\n";
+				before = before + br.readLine() + newLineChar;
 			}
-			content = before + text + "\r\n";
+			content = before + text + newLineChar;
 			br.readLine();
 			for (int i = 0; i < line - whichLine; i++) {
-				content = content + br.readLine() + "\r\n";
+				content = content + br.readLine() + newLineChar;
 			}
 			FileOutputStream fos = new FileOutputStream(f);
 			OutputStreamWriter osw = new OutputStreamWriter(fos, charSet);
@@ -136,7 +144,7 @@ public class TextFileWriter {
 		if (!(line == 0)) {
 			for (int i = 0; i < line; i++) {
 
-				old = old + TextReader.readText(filePath, i + 1) + "\r\n";
+				old = old + TextReader.readText(filePath, i + 1) + newLineChar;
 			}
 			FileOutputStream fos = new FileOutputStream(f);
 			OutputStreamWriter osw = new OutputStreamWriter(fos);
@@ -153,7 +161,7 @@ public class TextFileWriter {
 		}
 
 		// 检查是否写入成功
-		if (TextReader.readFile(filePath).equals(old + text + "\r\n")) {
+		if (TextReader.readFile(filePath).equals(old + text + newLineChar)) {
 			success = true;
 		}
 		return success;
@@ -188,7 +196,7 @@ public class TextFileWriter {
 		if (!(line == 0)) {
 			for (int i = 0; i < line; i++) {
 
-				old = old + TextReader.readText(filePath, i + 1) + "\r\n";
+				old = old + TextReader.readText(filePath, i + 1) + newLineChar;
 			}
 			FileOutputStream fos = new FileOutputStream(f);
 			OutputStreamWriter osw = new OutputStreamWriter(fos, charSet);
@@ -204,7 +212,7 @@ public class TextFileWriter {
 			bw.close();
 		}
 		// 检查是否写入成功
-		if (TextReader.readFile(filePath, charSet).equals(old + text + "\r\n")) {
+		if (TextReader.readFile(filePath, charSet).equals(old + text + newLineChar)) {
 			success = true;
 		}
 		return success;
@@ -241,11 +249,11 @@ public class TextFileWriter {
 				bounds = whichLine - 1;
 			}
 			for (int i = 0; i < bounds; i++) {
-				before = before + br.readLine() + "\r\n";
+				before = before + br.readLine() + newLineChar;
 			}
-			content = before + insertText + "\r\n";
+			content = before + insertText + newLineChar;
 			for (int i = 0; i < line - bounds; i++) {
-				content = content + br.readLine() + "\r\n";
+				content = content + br.readLine() + newLineChar;
 			}
 			FileOutputStream fos = new FileOutputStream(f);
 			OutputStreamWriter osw = new OutputStreamWriter(fos);
@@ -305,11 +313,11 @@ public class TextFileWriter {
 				bounds = whichLine - 1;
 			}
 			for (int i = 0; i < bounds; i++) {
-				before = before + br.readLine() + "\r\n";
+				before = before + br.readLine() + newLineChar;
 			}
-			content = before + insertText + "\r\n";
+			content = before + insertText + newLineChar;
 			for (int i = 0; i < line - bounds; i++) {
-				content = content + br.readLine() + "\r\n";
+				content = content + br.readLine() + newLineChar;
 			}
 			FileOutputStream fos = new FileOutputStream(f);
 			OutputStreamWriter osw = new OutputStreamWriter(fos, charSet);
@@ -348,12 +356,12 @@ public class TextFileWriter {
 			InputStreamReader isr = new InputStreamReader(fis);
 			BufferedReader br = new BufferedReader(isr);
 			for (int i = 0; i < whichLine - 1; i++) {
-				before = before + br.readLine() + "\r\n";
+				before = before + br.readLine() + newLineChar;
 			}
 			br.readLine();
 			content = before;
 			for (int i = 0; i < line - whichLine; i++) {
-				content = content + br.readLine() + "\r\n";
+				content = content + br.readLine() + newLineChar;
 			}
 			FileOutputStream fos = new FileOutputStream(f);
 			OutputStreamWriter osw = new OutputStreamWriter(fos);
