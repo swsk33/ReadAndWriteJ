@@ -25,7 +25,7 @@
 <dependency>
     <groupId>com.gitee.swsk33</groupId>
     <artifactId>read-and-write</artifactId>
-    <version>6.5.0</version>
+    <version>6.5.1</version>
 </dependency>
 ```
 ### 2，导入com.gitee.swsk33.readandwrite下所有类或者需要的类。（import swsk33.readandwrite.*;）
@@ -106,4 +106,4 @@
 
 **详细的使用可以在调用类的方法时查看，IDE中会显示其中的详细文档**
 
->最后更新：2021.5.28
+>最后更新：2021.5.31

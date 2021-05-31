@@ -26,9 +26,17 @@ public class NetworkUtils {
 	 * @throws Exception 请求异常
 	 */
 	public static String sendGetRequest(String urlString) throws Exception {
+		String urlProtocol; // 网址协议
+		String urlContent; // 网址内容
+		if (!urlString.startsWith("http://") && !urlString.startsWith("https://")) {
+			urlProtocol = "http://";
+			urlContent = urlString;
+			urlString = urlProtocol + urlString;
+		} else {
+			urlProtocol = urlString.substring(0, urlString.indexOf("//") + 2);
+			urlContent = urlString.substring(urlString.indexOf("//") + 2);
+		}
 		URL url = new URL(urlString);
-		String urlProtocol = urlString.substring(0, urlString.indexOf("//") + 2); // 网址协议
-		String urlContent = urlString.substring(urlString.indexOf("//") + 2); // 网址内容
 		String urlHost;
 		if (urlContent.contains("/")) {
 			urlHost = urlContent.substring(0, urlContent.indexOf("/"));
@@ -60,9 +68,17 @@ public class NetworkUtils {
 	 * @throws Exception 请求异常
 	 */
 	public static String sendGetRequest(String urlString, String userAgent) throws Exception {
+		String urlProtocol; // 网址协议
+		String urlContent; // 网址内容
+		if (!urlString.startsWith("http://") && !urlString.startsWith("https://")) {
+			urlProtocol = "http://";
+			urlContent = urlString;
+			urlString = urlProtocol + urlString;
+		} else {
+			urlProtocol = urlString.substring(0, urlString.indexOf("//") + 2);
+			urlContent = urlString.substring(urlString.indexOf("//") + 2);
+		}
 		URL url = new URL(urlString);
-		String urlProtocol = urlString.substring(0, urlString.indexOf("//") + 2); // 网址协议
-		String urlContent = urlString.substring(urlString.indexOf("//") + 2); // 网址内容
 		String urlHost;
 		if (urlContent.contains("/")) {
 			urlHost = urlContent.substring(0, urlContent.indexOf("/"));
@@ -95,6 +111,9 @@ public class NetworkUtils {
 	 * @throws Exception 请求异常
 	 */
 	public static String sendGetRequest(String urlString, Map<String, String> headers) throws Exception {
+		if (!urlString.startsWith("http://") && !urlString.startsWith("https://")) {
+			urlString = "http://" + urlString;
+		}
 		URL url = new URL(urlString);
 		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 		for (String key : headers.keySet()) {
@@ -122,9 +141,17 @@ public class NetworkUtils {
 	 * @throws Exception 请求错误
 	 */
 	public static String sendPostRequest(String urlString, String contentType, String requestBody) throws Exception {
+		String urlProtocol; // 网址协议
+		String urlContent; // 网址内容
+		if (!urlString.startsWith("http://") && !urlString.startsWith("https://")) {
+			urlProtocol = "http://";
+			urlContent = urlString;
+			urlString = urlProtocol + urlString;
+		} else {
+			urlProtocol = urlString.substring(0, urlString.indexOf("//") + 2);
+			urlContent = urlString.substring(urlString.indexOf("//") + 2);
+		}
 		URL url = new URL(urlString);
-		String urlProtocol = urlString.substring(0, urlString.indexOf("//") + 2); // 网址协议
-		String urlContent = urlString.substring(urlString.indexOf("//") + 2); // 网址内容
 		String urlHost;
 		if (urlContent.contains("/")) {
 			urlHost = urlContent.substring(0, urlContent.indexOf("/"));
@@ -163,9 +190,17 @@ public class NetworkUtils {
 	 * @throws Exception 请求错误
 	 */
 	public static String sendPostRequest(String urlString, String contentType, String requestBody, String userAgent) throws Exception {
+		String urlProtocol; // 网址协议
+		String urlContent; // 网址内容
+		if (!urlString.startsWith("http://") && !urlString.startsWith("https://")) {
+			urlProtocol = "http://";
+			urlContent = urlString;
+			urlString = urlProtocol + urlString;
+		} else {
+			urlProtocol = urlString.substring(0, urlString.indexOf("//") + 2);
+			urlContent = urlString.substring(urlString.indexOf("//") + 2);
+		}
 		URL url = new URL(urlString);
-		String urlProtocol = urlString.substring(0, urlString.indexOf("//") + 2); // 网址协议
-		String urlContent = urlString.substring(urlString.indexOf("//") + 2); // 网址内容
 		String urlHost;
 		if (urlContent.contains("/")) {
 			urlHost = urlContent.substring(0, urlContent.indexOf("/"));
@@ -205,6 +240,9 @@ public class NetworkUtils {
 	 * @throws Exception 请求错误
 	 */
 	public static String sendPostRequest(String urlString, Map<String, String> headers, String requestBody) throws Exception {
+		if (!urlString.startsWith("http://") && !urlString.startsWith("https://")) {
+			urlString = "http://" + urlString;
+		}
 		URL url = new URL(urlString);
 		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 		for (String key : headers.keySet()) {
@@ -237,8 +275,16 @@ public class NetworkUtils {
 	 * @throws Exception 网络异常，文件写入异常
 	 */
 	public static boolean downloadFile(String url, String filePath) throws Exception {
-		String urlProtocol = url.substring(0, url.indexOf("//") + 2); // 网址协议
-		String urlContent = url.substring(url.indexOf("//") + 2); // 网址内容
+		String urlProtocol; // 网址协议
+		String urlContent; // 网址内容
+		if (!url.startsWith("http://") && !url.startsWith("https://")) {
+			urlProtocol = "http://";
+			urlContent = url;
+			url = urlProtocol + url;
+		} else {
+			urlProtocol = url.substring(0, url.indexOf("//") + 2);
+			urlContent = url.substring(url.indexOf("//") + 2);
+		}
 		String urlHost;
 		if (urlContent.contains("/")) {
 			urlHost = urlContent.substring(0, urlContent.indexOf("/"));
@@ -274,8 +320,16 @@ public class NetworkUtils {
 	 * @throws Exception 网络异常，文件写入异常
 	 */
 	public static boolean downloadFile(String url, String filePath, String userAgent) throws Exception {
-		String urlProtocol = url.substring(0, url.indexOf("//") + 2); // 网址协议
-		String urlContent = url.substring(url.indexOf("//") + 2); // 网址内容
+		String urlProtocol; // 网址协议
+		String urlContent; // 网址内容
+		if (!url.startsWith("http://") && !url.startsWith("https://")) {
+			urlProtocol = "http://";
+			urlContent = url;
+			url = urlProtocol + url;
+		} else {
+			urlProtocol = url.substring(0, url.indexOf("//") + 2);
+			urlContent = url.substring(url.indexOf("//") + 2);
+		}
 		String urlHost;
 		if (urlContent.contains("/")) {
 			urlHost = urlContent.substring(0, urlContent.indexOf("/"));
@@ -312,6 +366,9 @@ public class NetworkUtils {
 	 * @throws Exception 网络异常，文件写入异常
 	 */
 	public static boolean downloadFile(String url, String filePath, Map<String, String> headers) throws Exception {
+		if (!url.startsWith("http://") && !url.startsWith("https://")) {
+			url = "http://" + url;
+		}
 		URL netUrl = new URL(url);
 		HttpURLConnection connection = (HttpURLConnection) netUrl.openConnection();
 		for (String key : headers.keySet()) {
