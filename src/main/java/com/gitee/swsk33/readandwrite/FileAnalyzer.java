@@ -2,170 +2,94 @@ package com.gitee.swsk33.readandwrite;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 
 /**
  * 文件分析器，用于读取文件大小和格式（扩展名）
- * 
- * @author swsk33
  */
 public class FileAnalyzer {
 
 	/**
 	 * 用于获取文件的MD5值
-	 * 
+	 *
 	 * @param filePath 文件的相对路径/绝对路径
-	 * @return String 字符串 文件MD5值
+	 * @return 文件MD5值
 	 */
 	public static String getFileMD5(String filePath) {
 		String result = "";
-		BigInteger bgi = null;
+		BigInteger bigInteger = null;
 		try {
 			byte[] buffer = new byte[8192];
 			int len = 0;
-			MessageDigest md = MessageDigest.getInstance("MD5");
-			File f = new File(filePath);
-			FileInputStream fis = new FileInputStream(f);
-			while ((len = fis.read(buffer)) != -1) {
-				md.update(buffer, 0, len);
+			MessageDigest md5 = MessageDigest.getInstance("MD5");
+			File file = new File(filePath);
+			FileInputStream fileInputStream = new FileInputStream(file);
+			while ((len = fileInputStream.read(buffer)) != -1) {
+				md5.update(buffer, 0, len);
 			}
-			fis.close();
-			byte[] b = md.digest();
-			bgi = new BigInteger(1, b);
+			fileInputStream.close();
+			byte[] digest = md5.digest();
+			bigInteger = new BigInteger(1, digest);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		result = bgi.toString(16);
+		result = bigInteger.toString(16);
 		return result;
 	}
 
 	/**
-	 * 获取文件的大小，单位为B
-	 * 
+	 * 获取文件的大小，单位为字节(Byte)
+	 *
 	 * @param filePath 文件的相对路径/绝对路径
-	 * @return long 长整型 文件大小
+	 * @return 文件大小
 	 */
-	public static long getFileSizeb(String filePath) {
-		long size = 0;
-		File f = new File(filePath);
-		size = f.length();
-		return size;
+	public static long getFileSizeByte(String filePath) {
+		return new File(filePath).length();
 	}
 
 	/**
-	 * 获取文件的大小，单位为KB
-	 * 
+	 * 获取文件的大小，单位为千字节(KB)
+	 *
 	 * @param filePath 文件的相对路径/绝对路径
-	 * @return double 浮点型 文件大小
+	 * @return 文件大小
 	 */
-	public static double getFileSizekb(String filePath) {
-		double size = 0;
-		File f = new File(filePath);
-		size = (double) f.length() / 1024;
-		return size;
-	}
-
-	/**
-	 * 获取文件大小，单位为KB-保留小数
-	 * 
-	 * @param filePath      文件的相对路径/绝对路径
-	 * @param numofdecimres 要保留的小数位数
-	 * @return double 浮点型 文件大小
-	 */
-	@SuppressWarnings("deprecation")
-	public static double getFileSizekb(String filePath, int numofdecimres) {
-		double size = 0;
-		File f = new File(filePath);
-		size = (double) f.length() / 1024;
-		BigDecimal bd = new BigDecimal(size);
-		size = bd.setScale(numofdecimres, BigDecimal.ROUND_DOWN).doubleValue();
-		return size;
+	public static double getFileSizeKb(String filePath) {
+		return (double) getFileSizeByte(filePath) / 1024;
 	}
 
 	/**
 	 * 获取文件的大小，单位为MB
-	 * 
+	 *
 	 * @param filePath 文件的相对路径/绝对路径
-	 * @return double 浮点型 文件大小
+	 * @return 文件大小
 	 */
-	public static double getFileSizemb(String filePath) {
-		double size = 0;
-		File f = new File(filePath);
-		size = (double) f.length() / 1024;
-		size = size / 1024;
-		return size;
-	}
-
-	/**
-	 * 获取文件大小，单位为MB-保留小数
-	 * 
-	 * @param filePath      文件的相对路径/绝对路径
-	 * @param numofdecimres 要保留的小数位数
-	 * @return double 浮点型 文件大小
-	 */
-	@SuppressWarnings("deprecation")
-	public static double getFileSizemb(String filePath, int numofdecimres) {
-		double size = 0;
-		File f = new File(filePath);
-		size = (double) f.length() / 1024;
-		size = size / 1024;
-		BigDecimal bd = new BigDecimal(size);
-		size = bd.setScale(numofdecimres, BigDecimal.ROUND_DOWN).doubleValue();
-		return size;
+	public static double getFileSizeMb(String filePath) {
+		return getFileSizeKb(filePath) / 1024;
 	}
 
 	/**
 	 * 获取文件的大小，单位为GB
-	 * 
+	 *
 	 * @param filePath 文件的相对路径/绝对路径
 	 * @return double 浮点型 文件大小
 	 */
-	public static double getFileSizegb(String filePath) {
-		double size = 0;
-		File f = new File(filePath);
-		size = (double) f.length() / 1024;
-		size = size / 1024;
-		size = size / 1024;
-		return size;
-	}
-
-	/**
-	 * 获取文件大小，单位为GB-保留小数
-	 * 
-	 * @param filePath      文件的相对路径/绝对路径
-	 * @param numofdecimres 要保留的小数位数
-	 * @return double 浮点型 文件大小
-	 */
-	@SuppressWarnings("deprecation")
-	public static double getFileSizegb(String filePath, int numofdecimres) {
-		double size = 0;
-		File f = new File(filePath);
-		size = (double) f.length() / 1024;
-		size = size / 1024;
-		size = size / 1024;
-		BigDecimal bd = new BigDecimal(size);
-		size = bd.setScale(numofdecimres, BigDecimal.ROUND_FLOOR).doubleValue();
-		return size;
+	public static double getFileSizeGb(String filePath) {
+		return getFileSizeMb(filePath) / 1024;
 	}
 
 	/**
 	 * 获取文件格式（扩展名）
-	 * 
+	 *
 	 * @param filePath 文件的相对路径/绝对路径
-	 * @return String 字符串 为获取文件扩展名（不带.）
+	 * @return 为获取文件扩展名（不带.），没有扩展名返回null
 	 */
 	public static String getFileFormat(String filePath) {
-		String ffr = "";
-		File f = new File(filePath);
-		String fn = f.getName();
-		if (fn.contains(".")) {
-			ffr = fn.substring(fn.lastIndexOf(".") + 1);
-		} else {
-			System.out.println("文件没有扩展名！");
+		String name = new File(filePath).getName();
+		if (name.contains(".")) {
+			return name.substring(name.lastIndexOf(".") + 1);
 		}
-		return ffr;
+		return null;
 	}
 
 }

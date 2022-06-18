@@ -1,73 +1,49 @@
 package com.gitee.swsk33.readandwrite;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.BufferedWriter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import com.gitee.swsk33.readandwrite.exception.RowsOutOfBoundsException;
+import com.gitee.swsk33.readandwrite.param.CharSetValue;
+import com.gitee.swsk33.readandwrite.param.NewLineCharacter;
 
 /**
  * 文件写入器
- * 
- * @author swsk33
- *
  */
 public class TextFileWriter {
 
-	private static String newLineChar = "\r\n";
-
-	static {
-		if (!System.getProperty("os.name").toLowerCase().contains("windows")) {
-			newLineChar = "\n";
+	/**
+	 * 异常校验，校验文件行数
+	 *
+	 * @param filePath  指定文件位置
+	 * @param whichLine 指定行数
+	 * @throws RowsOutOfBoundsException 行数不合法抛出异常
+	 */
+	private static void checkFileLine(String filePath, int whichLine) throws Exception {
+		int line = LineScanner.getLineCount(filePath);
+		if (whichLine <= 0) {
+			throw new RowsOutOfBoundsException("指定行数不可小于等于0！");
+		}
+		if (whichLine > line) {
+			throw new RowsOutOfBoundsException("指定行数不可超过文件固有行数！");
 		}
 	}
 
 	/**
 	 * 用指定内容替换文件指定行
-	 * 
+	 *
 	 * @param filePath  待写入文件相对/绝对路径
 	 * @param whichLine 待替换的行数
 	 * @param text      待替换的内容
-	 * @return boolean 替换写入操作成功即返回true
-	 * @throws Exception 文件不存在或者存在错误、指定替换的行数超出文件固有行数或者小于0时抛出异常
+	 * @return 替换写入操作成功即返回true
 	 */
 	public static boolean replaceLine(String filePath, int whichLine, String text) throws Exception {
-		boolean success = false;
-		String content = "";
-		int line = LineScanner.getLineCount(filePath);
-		if (whichLine > line) {
-			throw new RowsOutOfBoundsException("指定写入行数超过了文件的固有行数！");
-		} else if (whichLine <= 0) {
-			throw new RowsOutOfBoundsException("指定行数不可小于等于0！");
-		} else {
-			File f = new File(filePath);
-			String before = "";
-			FileInputStream fis = new FileInputStream(f);
-			InputStreamReader isr = new InputStreamReader(fis);
-			BufferedReader br = new BufferedReader(isr);
-			for (int i = 0; i < whichLine - 1; i++) {
-				before = before + br.readLine() + newLineChar;
-			}
-			content = before + text + newLineChar;
-			br.readLine();
-			for (int i = 0; i < line - whichLine; i++) {
-				content = content + br.readLine() + newLineChar;
-			}
-			FileOutputStream fos = new FileOutputStream(f);
-			OutputStreamWriter osw = new OutputStreamWriter(fos);
-			BufferedWriter bw = new BufferedWriter(osw);
-			bw.write(content);
-			br.close();
-			bw.close();
-		}
-		// 最后检查是否替换成功
-		if (TextReader.readFile(filePath).equals(content)) {
-			success = true;
-		}
-		return success;
+		return replaceLine(filePath, whichLine, text, CharSetValue.defaultCharSet);
 	}
 
 	/**
@@ -84,87 +60,29 @@ public class TextFileWriter {
 	 * </ul>
 	 * CharSetValue类在com.gitee.swsk33.readandwrite.param下<br>
 	 * <br>
-	 * 
+	 *
 	 * @param filePath  待写入文件相对/绝对路径
 	 * @param whichLine 待替换的行数
 	 * @param text      待替换的内容
 	 * @param charSet   指定编码格式写入文件
-	 * @return boolean 替换写入操作成功即返回true
-	 * @throws Exception 文件不存在或者存在错误、指定替换的行数超出文件固有行数或者小于0时抛出异常
+	 * @return 替换写入操作成功即返回true
 	 */
 	public static boolean replaceLine(String filePath, int whichLine, String text, String charSet) throws Exception {
-		boolean success = false;
-		String content = "";
-		int line = LineScanner.getLineCount(filePath);
-		if (whichLine > line) {
-			throw new RowsOutOfBoundsException("指定写入行数超过了文件的固有行数！");
-		} else if (whichLine <= 0) {
-			throw new RowsOutOfBoundsException("指定行数不可小于等于0！");
-		} else {
-			File f = new File(filePath);
-			String before = "";
-			FileInputStream fis = new FileInputStream(f);
-			InputStreamReader isr = new InputStreamReader(fis, charSet);
-			BufferedReader br = new BufferedReader(isr);
-			for (int i = 0; i < whichLine - 1; i++) {
-				before = before + br.readLine() + newLineChar;
-			}
-			content = before + text + newLineChar;
-			br.readLine();
-			for (int i = 0; i < line - whichLine; i++) {
-				content = content + br.readLine() + newLineChar;
-			}
-			FileOutputStream fos = new FileOutputStream(f);
-			OutputStreamWriter osw = new OutputStreamWriter(fos, charSet);
-			BufferedWriter bw = new BufferedWriter(osw);
-			bw.write(content);
-			br.close();
-			bw.close();
-		}
-		// 最后检查是否替换成功
-		if (TextReader.readFile(filePath, charSet).equals(content)) {
-			success = true;
-		}
-		return success;
+		checkFileLine(filePath, whichLine);
+		String[] fileContent = TextFileReader.readFileToArray(filePath, charSet);
+		fileContent[whichLine - 1] = text;
+		return writeTextArray(filePath, fileContent, charSet);
 	}
 
 	/**
 	 * 写入指定内容至文件末尾，每执行一次该方法就在末尾写入一行内容
-	 * 
+	 *
 	 * @param filePath 待写入文件相对/绝对路径
 	 * @param text     待写入内容
-	 * @return boolean 写入操作成功即返回true
-	 * @throws Exception 文件不存在或者存在错误时抛出异常
+	 * @return 写入操作成功即返回true
 	 */
-	public static boolean writeText(String filePath, String text) throws Exception {
-		boolean success = false;
-		File f = new File(filePath);
-		int line = LineScanner.getLineCount(filePath);
-		String old = "";
-		if (!(line == 0)) {
-			for (int i = 0; i < line; i++) {
-
-				old = old + TextReader.readText(filePath, i + 1) + newLineChar;
-			}
-			FileOutputStream fos = new FileOutputStream(f);
-			OutputStreamWriter osw = new OutputStreamWriter(fos);
-			BufferedWriter bw = new BufferedWriter(osw);
-			bw.write(old);
-			bw.write(text);
-			bw.close();
-		} else {
-			FileOutputStream fos = new FileOutputStream(f);
-			OutputStreamWriter osw = new OutputStreamWriter(fos);
-			BufferedWriter bw = new BufferedWriter(osw);
-			bw.write(text);
-			bw.close();
-		}
-
-		// 检查是否写入成功
-		if (TextReader.readFile(filePath).equals(old + text + newLineChar)) {
-			success = true;
-		}
-		return success;
+	public static boolean appendText(String filePath, String text) throws Exception {
+		return appendText(filePath, text, CharSetValue.defaultCharSet);
 	}
 
 	/**
@@ -181,96 +99,32 @@ public class TextFileWriter {
 	 * </ul>
 	 * CharSetValue类在com.gitee.swsk33.readandwrite.param下<br>
 	 * <br>
-	 * 
+	 *
 	 * @param filePath 待写入文件相对/绝对路径
 	 * @param text     待写入内容
 	 * @param charSet  指定编码格式写入文件
-	 * @return boolean 写入操作成功即返回true
-	 * @throws Exception 文件不存在或者存在错误时抛出异常
+	 * @return 写入操作成功即返回true
 	 */
-	public static boolean writeText(String filePath, String text, String charSet) throws Exception {
-		boolean success = false;
-		File f = new File(filePath);
-		int line = LineScanner.getLineCount(filePath);
-		String old = "";
-		if (!(line == 0)) {
-			for (int i = 0; i < line; i++) {
-
-				old = old + TextReader.readText(filePath, i + 1) + newLineChar;
-			}
-			FileOutputStream fos = new FileOutputStream(f);
-			OutputStreamWriter osw = new OutputStreamWriter(fos, charSet);
-			BufferedWriter bw = new BufferedWriter(osw);
-			bw.write(old);
-			bw.write(text);
-			bw.close();
-		} else {
-			FileOutputStream fos = new FileOutputStream(f);
-			OutputStreamWriter osw = new OutputStreamWriter(fos, charSet);
-			BufferedWriter bw = new BufferedWriter(osw);
-			bw.write(text);
-			bw.close();
-		}
-		// 检查是否写入成功
-		if (TextReader.readFile(filePath, charSet).equals(old + text + newLineChar)) {
-			success = true;
-		}
-		return success;
+	public static boolean appendText(String filePath, String text, String charSet) throws Exception {
+		List<String> content = new ArrayList<>();
+		Collections.addAll(content, TextFileReader.readFileToArray(filePath, charSet));
+		content.add(text);
+		return writeTextArray(filePath, content.toArray(new String[0]), charSet);
 	}
 
 	/**
-	 * 插入文本至指定行之后或者之前
-	 * 
-	 * @param filePath    待操作文件的相对/绝对路径
-	 * @param insertText  待插入的内容
-	 * @param whichLine   指定要插入的某一行
-	 * @param isAfterLine 是否在这一行之后插入，true则把内容插入至指定行之后，否则插入到某一行之前
-	 * @return boolean 是否插入成功
-	 * @throws Exception 文件不存在或者行数指定范围错误时抛出异常
+	 * 将文本写入文件，文件原有内容会被覆盖
+	 *
+	 * @param filePath 被写入文件路径
+	 * @param text     写入的内容
+	 * @return 写入成功返回true
 	 */
-	public static boolean insertText(String filePath, String insertText, int whichLine, boolean isAfterLine) throws Exception {
-		boolean success = false;
-		int line = LineScanner.getLineCount(filePath);
-		String content = "";
-		if (whichLine <= 0) {
-			throw new RowsOutOfBoundsException("指定行数不可小于等于0！");
-		} else if (whichLine > line) {
-			throw new RowsOutOfBoundsException("指定行数不可超过文件固有行数！");
-		} else {
-			File f = new File(filePath);
-			String before = "";
-			int bounds;
-			FileInputStream fis = new FileInputStream(f);
-			InputStreamReader isr = new InputStreamReader(fis);
-			BufferedReader br = new BufferedReader(isr);
-			if (isAfterLine) {
-				bounds = whichLine;
-			} else {
-				bounds = whichLine - 1;
-			}
-			for (int i = 0; i < bounds; i++) {
-				before = before + br.readLine() + newLineChar;
-			}
-			content = before + insertText + newLineChar;
-			for (int i = 0; i < line - bounds; i++) {
-				content = content + br.readLine() + newLineChar;
-			}
-			FileOutputStream fos = new FileOutputStream(f);
-			OutputStreamWriter osw = new OutputStreamWriter(fos);
-			BufferedWriter bw = new BufferedWriter(osw);
-			bw.write(content);
-			br.close();
-			bw.close();
-		}
-		// 检查写入是否成功
-		if (TextReader.readFile(filePath).equals(content)) {
-			success = true;
-		}
-		return success;
+	public static boolean writeText(String filePath, String text) throws Exception {
+		return writeText(filePath, text, CharSetValue.defaultCharSet);
 	}
 
 	/**
-	 * 插入文本至指定行之后或者之前，以指定的编码格式 <br>
+	 * 将文本以特定的编码写入到一个文件，文件原有内容会被覆盖<br>
 	 * 可用的编码常量值有：
 	 * <ul>
 	 * <li>CharSetValue.US_ASCII：<strong>US-ASCII</strong></li>
@@ -283,120 +137,103 @@ public class TextFileWriter {
 	 * </ul>
 	 * CharSetValue类在com.gitee.swsk33.readandwrite.param下<br>
 	 * <br>
-	 * 
-	 * @param filePath    待操作文件的相对/绝对路径
-	 * @param insertText  待插入的内容
-	 * @param whichLine   指定要插入的某一行
-	 * @param isAfterLine 是否在这一行之后插入，true则把内容插入至指定行之后，否则插入到某一行之前
-	 * @param charSet     指定编码格式写入文件
-	 * @return boolean 是否插入成功
-	 * @throws Exception 文件不存在或者行数指定范围错误时抛出异常
+	 *
+	 * @param filePath 被写入文件路径
+	 * @param text     写入的内容
+	 * @param charSet  以特定编码写入
+	 * @return 写入成功返回true
 	 */
-	public static boolean insertText(String filePath, String insertText, int whichLine, boolean isAfterLine, String charSet) throws Exception {
-		boolean success = false;
-		int line = LineScanner.getLineCount(filePath);
-		String content = "";
-		if (whichLine <= 0) {
-			throw new RowsOutOfBoundsException("指定行数不可小于等于0！");
-		} else if (whichLine > line) {
-			throw new RowsOutOfBoundsException("指定行数不可超过文件固有行数！");
-		} else {
-			File f = new File(filePath);
-			String before = "";
-			int bounds;
-			FileInputStream fis = new FileInputStream(f);
-			InputStreamReader isr = new InputStreamReader(fis, charSet);
-			BufferedReader br = new BufferedReader(isr);
-			if (isAfterLine) {
-				bounds = whichLine;
-			} else {
-				bounds = whichLine - 1;
-			}
-			for (int i = 0; i < bounds; i++) {
-				before = before + br.readLine() + newLineChar;
-			}
-			content = before + insertText + newLineChar;
-			for (int i = 0; i < line - bounds; i++) {
-				content = content + br.readLine() + newLineChar;
-			}
-			FileOutputStream fos = new FileOutputStream(f);
-			OutputStreamWriter osw = new OutputStreamWriter(fos, charSet);
-			BufferedWriter bw = new BufferedWriter(osw);
-			bw.write(content);
-			br.close();
-			bw.close();
-		}
-		// 检查写入是否成功
-		if (TextReader.readFile(filePath, charSet).equals(content)) {
-			success = true;
-		}
-		return success;
+	public static boolean writeText(String filePath, String text, String charSet) throws Exception {
+		File file = new File(filePath);
+		FileOutputStream outputStream = new FileOutputStream(file);
+		OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream, charSet);
+		BufferedWriter writer = new BufferedWriter(outputStreamWriter);
+		writer.write(text);
+		writer.close();
+		outputStreamWriter.close();
+		outputStream.close();
+		// 最后检查是否写入成功
+		return TextFileReader.readFile(filePath, charSet).equals(text);
+	}
+
+	/**
+	 * 把一个字符串数组以一个特定的编码写入文件，文件原有内容会被覆盖
+	 *
+	 * @param filePath  待写入文件
+	 * @param textArray 待写入字符串数组
+	 * @return 写入成功返回true
+	 */
+	public static boolean writeTextArray(String filePath, String[] textArray) throws Exception {
+		return writeTextArray(filePath, textArray, CharSetValue.defaultCharSet);
+	}
+
+	/**
+	 * 把一个字符串数组以一个特定的编码写入文件，文件原有内容会被覆盖<br>
+	 * 可用的编码常量值有：
+	 * <ul>
+	 * <li>CharSetValue.US_ASCII：<strong>US-ASCII</strong></li>
+	 * <li>CharSetValue.ISO_8859_1：<strong>ISO-8859-1</strong></li>
+	 * <li>CharSetValue.GBK：<strong>GBK</strong></li>
+	 * <li>CharSetValue.UTF_8：<strong>UTF-8</strong></li>
+	 * <li>CharSetValue.UTF_16：<strong>UTF-16</strong></li>
+	 * <li>CharSetValue.UTF_16BE：<strong>UTF-16BE</strong></li>
+	 * <li>CharSetValue.UTF_16LE：<strong>UTF-16LE</strong></li>
+	 * </ul>
+	 * CharSetValue类在com.gitee.swsk33.readandwrite.param下<br>
+	 * <br>
+	 *
+	 * @param filePath  待写入文件
+	 * @param textArray 待写入字符串数组
+	 * @param charSet   指定编码
+	 * @return 写入成功返回true
+	 */
+	public static boolean writeTextArray(String filePath, String[] textArray, String charSet) throws Exception {
+		return writeText(filePath, String.join(NewLineCharacter.defaultNewLineChar, textArray), charSet);
 	}
 
 	/**
 	 * 移除某一行的内容
-	 * 
-	 * @param filePath  待操作文件相对/绝对路径
-	 * @param whichLine 指定被移除的行
-	 * @return boolean 是否移除成功
-	 * @throws Exception 文件不存在或者指定行数范围错误时抛出异常
+	 *
+	 * @param filePath  文件路径
+	 * @param whichLine 待移除的行
+	 * @return 移除成功返回true
 	 */
 	public static boolean removeLine(String filePath, int whichLine) throws Exception {
-		boolean success = false;
-		String content = "";
-		int line = LineScanner.getLineCount(filePath);
-		if (whichLine <= 0) {
-			throw new RowsOutOfBoundsException("指定行数不可小于等于0！");
-		} else if (whichLine > line) {
-			throw new RowsOutOfBoundsException("指定行数不可超过文件固有行数！");
-		} else {
-			File f = new File(filePath);
-			String before = "";
-			FileInputStream fis = new FileInputStream(f);
-			InputStreamReader isr = new InputStreamReader(fis);
-			BufferedReader br = new BufferedReader(isr);
-			for (int i = 0; i < whichLine - 1; i++) {
-				before = before + br.readLine() + newLineChar;
-			}
-			br.readLine();
-			content = before;
-			for (int i = 0; i < line - whichLine; i++) {
-				content = content + br.readLine() + newLineChar;
-			}
-			FileOutputStream fos = new FileOutputStream(f);
-			OutputStreamWriter osw = new OutputStreamWriter(fos);
-			BufferedWriter bw = new BufferedWriter(osw);
-			bw.write(content);
-			br.close();
-			bw.close();
-		}
-		// 检测移除是否成功
-		if (TextReader.readFile(filePath).equals(content)) {
-			success = true;
-		}
-		return success;
+		return removeLine(filePath, whichLine, CharSetValue.defaultCharSet);
+	}
+
+	/**
+	 * 移除某一行的内容，并指定文件编码
+	 *
+	 * @param filePath  文件路径
+	 * @param whichLine 待移除的行
+	 * @param charSet   原始文件编码
+	 * @return 移除成功返回true
+	 */
+	public static boolean removeLine(String filePath, int whichLine, String charSet) throws Exception {
+		List<String> fileContents = new ArrayList<>();
+		Collections.addAll(fileContents, TextFileReader.readFileToArray(filePath, charSet));
+		fileContents.remove(whichLine - 1);
+		return writeTextArray(filePath, fileContents.toArray(new String[0]), charSet);
 	}
 
 	/**
 	 * 把指定文件内容清空
-	 * 
+	 *
 	 * @param filePath 待清空文件相对/绝对路径
-	 * @throws Exception 文件不存在时抛出异常
 	 * @return boolean 清空操作成功时返回true
 	 */
 	public static boolean clearAll(String filePath) throws Exception {
-		boolean success = false;
-		File f = new File(filePath);
-		FileOutputStream fos = new FileOutputStream(f);
-		OutputStreamWriter osw = new OutputStreamWriter(fos);
-		BufferedWriter bw = new BufferedWriter(osw);
-		bw.write("");
-		bw.close();
+		File file = new File(filePath);
+		FileOutputStream outputStream = new FileOutputStream(file);
+		OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream);
+		BufferedWriter writer = new BufferedWriter(outputStreamWriter);
+		writer.write("");
+		writer.close();
+		outputStreamWriter.close();
+		outputStream.close();
 		// 检查是否操作成功
-		if (LineScanner.getLineCount(filePath) == 0) {
-			success = true;
-		}
-		return success;
+		return LineScanner.getLineCount(filePath) == 0;
 	}
 
 }

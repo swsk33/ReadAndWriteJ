@@ -1,13 +1,11 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.gitee.swsk33</groupId>
 	<artifactId>read-and-write</artifactId>
-	<version>6.5.1</version>
+	<version>7.0.0</version>
 	<packaging>jar</packaging>
 	<name>ReadAndWriteJ</name>
-	<description>一个简单的实现文件简易读写的jar包。</description>
+	<description>一个简单的实现文件简易读写的jar包</description>
 	<url>https://gitee.com/swsk33/ReadAndWriteJ</url>
 
 	<properties>
@@ -20,7 +18,7 @@
 	<licenses>
 		<license>
 			<name>The Apache Software License, Version2.0</name>
-			<url>http://www.apache.org/licenses/</url>
+			<url>https://www.apache.org/licenses/</url>
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
@@ -49,6 +47,15 @@
 			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
 		</repository>
 	</distributionManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.24</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
 
 	<build>
 		<resources>

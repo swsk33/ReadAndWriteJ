@@ -2,45 +2,24 @@ package com.gitee.swsk33.readandwrite;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+
 import com.gitee.swsk33.readandwrite.model.TerminalOutput;
+import com.gitee.swsk33.readandwrite.param.CharSetValue;
+import com.gitee.swsk33.readandwrite.param.NewLineCharacter;
 
 /**
- * 用于命令行的执行和读取。
- * 
- * @author swsk33
- *
+ * 用于命令行的执行和读取
  */
 public class TerminalUtils {
 
 	/**
 	 * 向终端运行一条命令并获取输出结果，注意这是同步方法，会堵塞当前线程
-	 * 
+	 *
 	 * @param command 运行的命令
 	 * @return 标准结果类，位于com.gitee.swsk33.readandwrite.model下的TerminalOutput类
-	 * @throws Exception 输入输出异常
 	 */
 	public static TerminalOutput runCommand(String command) throws Exception {
-		TerminalOutput result = new TerminalOutput();
-		Process process = Runtime.getRuntime().exec(command);
-		BufferedReader stdOutReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-		BufferedReader stdErrReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-		String stdOutLine = "";
-		String stdErrLine = "";
-		String outResult = "";
-		String errResult = "";
-		while ((stdOutLine = stdOutReader.readLine()) != null) {
-			outResult = outResult + stdOutLine + "\r\n";
-		}
-		while ((stdErrLine = stdErrReader.readLine()) != null) {
-			errResult = errResult + stdErrLine + "\r\n";
-		}
-		stdOutReader.close();
-		stdErrReader.close();
-		process.waitFor();
-		result.setStandardOutput(outResult);
-		result.setStandardError(errResult);
-		result.setDone(true);
-		return result;
+		return runCommand(command, CharSetValue.defaultCharSet);
 	}
 
 	/**
@@ -57,12 +36,10 @@ public class TerminalUtils {
 	 * </ul>
 	 * CharSetValue类在com.gitee.swsk33.readandwrite.param下<br>
 	 * <br>
-	 * 
+	 *
 	 * @param command 运行的命令
 	 * @param charSet 编码格式
 	 * @return 标准结果，位于com.gitee.swsk33.readandwrite.model下的TerminalOutput类
-	 * @throws Exception 输入输出异常
-	 * 
 	 */
 	public static TerminalOutput runCommand(String command, String charSet) throws Exception {
 		TerminalOutput result = new TerminalOutput();
@@ -70,54 +47,33 @@ public class TerminalUtils {
 		BufferedReader stdOutReader = new BufferedReader(new InputStreamReader(process.getInputStream(), charSet));
 		BufferedReader stdErrReader = new BufferedReader(new InputStreamReader(process.getErrorStream(), charSet));
 		String stdOutLine = "";
-		String stdErrLine = "";
-		String outResult = "";
-		String errResult = "";
+		StringBuilder outResult = new StringBuilder();
 		while ((stdOutLine = stdOutReader.readLine()) != null) {
-			outResult = outResult + stdOutLine + "\r\n";
+			outResult.append(stdOutLine).append(NewLineCharacter.defaultNewLineChar);
 		}
+		String stdErrLine = "";
+		StringBuilder errResult = new StringBuilder();
 		while ((stdErrLine = stdErrReader.readLine()) != null) {
-			errResult = errResult + stdErrLine + "\r\n";
+			errResult.append(stdErrLine).append(NewLineCharacter.defaultNewLineChar);
 		}
 		stdOutReader.close();
 		stdErrReader.close();
 		process.waitFor();
-		result.setStandardOutput(outResult);
-		result.setStandardError(errResult);
+		result.setStandardOutput(outResult.toString());
+		result.setStandardError(errResult.toString());
 		result.setDone(true);
 		return result;
 	}
 
 	/**
 	 * 向终端运行一个命令数组并获取输出结果，注意这是同步方法，会堵塞当前线程
-	 * 
+	 *
 	 * @param commandArray 运行的命令数组。例如命令是cp -f a.txt b.txt，那么commandArray = {"cp",
 	 *                     "-f", "a.txt", "b.txt"};
 	 * @return 标准结果类，位于com.gitee.swsk33.readandwrite.model下的TerminalOutput类
-	 * @throws Exception 输入输出异常
 	 */
 	public static TerminalOutput runCommand(String[] commandArray) throws Exception {
-		TerminalOutput result = new TerminalOutput();
-		Process process = Runtime.getRuntime().exec(commandArray);
-		BufferedReader stdOutReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-		BufferedReader stdErrReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-		String stdOutLine = "";
-		String stdErrLine = "";
-		String outResult = "";
-		String errResult = "";
-		while ((stdOutLine = stdOutReader.readLine()) != null) {
-			outResult = outResult + stdOutLine + "\r\n";
-		}
-		while ((stdErrLine = stdErrReader.readLine()) != null) {
-			errResult = errResult + stdErrLine + "\r\n";
-		}
-		stdOutReader.close();
-		stdErrReader.close();
-		process.waitFor();
-		result.setStandardOutput(outResult);
-		result.setStandardError(errResult);
-		result.setDone(true);
-		return result;
+		return runCommand(commandArray, CharSetValue.defaultCharSet);
 	}
 
 	/**
@@ -134,13 +90,11 @@ public class TerminalUtils {
 	 * </ul>
 	 * CharSetValue类在com.gitee.swsk33.readandwrite.param下<br>
 	 * <br>
-	 * 
+	 *
 	 * @param commandArray 运行的命令数组。例如命令是cp -f a.txt b.txt，那么commandArray = {"cp",
 	 *                     "-f", "a.txt", "b.txt"};
 	 * @param charSet      编码格式
 	 * @return 标准结果，位于com.gitee.swsk33.readandwrite.model下的TerminalOutput类
-	 * @throws Exception 输入输出异常
-	 * 
 	 */
 	public static TerminalOutput runCommand(String[] commandArray, String charSet) throws Exception {
 		TerminalOutput result = new TerminalOutput();
@@ -148,61 +102,32 @@ public class TerminalUtils {
 		BufferedReader stdOutReader = new BufferedReader(new InputStreamReader(process.getInputStream(), charSet));
 		BufferedReader stdErrReader = new BufferedReader(new InputStreamReader(process.getErrorStream(), charSet));
 		String stdOutLine = "";
-		String stdErrLine = "";
-		String outResult = "";
-		String errResult = "";
+		StringBuilder outResult = new StringBuilder();
 		while ((stdOutLine = stdOutReader.readLine()) != null) {
-			outResult = outResult + stdOutLine + "\r\n";
+			outResult.append(stdOutLine).append(NewLineCharacter.defaultNewLineChar);
 		}
+		String stdErrLine = "";
+		StringBuilder errResult = new StringBuilder();
 		while ((stdErrLine = stdErrReader.readLine()) != null) {
-			errResult = errResult + stdErrLine + "\r\n";
+			errResult.append(stdErrLine).append(NewLineCharacter.defaultNewLineChar);
 		}
 		stdOutReader.close();
 		stdErrReader.close();
 		process.waitFor();
-		result.setStandardOutput(outResult);
-		result.setStandardError(errResult);
+		result.setStandardOutput(outResult.toString());
+		result.setStandardError(errResult.toString());
 		result.setDone(true);
 		return result;
 	}
 
 	/**
 	 * 异步运行命令并实时获取输出结果
-	 * 
+	 *
 	 * @param command 命令
 	 * @param result  用于储存结果的TerminalOutput实例，位于com.gitee.swsk33.readandwrite.model下
 	 */
 	public static void runCommandAsyn(String command, TerminalOutput result) {
-		new Thread(() -> {
-			BufferedReader stdOutReader = null;
-			BufferedReader stdErrReader = null;
-			try {
-				Process process = Runtime.getRuntime().exec(command);
-				stdOutReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-				stdErrReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-				String stdOutLine = "";
-				String stdErrLine = "";
-				while ((stdOutLine = stdOutReader.readLine()) != null || (stdErrLine = stdErrReader.readLine()) != null) {
-					if (stdOutLine != null) {
-						result.appendStandardOutput(stdOutLine);
-					}
-					if (stdErrLine != null) {
-						result.appendStandardError(stdErrLine);
-					}
-				}
-				process.waitFor();
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				result.setDone(true);
-				try {
-					stdOutReader.close();
-					stdErrReader.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		}).start();
+		runCommandAsyn(command, CharSetValue.defaultCharSet, result);
 	}
 
 	/**
@@ -219,27 +144,27 @@ public class TerminalUtils {
 	 * </ul>
 	 * CharSetValue类在com.gitee.swsk33.readandwrite.param下<br>
 	 * <br>
-	 * 
+	 *
 	 * @param command 命令
-	 * @param charset 编码
+	 * @param charSet 编码
 	 * @param result  用于储存结果的TerminalOutput实例，位于com.gitee.swsk33.readandwrite.model下
 	 */
-	public static void runCommandAsyn(String command, String charset, TerminalOutput result) {
+	public static void runCommandAsyn(String command, String charSet, TerminalOutput result) {
 		new Thread(() -> {
 			BufferedReader stdOutReader = null;
 			BufferedReader stdErrReader = null;
 			try {
 				Process process = Runtime.getRuntime().exec(command);
-				stdOutReader = new BufferedReader(new InputStreamReader(process.getInputStream(), charset));
-				stdErrReader = new BufferedReader(new InputStreamReader(process.getErrorStream(), charset));
-				String stdOutLine = "";
-				String stdErrLine = "";
-				while ((stdOutLine = stdOutReader.readLine()) != null || (stdErrLine = stdErrReader.readLine()) != null) {
+				stdOutReader = new BufferedReader(new InputStreamReader(process.getInputStream(), charSet));
+				stdErrReader = new BufferedReader(new InputStreamReader(process.getErrorStream(), charSet));
+				String stdOutLine;
+				String stdErrLine;
+				while (((stdOutLine = stdOutReader.readLine()) != null) | ((stdErrLine = stdErrReader.readLine()) != null)) {
 					if (stdOutLine != null) {
-						result.appendStandardOutput(stdOutLine);
+						result.setStandardOutput(result.getStandardOutput() + stdOutLine + NewLineCharacter.defaultNewLineChar);
 					}
 					if (stdErrLine != null) {
-						result.appendStandardError(stdErrLine);
+						result.setStandardError(result.getStandardError() + stdErrLine + NewLineCharacter.defaultNewLineChar);
 					}
 				}
 				process.waitFor();
@@ -259,42 +184,13 @@ public class TerminalUtils {
 
 	/**
 	 * 异步运行命令数组并实时获取输出结果
-	 * 
+	 *
 	 * @param commandArray 命令数组，例如命令是cp -f a.txt b.txt，那么commandArray = {"cp", "-f",
 	 *                     "a.txt", "b.txt"};
 	 * @param result       用于储存结果的TerminalOutput实例，位于com.gitee.swsk33.readandwrite.model下
 	 */
 	public static void runCommandAsyn(String[] commandArray, TerminalOutput result) {
-		new Thread(() -> {
-			BufferedReader stdOutReader = null;
-			BufferedReader stdErrReader = null;
-			try {
-				Process process = Runtime.getRuntime().exec(commandArray);
-				stdOutReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-				stdErrReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-				String stdOutLine = "";
-				String stdErrLine = "";
-				while ((stdOutLine = stdOutReader.readLine()) != null || (stdErrLine = stdErrReader.readLine()) != null) {
-					if (stdOutLine != null) {
-						result.appendStandardOutput(stdOutLine);
-					}
-					if (stdErrLine != null) {
-						result.appendStandardError(stdErrLine);
-					}
-				}
-				process.waitFor();
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				result.setDone(true);
-				try {
-					stdOutReader.close();
-					stdErrReader.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		}).start();
+		runCommandAsyn(commandArray, CharSetValue.defaultCharSet, result);
 	}
 
 	/**
@@ -311,28 +207,28 @@ public class TerminalUtils {
 	 * </ul>
 	 * CharSetValue类在com.gitee.swsk33.readandwrite.param下<br>
 	 * <br>
-	 * 
+	 *
 	 * @param commandArray 命令数组，例如命令是cp -f a.txt b.txt，那么commandArray = {"cp", "-f",
 	 *                     "a.txt", "b.txt"};
-	 * @param charset      编码
+	 * @param charSet      编码
 	 * @param result       用于储存结果的TerminalOutput实例，位于com.gitee.swsk33.readandwrite.model下
 	 */
-	public static void runCommandAsyn(String[] commandArray, String charset, TerminalOutput result) {
+	public static void runCommandAsyn(String[] commandArray, String charSet, TerminalOutput result) {
 		new Thread(() -> {
 			BufferedReader stdOutReader = null;
 			BufferedReader stdErrReader = null;
 			try {
 				Process process = Runtime.getRuntime().exec(commandArray);
-				stdOutReader = new BufferedReader(new InputStreamReader(process.getInputStream(), charset));
-				stdErrReader = new BufferedReader(new InputStreamReader(process.getErrorStream(), charset));
-				String stdOutLine = "";
-				String stdErrLine = "";
-				while ((stdOutLine = stdOutReader.readLine()) != null || (stdErrLine = stdErrReader.readLine()) != null) {
+				stdOutReader = new BufferedReader(new InputStreamReader(process.getInputStream(), charSet));
+				stdErrReader = new BufferedReader(new InputStreamReader(process.getErrorStream(), charSet));
+				String stdOutLine;
+				String stdErrLine;
+				while (((stdOutLine = stdOutReader.readLine()) != null) | ((stdErrLine = stdErrReader.readLine()) != null)) {
 					if (stdOutLine != null) {
-						result.appendStandardOutput(stdOutLine);
+						result.setStandardOutput(result.getStandardOutput() + stdOutLine + NewLineCharacter.defaultNewLineChar);
 					}
 					if (stdErrLine != null) {
-						result.appendStandardError(stdErrLine);
+						result.setStandardError(result.getStandardError() + stdErrLine + NewLineCharacter.defaultNewLineChar);
 					}
 				}
 				process.waitFor();

@@ -1,11 +1,22 @@
 package com.gitee.swsk33.readandwrite.param;
 
+import java.util.Locale;
+
 /**
  * 读写字符编码值常量
- * @author swsk33
- *
  */
 public class CharSetValue {
+
+	public static String defaultCharSet;
+
+	static {
+		Locale locale = Locale.getDefault();
+		if (locale.getLanguage().equals("zh")) {
+			defaultCharSet = "GBK";
+		} else {
+			defaultCharSet = "UTF-8";
+		}
+	}
 
 	/**
 	 * 读写编码：US-ASCII
@@ -31,12 +42,12 @@ public class CharSetValue {
 	 * 读写编码：UTF-16
 	 */
 	public static final String UTF_16 = "UTF-16";
-	
+
 	/**
 	 * 读写编码：UTF-16BE
 	 */
 	public static final String UTF_16BE = "UTF-16BE";
-	
+
 	/**
 	 * 读写编码：UTF-16LE
 	 */

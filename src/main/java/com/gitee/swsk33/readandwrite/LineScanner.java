@@ -7,30 +7,43 @@ import java.io.BufferedReader;
 
 /**
  * 文件行数读取器
- * 
- * @author swsk33
- *
  */
 public class LineScanner {
 
 	/**
 	 * 获取文本文件的内容行数
-	 * 
+	 *
 	 * @param filePath 待读取文件的相对路径/绝对路径
-	 * @return int 整型 文件行数
-	 * @throws Exception 文件不存在或存在错误时抛出异常
+	 * @return 文件行数
 	 */
 	public static int getLineCount(String filePath) throws Exception {
-		int linage = 0;
-		File f = new File(filePath);
-		FileInputStream fis = new FileInputStream(f);
-		InputStreamReader isr = new InputStreamReader(fis);
-		BufferedReader br = new BufferedReader(isr);
-		for (int i = 1; br.readLine() != null; i++) {
-			linage = i;
+		int linaCount = 0;
+		File file = new File(filePath);
+		FileInputStream fileInputStream = new FileInputStream(file);
+		InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
+		BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+		for (int i = 1; bufferedReader.readLine() != null; i++) {
+			linaCount = i;
 		}
-		br.close();
-		return linage;
+		bufferedReader.close();
+		return linaCount;
+	}
+
+	/**
+	 * 判断一段文本在文件的哪一行
+	 *
+	 * @param filePath 文件位置
+	 * @param text     待判断内容
+	 * @return 待判断内容位于文件中的行数，若指定内容在文件中不存在返回-1
+	 */
+	public static int getTextAtLine(String filePath, String text) throws Exception {
+		String[] fileContent = TextFileReader.readFileToArray(filePath);
+		for (int i = 0; i < fileContent.length; i++) {
+			if (fileContent[i].equals(text)) {
+				return i + 1;
+			}
+		}
+		return -1;
 	}
 
 }
