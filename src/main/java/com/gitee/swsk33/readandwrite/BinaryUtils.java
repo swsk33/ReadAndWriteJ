@@ -85,6 +85,7 @@ public class BinaryUtils {
 	 * @param filePath 待读取文件
 	 * @return 读取到的结果
 	 */
+	@SuppressWarnings("unchecked")
 	public static <T> T readObjectFromFile(String filePath) throws Exception {
 		byte[] readData = readBinaryFile(filePath);
 		ByteArrayInputStream byteInput = new ByteArrayInputStream(readData);

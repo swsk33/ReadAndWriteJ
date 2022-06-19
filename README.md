@@ -29,9 +29,9 @@
 
 ```xml
 <dependency>
-	<groupId>com.gitee.swsk33</groupId>
+	<groupId>io.github.swsk33</groupId>
 	<artifactId>read-and-write</artifactId>
-	<version>7.0.0</version>
+	<version>7.0.1</version>
 </dependency>
 ```
 ### 2，导入`com.gitee.swsk33.readandwrite`下所有类或者需要的类。（`import swsk33.readandwrite.*;`）
@@ -98,4 +98,4 @@
 
 **详细的使用可以在调用类的方法时查看，IDE中会显示其中的详细文档。**
 
->最后更新：2022.6.18
+>最后更新：2022.6.19
